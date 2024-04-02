@@ -1,0 +1,6 @@
+format: jb-article
+root: intro
+sections:
+- file: docs/markdown-example
+- file: docs/notebook-example
+
