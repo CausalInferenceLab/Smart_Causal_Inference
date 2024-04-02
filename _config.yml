@@ -1,0 +1,34 @@
+title : Smart Causal Inference [SCI]
+author: Smart Causal Inference Team
+logo: 'qe-logo-large.png'
+
+# Short description about the book
+description: >-
+  A brief introduction to Causal Inference.
+
+execute:
+  execute_notebooks           : off
+
+# HTML-specific settings
+html:
+  home_page_in_navbar         : false
+
+# Interact link settings
+notebook_interface            : "notebook"
+
+# Launch button settings
+repository:
+  url                         : https://github.com/CausalInferenceLab/Smart_Causal_Inference
+  path_to_book                : "mini_book"
+
+binder:
+  binderhub_url               : "https://mybinder.org"
+  text                        : "Launch binder"
+
+# LaTeX settings
+bibtex_bibfiles:
+   - _bibliography/references.bib
+latex:
+  latex_engine                : "xelatex"
+  latex_documents:
+    targetname: book.tex
