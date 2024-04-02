@@ -1,3 +1,3 @@
-# Jupyter Book Template for PseudoLab
+# Smart Causal Inference Team
 
-가짜연구소 자료 정리를 위한 Jupyter Book Template 입니다. 
+인과추론 정리를 위한 블로그입니다.
