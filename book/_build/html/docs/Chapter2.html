@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Recap &#8212; Smart Causal Inference [SCI]</title>
+    <title>Chapter 2. 무작위 실험 및 기초 통계 리뷰 &#8212; Smart Causal Inference [SCI]</title>
   
   
   
@@ -67,7 +67,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'docs/Chapter2';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="그래프 모델 집중 훈련" href="Chapter3.html" />
+    <link rel="next" title="Chapter 3. 그래프 인과모델" href="Chapter3.html" />
     <link rel="prev" title="Chapter 1. 인과추론 소개" href="Chapter1.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -164,7 +164,9 @@ const thebe_selector_output = ".output, .cell_output"
     <div class="bd-toc-item navbar-nav active">
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="Chapter1.html">Chapter 1. 인과추론 소개</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#"><strong>Recap</strong></a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Chapter 2. 무작위 실험 및 기초 통계 리뷰</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chapter3.html">Chapter 3. 그래프 인과모델</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chapter4.html">Chapter 4. 유용한 선형회귀</a></li>
 
 
 
@@ -172,19 +174,7 @@ const thebe_selector_output = ".output, .cell_output"
 
 
 
-
-
-<li class="toctree-l1"><a class="reference internal" href="Chapter3.html">그래프 모델 집중 훈련</a></li>
-
-
-
-<li class="toctree-l1"><a class="reference internal" href="Chapter4.html">1. 선형회귀분석의 필요성</a></li>
-
-
-
-
-
-
+<li class="toctree-l1"><a class="reference internal" href="Chapter5.html">Chapter 5. 성향점수</a></li>
 </ul>
 
     </div>
@@ -323,7 +313,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Recap</h1>
+    <h1>Chapter 2. 무작위 실험 및 기초 통계 리뷰</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -333,18 +323,17 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#"><strong>Recap</strong></a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#rct-randomized-control-trial"><strong>RCT (Randomized Control Trial)</strong></a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">추정</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#standard-error-confidence-interval">추정값의 표준오차 (Standard Error), 신뢰구간 (Confidence Interval)</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#hypothesis-testing">가설 검정 (Hypothesis Testing)</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#null-hypothesis">귀무 가설 (Null Hypothesis)</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#test-statistic">검정 통계량 (Test Statistic)</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#p-p-value">P 값 (P-Value)</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">표본 크기 계산</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recap"><strong>Recap</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rct-randomized-control-trial"><strong>RCT (Randomized Control Trial)</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">추정</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#standard-error-confidence-interval">추정값의 표준오차 (Standard Error), 신뢰구간 (Confidence Interval)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hypothesis-testing">가설 검정 (Hypothesis Testing)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#null-hypothesis">귀무 가설 (Null Hypothesis)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#test-statistic">검정 통계량 (Test Statistic)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#p-p-value">P 값 (P-Value)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">표본 크기 계산</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
-
             </nav>
         </div>
     </div>
@@ -355,8 +344,10 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section id="recap">
-<h1><strong>Recap</strong><a class="headerlink" href="#recap" title="Permalink to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="chapter-2">
+<h1>Chapter 2. 무작위 실험 및 기초 통계 리뷰<a class="headerlink" href="#chapter-2" title="Permalink to this heading">#</a></h1>
+<section id="recap">
+<h2><strong>Recap</strong><a class="headerlink" href="#recap" title="Permalink to this heading">#</a></h2>
 <p>작성자 : 최의관</p>
 <p><strong>인과관계와 연관관계의 차이는 무엇인가?</strong></p>
 <div class="math notranslate nohighlight">
@@ -380,7 +371,7 @@ E[Y_1-Y_0|T=1]_(ATT_)+[E[Y_0|T=1]-E[Y_0|T=0]]_(편향_)
 <p><strong>처치 배정 시, 랜덤화 배정 진행으로 해결할 수 있다 (무작위 통제 실험 RCT)</strong></p>
 </section>
 <section id="rct-randomized-control-trial">
-<h1><strong>RCT (Randomized Control Trial)</strong><a class="headerlink" href="#rct-randomized-control-trial" title="Permalink to this heading">#</a></h1>
+<h2><strong>RCT (Randomized Control Trial)</strong><a class="headerlink" href="#rct-randomized-control-trial" title="Permalink to this heading">#</a></h2>
 <p>RCT를 통해서 이론적으로는 독립성이 성립해야 하지만, 실제로는 반드시 그렇지 않다.</p>
 <p>실험군과 대조군이 비슷한지 확인하기 위해서 정규화 차이(normalized difference)를 계산해 볼 수 있다.</p>
 <p><img alt="Untitled" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/654ef806-da34-4beb-a6b4-8a561b86543f/Untitled.png" /></p>
@@ -390,7 +381,7 @@ E[Y_1-Y_0|T=1]_(ATT_)+[E[Y_0|T=1]-E[Y_0|T=0]]_(편향_)
 <p><strong>→ 우리는 RCT를 통해 독립성 가정을 만족하며 ‘식별’을 할 수 있음</strong></p>
 </section>
 <section id="id1">
-<h1>추정<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
+<h2>추정<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
 <p>인과추론은 크게 두 단계로 이루어진다.</p>
 <ol class="arabic simple">
 <li><p>‘식별’을 통해 관측할 수 없는 인과 추정량을 데이터에서 추정할 수 있는 관측 가능한 통계량으로 바꾼다.</p></li>
@@ -410,7 +401,7 @@ E[Y_1-Y_0|T=1]_(ATT_)+[E[Y_0|T=1]-E[Y_0|T=0]]_(편향_)
 </div></blockquote>
 </section>
 <section id="standard-error-confidence-interval">
-<h1>추정값의 표준오차 (Standard Error), 신뢰구간 (Confidence Interval)<a class="headerlink" href="#standard-error-confidence-interval" title="Permalink to this heading">#</a></h1>
+<h2>추정값의 표준오차 (Standard Error), 신뢰구간 (Confidence Interval)<a class="headerlink" href="#standard-error-confidence-interval" title="Permalink to this heading">#</a></h2>
 <p><img alt="Untitled" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/a9128c71-26dc-4f91-9b7c-46d1f555f52c/Untitled.png" /></p>
 <p>(SE : 평균의 표준오차, σ : 표준편차, n : 표본크기)</p>
 <ul class="simple">
@@ -430,7 +421,7 @@ E[Y_1-Y_0|T=1]_(ATT_)+[E[Y_0|T=1]-E[Y_0|T=0]]_(편향_)
 </ul>
 </section>
 <section id="hypothesis-testing">
-<h1>가설 검정 (Hypothesis Testing)<a class="headerlink" href="#hypothesis-testing" title="Permalink to this heading">#</a></h1>
+<h2>가설 검정 (Hypothesis Testing)<a class="headerlink" href="#hypothesis-testing" title="Permalink to this heading">#</a></h2>
 <p>불확실성을 나타내는 또 다른 방법은 가설검정을 통해 결과를 제시하는 것이다.</p>
 <p>두 그룹 간 평균 차이가 통계적으로 유의한 차이가 있는지에 대한 물음에 답을 하기 위해서는 두 독립 정규분포의 합이나 차 역시 정규분포라는 점을 기억해야 한다.</p>
 <p>정규분포의 합이나 차는 아래와 같은 분포를 따른다.</p>
@@ -438,7 +429,7 @@ E[Y_1-Y_0|T=1]_(ATT_)+[E[Y_0|T=1]-E[Y_0|T=0]]_(편향_)
 <p><img alt="Untitled" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/4c000ce1-3ded-46d7-9adf-00416487acd3/Untitled.png" /></p>
 </section>
 <section id="null-hypothesis">
-<h1>귀무 가설 (Null Hypothesis)<a class="headerlink" href="#null-hypothesis" title="Permalink to this heading">#</a></h1>
+<h2>귀무 가설 (Null Hypothesis)<a class="headerlink" href="#null-hypothesis" title="Permalink to this heading">#</a></h2>
 <p>귀무가설은 아래와 같이 설정할 수 있습니다.</p>
 <p><span class="math notranslate nohighlight">\(H_0 : Conversion_{no-email} = Conversion_{short-email}\)</span></p>
 <ul class="simple">
@@ -479,7 +470,7 @@ E[Y_1-Y_0|T=1]_(ATT_)+[E[Y_0|T=1]-E[Y_0|T=0]]_(편향_)
 </aside>
 </section>
 <section id="test-statistic">
-<h1>검정 통계량 (Test Statistic)<a class="headerlink" href="#test-statistic" title="Permalink to this heading">#</a></h1>
+<h2>검정 통계량 (Test Statistic)<a class="headerlink" href="#test-statistic" title="Permalink to this heading">#</a></h2>
 <p>위에서 설명한 신뢰구간 외에도, 검정통계량을 사용하여 귀무가설을 기각할 수도 있다.</p>
 <p>대체로 값이 클수록 귀무가설을 기각하는 방향으로 설정하게 된다.</p>
 <p>가장 널리 사용하는 통계량 중 하나는 t-통계량이고, 신뢰구간을 형성하는 분포를 정규화함으로써 아래와 같이 정의된다.</p>
@@ -490,7 +481,7 @@ E[Y_1-Y_0|T=1]_(ATT_)+[E[Y_0|T=1]-E[Y_0|T=0]]_(편향_)
 <p><em>(출처 : <a class="reference external" href="https://blog.naver.com/uranusjj/221606736038">https://blog.naver.com/uranusjj/221606736038</a>)</em></p>
 </section>
 <section id="p-p-value">
-<h1>P 값 (P-Value)<a class="headerlink" href="#p-p-value" title="Permalink to this heading">#</a></h1>
+<h2>P 값 (P-Value)<a class="headerlink" href="#p-p-value" title="Permalink to this heading">#</a></h2>
 <aside>
 💡 **P값**
 : p값은 귀무가설이 참이라고 가정할 때 관측된 결과보다 더 극단적인 결과가 실제로 관측될 확률이다.
@@ -504,7 +495,7 @@ p값은 P(H_0|data)가 아니라 P(data|H_0)
 <p>반대로 p-value &gt; 유의수준 α →  귀무가설 채택</p>
 </section>
 <section id="id2">
-<h1>표본 크기 계산<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h1>
+<h2>표본 크기 계산<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
 <ul>
 <li><p><strong>표본계산 추가자료</strong></p>
 <p><img alt="Untitled" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/ef4fa8cc-6cef-4717-9f7e-72a8d4d029f9/Untitled.png" /></p>
@@ -533,7 +524,7 @@ p값은 P(H_0|data)가 아니라 P(data|H_0)
 <p>→ <strong>대조군의 분산(σ^2)을 가장 타당한 추정값으로 사용해서 필요한 표본 크기를 정할 수 있다.</strong></p>
 </section>
 <section id="summary">
-<h1>Summary<a class="headerlink" href="#summary" title="Permalink to this heading">#</a></h1>
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this heading">#</a></h2>
 <ol class="arabic simple">
 <li><p>인과추론의 목표는 데이터에서 인과추정량을 구하는 것</p></li>
 <li><p>식별: 독립성 가정을 통해 관측할 수 없는 인과추정량을 추정할 수 있는 관측 가능한 통계량으로 만드는 것</p></li>
@@ -557,6 +548,7 @@ p값은 P(H_0|data)가 아니라 P(data|H_0)
 <ol class="arabic simple">
 <li><p>설계 시 표본크기 (유의수준(α) = 5%, 검정력(1-β) = 80%)</p></li>
 </ol>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -603,7 +595,7 @@ p값은 P(H_0|data)가 아니라 P(data|H_0)
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">그래프 모델 집중 훈련</p>
+        <p class="prev-next-title">Chapter 3. 그래프 인과모델</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -622,18 +614,17 @@ p값은 P(H_0|data)가 아니라 P(data|H_0)
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#"><strong>Recap</strong></a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#rct-randomized-control-trial"><strong>RCT (Randomized Control Trial)</strong></a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">추정</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#standard-error-confidence-interval">추정값의 표준오차 (Standard Error), 신뢰구간 (Confidence Interval)</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#hypothesis-testing">가설 검정 (Hypothesis Testing)</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#null-hypothesis">귀무 가설 (Null Hypothesis)</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#test-statistic">검정 통계량 (Test Statistic)</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#p-p-value">P 값 (P-Value)</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">표본 크기 계산</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recap"><strong>Recap</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rct-randomized-control-trial"><strong>RCT (Randomized Control Trial)</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">추정</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#standard-error-confidence-interval">추정값의 표준오차 (Standard Error), 신뢰구간 (Confidence Interval)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hypothesis-testing">가설 검정 (Hypothesis Testing)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#null-hypothesis">귀무 가설 (Null Hypothesis)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#test-statistic">검정 통계량 (Test Statistic)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#p-p-value">P 값 (P-Value)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">표본 크기 계산</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
-
   </nav></div>
 
 </div></div>
