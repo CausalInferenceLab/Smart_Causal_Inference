@@ -1,0 +1,650 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>1. 선형회귀분석의 필요성 &#8212; Smart Causal Inference [SCI]</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/Chapter4';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="&lt;no title&gt;" href="Chapter5.html" />
+    <link rel="prev" title="그래프 모델 집중 훈련" href="Chapter3.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/qe-logo-large.png" class="logo__image only-light" alt="Smart Causal Inference [SCI] - Home"/>
+    <script>document.write(`<img src="../_static/qe-logo-large.png" class="logo__image only-dark" alt="Smart Causal Inference [SCI] - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Chapter1.html">Chapter 1. 인과추론 소개</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chapter2.html"><strong>Recap</strong></a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Chapter3.html">그래프 모델 집중 훈련</a></li>
+
+
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">1. 선형회귀분석의 필요성</a></li>
+
+
+
+
+
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/docs/Chapter4.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>1. 선형회귀분석의 필요성</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">1. 선형회귀분석의 필요성</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">2. 회귀분석 이론</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">3. 프리슈-워-로벨 정리와 직교화</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">4. 양수성과 외삽</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">5. 선형회귀에서의 비선형성</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">6. 더미변수</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">7. 중립 통제변수</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1>1. 선형회귀분석의 필요성<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
+<p>작성자 : 박상호</p>
+<ol class="arabic simple">
+<li><p>예시 : 은행이 고객을 평가하고 신용 한도를 배정할 때 10개의 변수를 사용하고, 각 변수에 3개의 그룹이 있다. 셀의 개수는 이때, 총 <span class="math notranslate nohighlight">\(3^{10}\)</span> = 59,049개가 된다. 각 셀에서 ATE를 추정하고 각 결과의 평균값을 구하려면 엄청난 양의 데이터가 있어야 한다.</p></li>
+</ol>
+<p>차원의 저주에서 벗어나기 위해 잠재적 결과를 선형회귀 같은 방식으로 모델링할 수 있다고 가정하고, X로 정의된 각각의 셀을 내삽(interpolate)하고 외삽(extrapolate)한다. 회귀분석은 필요한 모든 추론 통계량을 바로 얻을 수 있다.</p>
+<ol class="arabic simple" start="2">
+<li><p>예시 : 새로운 추천 시스템이 스트리밍 서비스의 시청 시간을 늘릴 수 있는지 알기 위해 A/B 테스트를 진행하였다.</p></li>
+</ol>
+<p><span class="math notranslate nohighlight">\(WatchTime_i = \beta_0+\beta_1challenger_1+e_1\)</span></p>
+<p>여기서 <span class="math notranslate nohighlight">\(challenger\)</span>는 새로운 추천 시스템이 적용되면 1, 그렇지 않으면 0이다. 이 모델을 추정하는 경우, 새로운 버전의 효과는 <span class="math notranslate nohighlight">\(\beta_1\)</span>의 추정값인 <span class="math notranslate nohighlight">\(\widehat{\beta_1}\)</span>이 된다.</p>
+<p><span class="math notranslate nohighlight">\(\widehat{\beta_0}\)</span>은 기존 버전의 추천 시스템을 사용했을 때의 추정값이고, <span class="math notranslate nohighlight">\(\widehat{\beta_0}+\widehat{\beta_1}\)</span>이 새로운 버전을 이용한 고객 시청 시간의 추정값이다. <span class="math notranslate nohighlight">\(\widehat{\beta_1}\)</span>이 ATE에 해당한다.</p>
+<ol class="arabic simple" start="3">
+<li><p>신용 한도가 채무불이행률에 미치는 영향을 추정하고자 선형회귀분석을 사용하는 상황을 고려해보자.</p></li>
+</ol>
+<p><span class="math notranslate nohighlight">\(Default_i=\beta_0+\beta_1line_i+e_i\)</span></p>
+<p>여기서 추정된 <span class="math notranslate nohighlight">\(\widehat{\beta_1}\)</span>은 신용 한도가 1달러 증가할 때 채무불이행률이 얼마나 변할지에 대한 기댓값이다. 그러나 은행은 위험이 적은 고객에게 더 높은 한도를 주는 경향이 있기 때문에, 교란 요인을 보정해야 한다. 회귀분석은 OLS로 추정할 모델에 단순히 교란 요인을 추가하면 교란 요인이 보정된다.</p>
+<p><span class="math notranslate nohighlight">\(Default_i=\beta_0+\beta_1line_i+\theta X_i+e_i\)</span></p>
+<p>여기서 <span class="math notranslate nohighlight">\(X\)</span>는 교란 요인의 벡터이고 <span class="math notranslate nohighlight">\(\theta\)</span>는 해당 교란 요인과 관련된 매개변수의 벡터이다. 몇 가지 교란 요인을 추가하면 신용 한도와 채무불이행률 사이의 관계가 양수로 바뀐다.</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="id2">
+<h1>2. 회귀분석 이론<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h1>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(\beta^*\)</span>를 매개변수 벡터라고 하자.</p></li>
+</ol>
+<p><span class="math notranslate nohighlight">\(\beta^*=argmin_\beta E[(Y_i-X_i^\prime\beta)^2]\)</span></p>
+<p>선형회귀분석은 평균제곱오차를 최소화하는 매개변수를 찾는다. 이를 미분하고, 그 결과를 0으로 두면, 표본으로부터 다음과 같이 회귀계수를 추정할 수 있다.</p>
+<p><span class="math notranslate nohighlight">\(\widehat{\beta}=(X\prime X)^{-1}X\prime Y\)</span></p>
+<ol class="arabic simple" start="2">
+<li><p>단순선형회귀</p></li>
+</ol>
+<p>인과추론에서는 변수 T가 결과 Y에 미치는 인과효과를 추정하려는 경우가 많다. 단순선형회귀분석을 통해 이 효과를 추정할 수 있다.</p>
+<p><span class="math notranslate nohighlight">\(\widehat\tau=\frac{Cov(Y_i,T_i)}{Var(T_i)}\)</span></p>
+<p>회귀분석은 처치와 결과가 어떻게 함께 움직이는지(분자의 공분산) 파악하고 이를 처치 대상에 따라 조정(분모의 분산)한다.</p>
+<ol class="arabic simple" start="3">
+<li><p>다중선형회귀</p></li>
+</ol>
+<p>설명변수가 두 개 이상일 때에는 단순선형회귀분석을 확장하면 된다. 관심 있는 것은 <span class="math notranslate nohighlight">\(T\)</span>와 관련된 매개변수 <span class="math notranslate nohighlight">\(\tau\)</span>를 추정하는 것이다.</p>
+<p><span class="math notranslate nohighlight">\(y_i = \beta_0+\tau T_i+ \beta_1 X_{1i}+\cdots+\beta_k X_{ki}+u_i\)</span></p>
+<p>여기서 <span class="math notranslate nohighlight">\(\tau\)</span>는 다음 공식으로 추정할 수 있다.</p>
+<p><span class="math notranslate nohighlight">\(\hat\tau=\frac{Cov(Y_i,\tilde T_i)}{Var(\tilde T_i)}\)</span></p>
+<p>여기서 <span class="math notranslate nohighlight">\(\tilde T_i\)</span>는 <span class="math notranslate nohighlight">\(T_i\)</span>를 모든 공변량 <span class="math notranslate nohighlight">\(X_{1i}+\cdots+X_{ki}\)</span>에 대해 회귀한 잔차(residual)이다. 다중회귀분석의 회귀계수는 모델의 다른 변수들의 효과를 고려한 후 얻은 값이다. 교란 요인에서 T를 예측한 다음, T에서 회귀한 값을 빼준다. <span class="math notranslate nohighlight">\(\tilde T\)</span>는 <span class="math notranslate nohighlight">\(X\)</span>의 다른 변수와 연관이 없는 처치이다.</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="id3">
+<h1>3. 프리슈-워-로벨 정리와 직교화<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h1>
+<ol class="arabic simple">
+<li><p>FWL 정리로부터 구한 결과와 다중회귀분석의 결과는 동일하다. 하지만 FWL의 경우 세 단계로 나누어 추정할 수 있고, 편향 제거와 잡음 제거한 데이터셋을 얻을 수 있다.</p></li>
+</ol>
+<ol class="arabic simple">
+<li><p>편향 제거 단계 : 처치 <span class="math notranslate nohighlight">\(T\)</span>를 교란 요인 <span class="math notranslate nohighlight">\(X\)</span>에 회귀하여 처치 잔차 <span class="math notranslate nohighlight">\(\tilde T=T-\hat T\)</span>를 구한다.</p></li>
+<li><p>잡음 제거 단계 : 결과 <span class="math notranslate nohighlight">\(Y\)</span>를 교란 요인 <span class="math notranslate nohighlight">\(X\)</span>에 대해 회귀하여 결과 잔차 <span class="math notranslate nohighlight">\(\tilde Y=Y-\hat Y\)</span>를 구한다.</p></li>
+<li><p>결과 모델 단계 : 결과 잔차 <span class="math notranslate nohighlight">\(\tilde Y\)</span>를 처치 잔차 <span class="math notranslate nohighlight">\(\tilde T\)</span>에 대해 회귀하여 <span class="math notranslate nohighlight">\(T\)</span>가 <span class="math notranslate nohighlight">\(Y\)</span>에 미치는 인과효과 추정값을 구한다.</p></li>
+</ol>
+<p>원래 데이터셋</p>
+<p><img alt="스크린샷 2024-04-17 오후 4.51.25.png" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/9227f135-d2af-416a-b1de-f4f876082e0e/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2024-04-17_%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE_4.51.25.png" /></p>
+<p>편향 제거 후 데이터셋 (다중회귀분석 <span class="math notranslate nohighlight">\(\hat\beta_1\)</span>의 추정량과 같으나 <span class="math notranslate nohighlight">\(\hat\beta_1\)</span>의 표준오차는 더 큼)</p>
+<p><img alt="스크린샷 2024-04-17 오후 4.51.38.png" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/7d197f34-7f2c-4126-b041-f8ae3c026479/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2024-04-17_%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE_4.51.38.png" /></p>
+<p>잡음 제거 후 최종 결과 모델 (다중회귀분석 <span class="math notranslate nohighlight">\(\hat\beta_1\)</span>의 추정량과 표준오차가 같음)</p>
+<p><img alt="스크린샷 2024-04-17 오후 4.52.31.png" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/48800c2b-01b0-4603-9fc7-04eeb05f7fac/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2024-04-17_%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE_4.52.31.png" /></p>
+<ol class="arabic simple" start="2">
+<li><p>회귀 추정량의 표준오차</p></li>
+</ol>
+<p>추정한 회귀계수의 표준오차의 공식은 다음과 같다.</p>
+<p><span class="math notranslate nohighlight">\(SE(\hat\beta)=\frac{\sigma(\hat\epsilon)}{\sigma(\tilde T )\sqrt{n-DF}}\)</span></p>
+<p>여기서 <span class="math notranslate nohighlight">\(\hat\epsilon\)</span>은 회귀 모델의 잔차이고 <span class="math notranslate nohighlight">\(DF\)</span>는 모델이 추정하는 매개변수의 수이다 (n-<span class="math notranslate nohighlight">\(DF\)</span>가 자유도, n은 관측 데이터 수).</p>
+<p>분자의 경우 결과를 잘 예측할수록 잔차가 작아지므로 추정값의 분산이 낮아진다. 또한 처치가 결과를 많이 설명하면 매개변수 추정값의 표준오차도 작아진다. 오차는 (잔차화된) 처치의 분산에 반비례한다. 처치가 많이 바뀌면 그 영향을 측정하기가 더 쉬워진다.</p>
+<ol class="arabic simple" start="3">
+<li><p>FWL 정리 시각화 요약</p></li>
+</ol>
+<p><img alt="스크린샷 2024-04-17 오후 5.06.05.png" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/1244d036-0b3c-4549-a622-9b408958182a/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2024-04-17_%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE_5.06.05.png" /></p>
+<p><img alt="스크린샷 2024-04-17 오후 5.06.40.png" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/0b1145b1-5ba8-4675-8b4f-1f3976e03322/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2024-04-17_%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE_5.06.40.png" /></p>
+<p><img alt="스크린샷 2024-04-17 오후 5.06.50.png" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/03aa862d-9a06-4401-9d97-050505427c56/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2024-04-17_%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE_5.06.50.png" /></p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="id4">
+<h1>4. 양수성과 외삽<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h1>
+<p>외삽 주의</p>
+<p><img alt="스크린샷 2024-04-17 오후 5.09.06.png" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/f281626d-d96a-4817-8d47-0c606acb7d73/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2024-04-17_%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE_5.09.06.png" /></p>
+<p>데이터셋 1은 실제 관측된 값이고, 데이터셋 2는 처치를 무작위 배정한 결과. 데이터셋 2에서는 실제 처치효과보다 크게 과소평가한 것을 확인할 수 있다.</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="id5">
+<h1>5. 선형회귀에서의 비선형성<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h1>
+<ol class="arabic simple">
+<li><p>예를 들어, 한도를 2,000에서 3,000으로 늘렸을 때보다 1,000에서 2,000으로 늘렸을 때 소비가 더 많이 증가하는 경우 어떻게 해야할까? 다음과 같은 데이터셋을 고려해보자.</p></li>
+</ol>
+<p><img alt="스크린샷 2024-04-17 오후 5.12.59.png" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/baa52619-3cfb-4583-a205-ac7fa8e30810/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2024-04-17_%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE_5.12.59.png" /></p>
+<p>이 문제를 해결하기 위해 처치를 결과와 선형 관계로 변환해야 한다. 예를 들어, 다음과 같은 모델을 고려해볼 수 있다.</p>
+<p><span class="math notranslate nohighlight">\(spend_i = \beta_0+\beta_1 \sqrt{line}_i+e_i\)</span></p>
+<p>여기서 제곱근, 로그 함수, 분수의 거듭제곱 등 여러가지를 고려해볼 수 있다. 이 예제에서는 제곱근을 사용하였다.</p>
+<p><img alt="스크린샷 2024-04-17 오후 5.15.05.png" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/efbb17cd-be3d-4b52-88cc-310ccc9766d1/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2024-04-17_%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE_5.15.05.png" /></p>
+<ol class="arabic simple" start="2">
+<li><p>비선형 FWL과 편향제거</p></li>
+</ol>
+<ol class="arabic simple">
+<li><p>처치 선형화 단계: <span class="math notranslate nohighlight">\(T\)</span>와 <span class="math notranslate nohighlight">\(Y\)</span>의 관계를 선형화하는 함수 <span class="math notranslate nohighlight">\(F\)</span>를 찾는다.</p></li>
+<li><p>편향 제거 단계: <span class="math notranslate nohighlight">\(F(T)\)</span>를 교란 요인 <span class="math notranslate nohighlight">\(X\)</span>에 회귀하고 처치 잔차 <span class="math notranslate nohighlight">\(\widetilde {F(T)}=F(T)-\widehat {F(T)}\)</span>를 구한다.</p></li>
+<li><p>잡음 제거 단계: 결과 <span class="math notranslate nohighlight">\(Y\)</span>를 교란 요인 <span class="math notranslate nohighlight">\(X\)</span>에 대해 회귀하여 결과 잔차 <span class="math notranslate nohighlight">\(\tilde Y=Y-\hat Y\)</span>를 구한다.</p></li>
+<li><p>결과 모델 단계: 이렇게 얻은 결과 모델은 결과 잔차 <span class="math notranslate nohighlight">\(\tilde Y\)</span>를 처치 잔차 <span class="math notranslate nohighlight">\(\widetilde {F(T)}\)</span>에 대해 회귀하여 <span class="math notranslate nohighlight">\(F(T)\)</span>가 <span class="math notranslate nohighlight">\(Y\)</span>에 미치는 인과효과 추정값을 구한다.</p></li>
+</ol>
+<ol class="arabic simple" start="3">
+<li><p>비선형 FWL을 한 결과</p></li>
+</ol>
+<p>1)에서는 예측값이 상향 편향되어 있으나 여기서는 임금 그룹의 중간을 통과한다. 모델에 임금을 포함하였다.</p>
+<p><span class="math notranslate nohighlight">\(spend_i=\beta_0+\beta_1 \sqrt{line}_1+\beta_2 wage_i+e_i\)</span></p>
+<p><img alt="스크린샷 2024-04-17 오후 5.20.01.png" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/5cf3f3bc-82cb-4f6b-86b5-1407c932373b/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2024-04-17_%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE_5.20.01.png" /></p>
+<p>코드</p>
+<p><img alt="스크린샷 2024-04-17 오후 8.34.03.png" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/96d1d363-5410-4c56-92fd-b21df39c2b03/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2024-04-17_%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE_8.34.03.png" /></p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="id6">
+<h1>6. 더미변수<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h1>
+<ol class="arabic simple">
+<li><p>은행에서 신용 한도를 무작위로 배정하여 채무불이행률과 고객 소비에 미치는 영향을 추정할 수 있으나, 큰 비용이 들 수 있다. 한 가지 해결 방법은 조건부 무작위 실험을 고려하는 것이다. 예를 들어, <span class="math notranslate nohighlight">\(credit\_score1\)</span> 변수가 고객 위험도의 대리변수라고 할 때, 위험도에 따른 고객 그룹을 생성할 수 있다. <span class="math notranslate nohighlight">\(credit\_score1\)</span>이 낮은 고위험 그룹은 평균이 낮은 분포에서 신용 한도를 추출하여 무작위로 배정하고, <span class="math notranslate nohighlight">\(credit\_score1\)</span>이 높은 저위험 고객은 평균이 높은 분포에서 추출하여 신용 한도를 무작위로 배정한다.</p></li>
+</ol>
+<p><img alt="스크린샷 2024-04-17 오후 8.44.40.png" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/3a0ef803-ddf0-4551-b3da-8dced2cd0347/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2024-04-17_%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE_8.44.40.png" /></p>
+<ol class="arabic simple" start="2">
+<li><p>회귀모형에서 <span class="math notranslate nohighlight">\(credit\_score1\)</span>의 범주에 따라 다르게 추정하고 싶을 때 더미변수를 사용한다. 더미변수는 그룹에 대해 이진값으로 구성된 열이다. 즉, 고객이 해당 그룹에 속하면 1이고 그렇지 않으면 0이다. 고객은 하나의 그룹에만 속할 수 있으므로 더미 열 중에서 하나만 1의 값을 가질 수 있고, 나머지 열은 모두 0이 된다. 첫 번째 더미의 경우에는 제외한다(모든 열의 값이 0이기 때문이다).</p></li>
+</ol>
+<p><img alt="스크린샷 2024-04-17 오후 8.48.53.png" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/3f898d27-fe30-458b-ad34-b4593ea255db/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2024-04-17_%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE_8.48.53.png" /></p>
+<p>회귀 모델은 다음과 같다.</p>
+<p><span class="math notranslate nohighlight">\(default_i=\beta_0+\beta_1 lines_i + \theta G_i + e_i\)</span></p>
+<p>다음 표에서 sb_200, sb_400, …, sb_1000은 sb_000을 기준(reference)으로 각 군의 효과를 나타낸 것이다.</p>
+<p><img alt="스크린샷 2024-04-17 오후 8.52.15.png" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/693ffbce-a5cb-4bfd-b869-794eacba449e/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2024-04-17_%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE_8.52.15.png" /></p>
+<p>기울기 매개변수는 하나 뿐이고, 그룹당 하나의 절편이 생기지만, 모든 그룹에 동일한 기울기가 적용된다.</p>
+<p><img alt="스크린샷 2024-04-17 오후 8.53.06.png" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/ba8144c9-15c5-4a4c-9a49-b94774ccfefd/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2024-04-17_%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE_8.53.06.png" /></p>
+<ol class="arabic simple" start="3">
+<li><p>만약 그룹별로 효과가 다르다고 판단해서, 회귀분석을 진행하고 싶다면 포화모델을 고려해볼 수 있다. 조건부 무작위 실험의 데이터를 <span class="math notranslate nohighlight">\(credit\_score1\_buckets\)</span>에 따라 나누고 그룹별로 효과를 추정한 것과 같다.</p></li>
+</ol>
+<p>각 그룹별로 효과를 추정한 경우</p>
+<p><img alt="스크린샷 2024-04-17 오후 8.57.18.png" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/9ac12fb8-b78e-42e6-ab5d-6bd6c1b8eeea/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2024-04-17_%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE_8.57.18.png" /></p>
+<p>포화모델은 더미변수와 처치에 대한 상호작용 항에서, 각 더미변수에 해당하는 그룹의 인과효과를 추정할 수 있다.</p>
+<p><img alt="스크린샷 2024-04-17 오후 8.58.39.png" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/cb00c5fe-9da5-4cf7-b8dc-926236844afb/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2024-04-17_%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE_8.58.39.png" /></p>
+<p>회귀분석 결과</p>
+<p><img alt="스크린샷 2024-04-17 오후 9.02.51.png" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/af2959c1-8dff-41ee-93ee-451a2cc25c39/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2024-04-17_%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE_9.02.51.png" /></p>
+<p>음의 기울기 그래프와 여러 기울기 그래프가 나타나는데, 위의 표를 보면 모든 기울기가 통계적으로 유의하지 않다. 군을 많이 나눠서 각 그룹의 표본 크기가 작아졌고, 표준오차가 크게 나타난 것으로 보인다.</p>
+<ol class="arabic simple" start="4">
+<li><p>회귀분석은 그룹 효과를 결합할 때 표본 크기를 가중치로 사용하는 것이 아니라 <strong>각 그룹에서 처치의 분산에 비례하는 가중치</strong>를 사용한다. 예시는 교재 참고.</p></li>
+</ol>
+<p><span class="math notranslate nohighlight">\(ATE=E\biggl\{ \bigg(\frac{\partial}{\partial t}E[Y_i|T=t,Group_i]\bigg)w(Group_i)\biggl\}\)</span></p>
+<p>회귀분석에서는 <span class="math notranslate nohighlight">\(w(Group_i) \propto \sigma^2(T)\)</span>를 사용한다.</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="id7">
+<h1>7. 중립 통제변수<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h1>
+<ol class="arabic simple">
+<li><p>회귀분석에서 고려해야 할 다른 유형의 통제변수가 있다. 일부 변수가 무해해 보이지만, 실제로는 해로울 수 있는 통제변수들이다. 이러한 통제변수는 회귀분석 추정에서 편향에 영향을 미치지 않는다는 점에서 중립적이라고 한다. 하지만, 분산에는 심각한 영향을 줄 수 있다.</p></li>
+</ol>
+<p><img alt="스크린샷 2024-04-17 오후 9.25.23.png" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/1ba9418e-c6b6-448f-b99e-8cf59232cef0/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2024-04-17_%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE_9.25.23.png" /></p>
+<p><span class="math notranslate nohighlight">\(credit\_score2\)</span>를 포함하면 <span class="math notranslate nohighlight">\(credit\_limit\)</span>의 표준오차가 감소했다.</p>
+<p><img alt="스크린샷 2024-04-17 오후 9.30.36.png" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/5bf442f1-1697-4ca9-90ba-d2ac63d33dbf/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2024-04-17_%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE_9.30.36.png" /></p>
+<p>선형회귀분석은 교란 요인을 보정하는 데 사용할 수 있을 뿐만 아니라 잡음을 줄이는 데도 사용할 수 있다.</p>
+<ol class="arabic simple" start="2">
+<li><p>잡음 유발 통제변수</p></li>
+</ol>
+<p>신용 한도가 위험도가 아닌 소비에 미치는 영향을 추정하려고 한다. 이전 예제에서처럼 <span class="math notranslate nohighlight">\(credit\_score1\)</span>이 주어졌을 때 신용 한도는 무작위로 배정되었다. 하지만 이번에는 <span class="math notranslate nohighlight">\(credit\_score1\)</span>이 교란 요인이 아니라고 가정해보자. 이 데이터 생성 과정의 인과 그래프는 다음과 같다.</p>
+<p><img alt="스크린샷 2024-04-17 오후 9.36.10.png" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/29acf512-c5c3-4e5e-aa38-513cd40a0370/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2024-04-17_%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE_9.36.10.png" /></p>
+<p>단순회귀모형을 사용했으며, 제곱근 함수를 적용하였다.</p>
+<p><img alt="스크린샷 2024-04-17 오후 9.37.52.png" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/2e25acea-43e8-4c88-8c1e-83e815e10848/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2024-04-17_%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE_9.37.52.png" /></p>
+<p>하지만 <span class="math notranslate nohighlight">\(credit\_score1\_buckets\)</span>를 포함하면 어떻게 될까?</p>
+<p><img alt="스크린샷 2024-04-17 오후 9.38.41.png" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/7ae2d514-e6ed-4aa3-8d0d-e7ed1f872c4e/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2024-04-17_%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE_9.38.41.png" /></p>
+<p>표준오차가 증가하여 인과 매개변수의 신뢰구간이 넓어졌다.</p>
+<ol class="arabic simple" start="3">
+<li><p>교란 요인 중 하나가 처치의 강력한 예측자이고 결과의 약한 예측자임을 알면, 모델에서 제외할 수 있다. 이렇게 할 때, 추정값이 편향될 수 있으나 분산을 크게 줄인다면 가치가 있는 선택일 수 있다. 이를 편향-분산 트레이드오프라고 한다.</p></li>
+</ol>
+<p>우선순위 통제변수</p>
+<ol class="arabic simple">
+<li><p>교란 변수</p></li>
+<li><p>outcome을 설명하는 변수&gt;&gt;처치를 설명하는 변수</p></li>
+<li><p>처치를 설명하는 변수&gt;&gt;outcome을 설명하는 변수</p></li>
+</ol>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./docs"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Chapter3.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">그래프 모델 집중 훈련</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Chapter5.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">&lt;no title&gt;</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">1. 선형회귀분석의 필요성</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">2. 회귀분석 이론</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">3. 프리슈-워-로벨 정리와 직교화</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">4. 양수성과 외삽</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">5. 선형회귀에서의 비선형성</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">6. 더미변수</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">7. 중립 통제변수</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Smart Causal Inference Team
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

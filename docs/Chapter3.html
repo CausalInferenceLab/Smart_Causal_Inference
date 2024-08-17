@@ -1,0 +1,946 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>그래프 모델 집중 훈련 &#8212; Smart Causal Inference [SCI]</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/Chapter3';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="1. 선형회귀분석의 필요성" href="Chapter4.html" />
+    <link rel="prev" title="Recap" href="Chapter2.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/qe-logo-large.png" class="logo__image only-light" alt="Smart Causal Inference [SCI] - Home"/>
+    <script>document.write(`<img src="../_static/qe-logo-large.png" class="logo__image only-dark" alt="Smart Causal Inference [SCI] - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Chapter1.html">Chapter 1. 인과추론 소개</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chapter2.html"><strong>Recap</strong></a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">그래프 모델 집중 훈련</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Chapter4.html">1. 선형회귀분석의 필요성</a></li>
+
+
+
+
+
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/docs/Chapter3.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>그래프 모델 집중 훈련</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">그래프 모델 집중 훈련</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">인과 그래프 예시</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">인과 그래프에서의 변수 관계 유형</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chain">1) 사슬 구조 (Chain)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fork">2) 분기 구조 (Fork)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#collider">3) 충돌부 구조 (Collider)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">연관성 흐름 치트 시트</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">퀴즈)</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">식별 재해석</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cia-conditional-independence-assumption">조건부 독립성 가정(CIA; Conditional Independence Assumption)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#positivity">양수성 (Positivity) 가정</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">두 가지 주요 편향</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">1) 교란 편향</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">2) 선택 편향</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">요약</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <aside>
+<p>작성자 : 안시형</p>
+<p>🔥 <strong>이번 장에서 다룰 것</strong></p>
+<ul class="simple">
+<li><p>그래프 모델에 대한 이해하고, 그래프 모델을 통해 식별의 개념을 재해석</p></li>
+<li><p>인과모델과 그래프에서 연관성이 어떻게 흐르는지 이해</p></li>
+<li><p>식별을 방해하는 편향의 원인 두 가지를 알아봄</p></li>
+</ul>
+</aside>
+<section id="id1">
+<h1>그래프 모델 집중 훈련<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
+<section id="id2">
+<h2>인과 그래프 예시<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<p><img alt="Untitled" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/8d7f6034-cfbe-4fcf-8ba9-cb7f6ed2e2b8/Untitled.png" /></p>
+<p>인과 그래프는 DAG(directed acyclic graph)이라고도 불리며, 방향이 있있고, 순환되는 부분이 없는 유향 비순환 그래프이다.</p>
+<ul class="simple">
+<li><p>화살표는 각 인과 관계를 나타낸다. 예를 들어, conversion의 원인은 cross_sell_email (교차 판매 이메일 배송), age, gender 이다.</p></li>
+<li><p>U는 관측되지 않은 변수를 뜻한다.</p></li>
+</ul>
+<p>흥미로운 점으로 가장 중요한 정보가 그래프 안에 없을 수도 있다.</p>
+<p>→ 우리가 개념적으로 알고 있는 영역들을 도식화하여 인과관계를 표현하고 연관성이 어떻게 흐르는지, 어디에서 편향이 발생하고 어떻게 통제해야 편향을 막을 수 있는지를 쉽게 이해할 수 있는 표현 방법</p>
+</section>
+<section id="id3">
+<h2>인과 그래프에서의 변수 관계 유형<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
+<p><img alt="Untitled" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/4ba7dbea-e0f9-4219-85ce-0e68ed92684d/Untitled.png" /></p>
+<p>인과 그래프에서는 대표적으로 3가지 구조가 있다.</p>
+</section>
+<section id="chain">
+<h2>1) 사슬 구조 (Chain)<a class="headerlink" href="#chain" title="Permalink to this heading">#</a></h2>
+<p><img alt="Untitled" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/1afb5035-4ef9-4071-915f-2d8f1578552c/Untitled.png" /></p>
+<p>T는 M의 원인, M은 Y의 원인. 중간 노드 M은 매개자 (Mediator)라고 불림</p>
+<p><strong>사슬 구조에서의 연관성</strong></p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(T \not\perp M\)</span> : 종속 (dependent)</p></li>
+<li><p><span class="math notranslate nohighlight">\(M \not\perp Y\)</span> : 종속</p></li>
+<li><p><span class="math notranslate nohighlight">\(T \not\perp Y\)</span> : 종속</p></li>
+<li><p><span class="math notranslate nohighlight">\(T \perp Y \mid M\)</span> : 독립</p></li>
+</ul>
+<p><strong>사슬 구조 예시</strong></p>
+<p><img alt="Untitled" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/31e429fe-8f1f-4185-8ba4-19db93b7dc4f/Untitled.png" /></p>
+<ul class="simple">
+<li><p>인과관계</p>
+<ul>
+<li><p>인과추론을 알게되면 문제해결력이 향상</p></li>
+<li><p>문제해결력이 향상되면 승진할 가능성이 높아짐</p></li>
+<li><p>따라서, 인과적 지식은 문제해결력을 향상하고, 승진의 원인이 됨</p></li>
+</ul>
+</li>
+<li><p>연관관계</p>
+<ul>
+<li><p>인과추론 전문성이 높을 수록 승진할 가능성이 높음</p></li>
+<li><p>승진 가능성이 높을 수록 인과추론 지식이 많을 확률도 높아짐</p></li>
+</ul>
+</li>
+</ul>
+<p>→ 인과관계가 한 방향으로 존재하더라도 서로 연관성이 있음. 이렇게 두 변수가 연관성 있으면 ‘독립’이 아님</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span> 즉, 인과추론 지식 $\not\perp$ 승진
+</pre></div>
+</div>
+<p><strong>조건부일 경우?</strong></p>
+<ul class="simple">
+<li><p>변수를 고정하는 것이라고도 함</p></li>
+<li><p>해당 변수의 영향을 통제하는 것</p></li>
+</ul>
+<p><img alt="Untitled" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/2c7cc423-3e3e-4574-9877-9432c5bd0082/Untitled.png" /></p>
+<ul class="simple">
+<li><p>문제 해결력이 동일한 사람들을 살펴보면, 인과추론 지식만 가지고 승진 가능성에 대한 정보를 알 수 없음</p></li>
+</ul>
+<p>→ 인과추론 지식 <span class="math notranslate nohighlight">\(\perp\)</span> 승진 <span class="math notranslate nohighlight">\(\mid\)</span> 문제해결력</p>
+</section>
+<section id="fork">
+<h2>2) 분기 구조 (Fork)<a class="headerlink" href="#fork" title="Permalink to this heading">#</a></h2>
+<p><img alt="Untitled" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/5448b94a-0156-470a-85da-0b78f5264c7e/Untitled.png" /></p>
+<p>T의 원인은 X, Y의 원인도 X.</p>
+<p>X를 공통 원인 (commmon cause)라 부르며, 교란 요인(confounder)라고도 한다.</p>
+<p><strong>분기 구조에서의 연관성</strong></p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(T \not\perp X\)</span> : 종속</p></li>
+<li><p><span class="math notranslate nohighlight">\(X \not\perp Y\)</span> : 종속</p></li>
+<li><p><span class="math notranslate nohighlight">\(T \not\perp Y\)</span> : 종속</p></li>
+<li><p><span class="math notranslate nohighlight">\(T \perp Y \mid X\)</span> : 독립</p></li>
+</ul>
+<p><strong>분기 구조 예시</strong></p>
+<p><img alt="Untitled" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/973bf760-dd29-4a81-bf53-6880ccc6e61e/Untitled.png" /></p>
+<ul class="simple">
+<li><p>인과관계</p>
+<ul>
+<li><p>통계학 덕분에 인과추론과 머신러닝을 더 많이 알게 됨</p></li>
+<li><p>인과추론을 잘 알아도 머신러닝에 도움이 되지는 않으며, 그 반대도 마찬가지</p></li>
+</ul>
+</li>
+<li><p>연관관계</p>
+<ul>
+<li><p>인과추론을 잘 안다면, 머신러닝도 능숙할 가능성이 높음</p></li>
+</ul>
+</li>
+</ul>
+<p><strong>분기 구조 예시 2)</strong></p>
+<p><img alt="Untitled" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/18e01040-7014-4464-b446-09c44a81aee6/Untitled.png" /></p>
+<ul class="simple">
+<li><p>인과관계</p>
+<ul>
+<li><p>훌륭한 프로그래머가 좋은 성과를 냄 (좋은 프로그래머 → 좋은 직원)</p></li>
+<li><p>좋은 프로그래머라면 답변할 수 있을 만한 질문을 함 (좋은 프로그래머 → 문제해결력)</p></li>
+</ul>
+</li>
+<li><p>연관관계</p>
+<ul>
+<li><p>질문에 답할 경우, 좋은 직원이 될 가능성이 높음</p></li>
+</ul>
+</li>
+</ul>
+<p><strong>조건부일 경우?</strong></p>
+<p><img alt="Untitled" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/6fbc35da-6a70-4fe2-817b-965379511350/Untitled.png" /></p>
+<ul>
+<li><p>지원자가 좋은 프로그래머임을 이미 아는 경우,</p>
+<ul class="simple">
+<li><p>문제 해결력이 좋다고 좋은 직원이 될 것인지에 대한 정보를 알 수 없음</p></li>
+</ul>
+<p>→ 문제 해결력 <span class="math notranslate nohighlight">\(\perp\)</span> 좋은 직원 <span class="math notranslate nohighlight">\(\mid\)</span> 좋은 프로그래머</p>
+</li>
+</ul>
+</section>
+<section id="collider">
+<h2>3) 충돌부 구조 (Collider)<a class="headerlink" href="#collider" title="Permalink to this heading">#</a></h2>
+<p><img alt="Untitled" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/7f3685ec-4dc9-4daa-b439-f745db637b74/Untitled.png" /></p>
+<p>X의 원인은 T, Y 모두</p>
+<p>T와 Y 사이에 직접적인 관계는 없는 경우</p>
+<p>X를 collision node 혹은 <code class="docutils literal notranslate"><span class="pre">common</span> <span class="pre">effect</span></code>라고 부르며, 충돌부 구조를 Immorality 라고 부르기도 함. (연관성 없는 두 부모…)</p>
+<p><strong>충돌부 구조에서의 연관성</strong></p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(T \perp Y\)</span> : 독립</p></li>
+<li><p><span class="math notranslate nohighlight">\(T \not\perp X\)</span> : 종속</p></li>
+<li><p><span class="math notranslate nohighlight">\(X \not\perp Y\)</span> : 종속</p></li>
+<li><p><span class="math notranslate nohighlight">\(T \not\perp Y \mid X\)</span> : 종속</p></li>
+</ul>
+<p><strong>충돌부 구조 예시 1)</strong></p>
+<p><img alt="Untitled" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/215ff9ad-7f70-4dc6-b8e8-8edc37481e7b/Untitled.png" /></p>
+<ul class="simple">
+<li><p>인과관계</p>
+<ul>
+<li><p>통계를 잘 알거나, 아부를 잘하는 사람이 승진할 수 있음</p></li>
+</ul>
+</li>
+<li><p>연관관계</p>
+<ul>
+<li><p>통계에 얼마나 능숙한지를 아는 게 얼마나 아부를 잘하는 지에 관해서는 알 수 없음</p></li>
+</ul>
+</li>
+</ul>
+<p><strong>조건부일 경우?</strong></p>
+<p><img alt="Untitled" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/d0a42f63-b786-4ba2-baf7-fccf7c747178/Untitled.png" /></p>
+<ul class="simple">
+<li><p>승진을 했다면, 통계 수준으로 아부 수준을 알 수 있음</p>
+<ul>
+<li><p>통계를 잘 알지 못하지만 승진을 했다면, 상사에게 아부를 잘 할 가능성이 높음</p></li>
+<li><p>통계를 잘 안다면 통계수준이 이미 승진을 설명했으므로 아부를 잘 하지 못할 가능성이 높음</p></li>
+</ul>
+</li>
+</ul>
+<p>→ 통계학 <span class="math notranslate nohighlight">\(\not\perp\)</span> 아부 <span class="math notranslate nohighlight">\(\mid\)</span> 승진</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>  다른 요인에 의해 설명되는 현상 (explaining away)이라고도 함
+</pre></div>
+</div>
+<p><strong>충돌부 구조 예시 2)</strong></p>
+<p><img alt="Untitled" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/19d2fe33-ae0a-4cc5-8318-f7e2244d2d22/Untitled.png" /></p>
+<ul class="simple">
+<li><p>승진(collision 노드)을 조건으로 두지않고, 해당 충돌부의 <code class="docutils literal notranslate"><span class="pre">결과</span></code>를 조건부로 두어도 충돌부의 원인들은 종속이 됨</p>
+<ul>
+<li><p>승진 정보를 몰라도 거액의 연봉 정보를 안다면, 통계 지식과 아부는 종속적인 관계가 됨</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="id4">
+<h2>연관성 흐름 치트 시트<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h2>
+<p><img alt="Untitled" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/5a13f24a-21f4-4ff2-ba02-e61c6a889613/Untitled.png" /></p>
+<ul class="simple">
+<li><p>위의 세 가지(Chain, Fork, Collider) 구조를 알면 독립성과 연관성에 대한 흐름의 일반적인 규칙을 정리</p></li>
+</ul>
+</section>
+<section id="id5">
+<h2>퀴즈)<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h2>
+<p><img alt="Untitled" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/59e88915-b527-4b40-88c8-16f81ba78cf6/Untitled.png" /></p>
+<ul>
+<li><p>정답</p>
+<p><img alt="Untitled" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/2597f129-4885-4316-87d1-04237c607ff3/Untitled.png" /></p>
+</li>
+</ul>
+</section>
+</section>
+<section id="id6">
+<h1>식별 재해석<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h1>
+<p>기업에서 컨설팅을 받는게 이후 6개월 수익에 도움이 되는지 알고 싶음</p>
+<p>이전 6개월의 수익이 좋은 경우 좋은 컨설턴트를 고용할 가능성이 높음</p>
+<p>그리고, 이전에도 수익이 좋았으면 미래에도 수익이 좋을 것</p>
+<p>이를 인과그래프로 나타내면,</p>
+<p><img alt="Untitled" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/17254899-fcb9-4f7b-990d-91adc565b61f/Untitled.png" /></p>
+<ul class="simple">
+<li><p>컨설팅과 6개월 이후 수익에는 두가지 흐름이 연관됨</p>
+<ul>
+<li><p>직접적인 인과 경로</p></li>
+<li><p>공통원인 때문에 교란받는 비인과 경로 (뒷문 경로, Backdoor path라고도 함)</p></li>
+</ul>
+</li>
+</ul>
+<p><img alt="Untitled" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/823a3297-7a0e-42b2-a57c-d49ff77d4750/Untitled.png" /></p>
+<ul class="simple">
+<li><p>컨설팅과 6개월 이후 인과관계를 식별하려면, 인과 경로를 하나만 남겨야함</p>
+<ul>
+<li><p>공통 원인인 이전 6개월 수익을 조건부로 설정하면 해당 경로가 닫힌다</p></li>
+</ul>
+</li>
+</ul>
+<section id="cia-conditional-independence-assumption">
+<h2>조건부 독립성 가정(CIA; Conditional Independence Assumption)<a class="headerlink" href="#cia-conditional-independence-assumption" title="Permalink to this heading">#</a></h2>
+<ul>
+<li><p>회사의 과거 실적(이전 6개월 수익)이 비슷한 실험군으로 실험하면, 이후 6개월 수익은 평균적으로 같음</p>
+<p>= 공변량 X 수준이 동일한 대상을 비교하면, 잠재적 결과는 평균적으로 같음</p>
+</li>
+</ul>
+</section>
+<section id="positivity">
+<h2>양수성 (Positivity) 가정<a class="headerlink" href="#positivity" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>회사의 과거 실적(이전 6개월 수익)이 비슷한 대상이 대조군(컨설팅하지 않음)에도 있어야함</p></li>
+<li><p>X의 모든 그룹에 실험군과 대조군의 실험대상이 반드시 존재해야함</p>
+<ul>
+<li><p>없다면, 그룹 간의 차이를 정의할 수 없음</p></li>
+</ul>
+</li>
+</ul>
+<p><img alt="Untitled" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/35144ca7-b48d-4e3c-8353-0ebadfa2b33e/Untitled.png" /></p>
+<p><strong>실험군 (컨설턴트를 고용한 회사) vs 대조군(고용하지 않은 회사) 비교하면?</strong></p>
+<ul>
+<li><p>실험군 mean(profits_next_6m) = 4.2</p></li>
+<li><p>대조군 mean(profits_next_6m) = 2.53</p>
+<p>→ 실험군 - 대조군 = $ 1.66 (million)</p>
+</li>
+</ul>
+<p>⚠️ 이 값으로 컨설팅이 회사 실적에 미치는 <strong><code class="docutils literal notranslate"><span class="pre">인과</span> <span class="pre">효과라고</span> <span class="pre">할</span> <span class="pre">수</span> <span class="pre">없음</span></code></strong></p>
+<p><strong>과거 실적이 비슷한 회사들로 본다면?</strong></p>
+<ul>
+<li><p>profits_prev_6m = 1</p>
+<ul class="simple">
+<li><p>실험군 - 대조군 = 1.2 - 1.05 = 0.15</p></li>
+</ul>
+</li>
+<li><p>profits_prev_6m = 5</p>
+<ul class="simple">
+<li><p>실험군 - 대조군 = 5.7 - 5.5 = 0.2</p></li>
+</ul>
+<p>→ 각 그룹의 크기를 가중치로 사용(여기서는 동일)하여 계산하면, $ 0.175 (million)라고 결론이 나옴</p>
+</li>
+<li><p>가중치로 계산하는 방법 예시)</p>
+<ul>
+<li><p>아래 케이스인 경우, 아래와 같이 계산</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p>n</p></th>
+<th class="head"><p>실험군-대조군</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>(profits_prev_6m) = 5.0</p></td>
+<td><p>27</p></td>
+<td><p>0.2</p></td>
+</tr>
+<tr class="row-odd"><td><p>(profits_prev_6m) = 1.0</p></td>
+<td><p>3</p></td>
+<td><p>0.15</p></td>
+</tr>
+</tbody>
+</table>
+<ul class="simple">
+<li><p>0.2 x (27/30) + 0.15 x (3/30) = 0.195</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+<section id="id7">
+<h1>두 가지 주요 편향<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h1>
+<section id="id8">
+<h2>1) 교란 편향<a class="headerlink" href="#id8" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>뒷문 경로가 있을 경우 발생</p></li>
+<li><p>처치와 결과가 공통적인 원인을 공유하는 경우</p>
+<ul>
+<li><p>새로운 교육 프로그램이 관리자의 참여도를 높이는지 알고 싶음</p></li>
+<li><p>잘하고 있는 관리자만 교육에 참석하는 경향</p></li>
+</ul>
+</li>
+</ul>
+<p><img alt="Untitled" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/ad711262-3d57-4015-bec7-28cb7bc5c765/Untitled.png" /></p>
+<p><strong>→ 처치와 결과의 공통원인을 보정해야함</strong></p>
+<p>그러나 항상 공통원인을 보정할 수는 없다.</p>
+<ul class="simple">
+<li><p>원인을 알 수 없거나, 원인을 알아도 측정하지 못하는 경우</p></li>
+<li><p>관리자 자질은 측정할 수 없음</p></li>
+</ul>
+<p><strong>대리 교란 요인을 통제하자</strong></p>
+<p><img alt="Untitled" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/a286941e-5e58-42f3-ab43-c21c9fbf69de/Untitled.png" /></p>
+<ul class="simple">
+<li><p>관리자 자질에 대한 대리변수로 사용할 수 있는 측정된 변수들을 통제하면 편향을 줄이는데 도움됨</p></li>
+</ul>
+<p><strong>처치를 무작위로 하면, 교란 요인을 파악하기 쉬워진다 (랜덤화 재해석)</strong></p>
+<p><img alt="Untitled" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/c78b7795-ad77-4fa6-8e7b-a7cb28131d55/Untitled.png" /></p>
+<ul class="simple">
+<li><p>많은 연구에서는 교란 요인이 중요한 문제임</p>
+<ul>
+<li><p>모든 교란요인을 통제했는지 확신하기 어렵기 때문</p></li>
+</ul>
+</li>
+<li><p>그러나 실무에서는 A/B 테스트를 통해, 처치의 유일한 원인이 랜덤성(rnd)인 그래프로 바꿀 수 있음</p></li>
+</ul>
+</section>
+<section id="id9">
+<h2>2) 선택 편향<a class="headerlink" href="#id9" title="Permalink to this heading">#</a></h2>
+<p>교란편향은 처치와 결과의 공통 원인을 통제하지 않았을 때 발생하지만, 선택 편향은 common effect (충돌부 구조의 충돌 노드)와 mediator (사슬 구조의 중간 노드)에 대한 조건부와 더 밀접한 관련이 있음</p>
+<p><strong>신규 기능 NPS 평가 사례</strong></p>
+<p>소프트웨어에서 신규 기능의 영향을 평가하고 싶어함</p>
+<p>→ 무작위로 고객에게 기능을 배포 (고객 중 10%는 무작위로 신규 기능 사용)</p>
+<p>→ 이 기능이 만족도를 높였는지 알고 싶어 NPS (순고객추천지수)를 설문조사를 통해 측정함</p>
+<p>신규 기능을 사용하지 않고 NPS 설문에 응답한 고객보다 신규 기능을 사용하고 NPS 설문에 응답한 고객들의 NPS 점수가 더 높았다.</p>
+<p>이 차이가 신규 기능이 NPS에 미친 인과효과 때문이라고 할 수 있을까?</p>
+<p>→ No. 설문에 응답한 사람들에게서만 NPS를 측정했기 때문 (선택 편향)</p>
+<p><img alt="Untitled" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/46bb87ae-4205-4cf9-9170-981674b87b3a/Untitled.png" /></p>
+<ul class="simple">
+<li><p>공통 효과 (설문 응답)을 조건부로 두면 선택 편향이 생김</p>
+<ul>
+<li><p>신규 기능과 고객만족도에 연관성이 생기기 때문 - 비인과 경로로 발생하는 편향</p></li>
+</ul>
+</li>
+</ul>
+<p><strong>편향에 대한 직관을 키워보자</strong></p>
+<ul class="simple">
+<li><p>만약 설문에 참여하지 않은 고객들의 응답까지 모두 받을 수 있다고 가정하면?</p>
+<ul>
+<li><p>nps_0 = 대조군의 nps결과</p></li>
+<li><p>nps_1 = 실험군의 nps결과</p></li>
+</ul>
+</li>
+</ul>
+<p><img alt="Untitled" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/cc17e3d9-0875-419c-b8e2-4b80e40aa552/Untitled.png" /></p>
+<p>→ 실험군, 대조군 모두 0.4 만큼 차이남 → 신규 기능이 NPS를 0.4 만큼 높이는 것이라고 볼 수 있음</p>
+<ul class="simple">
+<li><p>그러나 실제라면?</p>
+<ul>
+<li><p>nps_0, nps_1 열을 볼 수 없다.</p></li>
+<li><p>설문에 응답하지 않은 사람들의 응답을 볼 수 없다.</p></li>
+</ul>
+</li>
+</ul>
+<p><img alt="Untitled" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/4b09fdf6-f4a9-4ed1-94bb-605faba82de1/Untitled.png" /></p>
+<p>→ 실험군 - 대조군 차이가 0.22 (0.4의 절반 수준) 에 불과함</p>
+<p><img alt="Untitled" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/8b169784-a27b-4f80-ac64-047b17a29371/Untitled.png" /></p>
+<p>→ 값이 채워져있다면 (가정) 위와 같은 값일 것임.</p>
+<ul class="simple">
+<li><p>응답한 사람들의 nps가 높음</p></li>
+<li><p>만족한 고객이 설문에 응답할 가능성이 더 높기 때문</p></li>
+</ul>
+<p><strong>선택편향 보정은 어떻게 할까?</strong></p>
+<ul>
+<li><p>다른 관측가능한 변수를 활용하자!</p>
+<p><img alt="Untitled" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/38fc24af-ceb6-49b9-9e9d-c5e50e212315/Untitled.png" /></p>
+<ul>
+<li><p>설문에 응답하는 요인에 영향을 주는 것</p>
+<ul class="simple">
+<li><p>예시) 앱 사용 시간, 신규 기능</p></li>
+</ul>
+</li>
+<li><p>앱 사용 시간이 비슷한 유저들끼리 비교하자!</p>
+<ul class="simple">
+<li><p>앱 사용 시간이 많은 유저를 1, 사용 시간이 적은 유저들을 0으로 두고 비교하면 편향을 줄일 수 있음</p></li>
+</ul>
+<p><img alt="Untitled" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/d0b3c3a8-d2cc-4c7a-9bed-b599d67bbca3/Untitled.png" /></p>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>매개자 (Mediator)를 조건부 설정할 때 발생할 수 있는 편향</strong></p>
+<ul>
+<li><p>인사팀에서 일하면서, 성차별이 있는지, 동일한 자격을 갖춘 남성과 여성이 다르게 임금을 받는지 알고 싶다고 가정</p>
+<p><img alt="Untitled" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/85ce6236-0291-41b6-9e2e-29e49d09b487/Untitled.png" /></p>
+<ul class="simple">
+<li><p>이 분석을 수행할 때 직급(Seniority Level)의 통제를 고려할 수 있음</p></li>
+<li><p>그러나 woman → salary 간의 관계는 2가지 경로가 있음</p>
+<ul>
+<li><p>woman → seniority → salary = 간접 경로</p></li>
+<li><p>woman → salary = 직접 경로</p>
+<ul>
+<li><p>직급 (seniority)을 통제하면, 직접 경로로 인한 차별만 식별할 수 있음</p>
+<ul>
+<li><p>성별 때문에 승진을 못하는 케이스는 알 수 없음</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+<section id="id10">
+<h1>요약<a class="headerlink" href="#id10" title="Permalink to this heading">#</a></h1>
+<ul>
+<li><p>인과 그래프의 주요 구조와 연관성 흐름을 알아봄</p>
+<ul>
+<li><p>사슬 구조 (Chain), 분기 구조 (Fork), 충돌부 구조 (Collider)</p></li>
+<li><p>치트 시트</p>
+<p><img alt="Untitled" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/5a13f24a-21f4-4ff2-ba02-e61c6a889613/Untitled.png" /></p>
+</li>
+</ul>
+</li>
+<li><p>교란 편향과 선택 편향의 사례와 그에 따른 보정 방법</p>
+<ul class="simple">
+<li><p>교란 편향 : 처치와 결과가 공통 원인을 공유하는 경우</p>
+<ul>
+<li><p>대리 교란 요인을 통제</p></li>
+<li><p>무작위 처치</p></li>
+</ul>
+</li>
+<li><p>선택 편향 : 공통 효과을 조건부로 두는 경우</p>
+<ul>
+<li><p>관측가능한 변수를 통제</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./docs"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Chapter2.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><strong>Recap</strong></p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Chapter4.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">1. 선형회귀분석의 필요성</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">그래프 모델 집중 훈련</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">인과 그래프 예시</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">인과 그래프에서의 변수 관계 유형</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chain">1) 사슬 구조 (Chain)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fork">2) 분기 구조 (Fork)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#collider">3) 충돌부 구조 (Collider)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">연관성 흐름 치트 시트</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">퀴즈)</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">식별 재해석</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cia-conditional-independence-assumption">조건부 독립성 가정(CIA; Conditional Independence Assumption)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#positivity">양수성 (Positivity) 가정</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">두 가지 주요 편향</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">1) 교란 편향</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">2) 선택 편향</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">요약</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Smart Causal Inference Team
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
