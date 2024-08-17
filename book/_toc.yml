@@ -1,6 +1,8 @@
 format: jb-article
 root: intro
 sections:
-- file: docs/markdown-example
-- file: docs/notebook-example
-
+- file: docs/Chapter1
+- file: docs/Chapter2
+- file: docs/Chapter3
+- file: docs/Chapter4
+- file: docs/Chapter5
