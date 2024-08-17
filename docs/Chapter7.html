@@ -1,0 +1,878 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Chapter 7. 메타러너 &#8212; Smart Causal Inference [SCI]</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/Chapter7';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Chapter 8. 이중차분법 (8.1~8.3)" href="Chapter8_1.html" />
+    <link rel="prev" title="Chapter 6. 이질적 처치효과" href="Chapter6.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/qe-logo-large.png" class="logo__image only-light" alt="Smart Causal Inference [SCI] - Home"/>
+    <script>document.write(`<img src="../_static/qe-logo-large.png" class="logo__image only-dark" alt="Smart Causal Inference [SCI] - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Chapter1.html">Chapter 1. 인과추론 소개</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chapter2.html">Chapter 2. 무작위 실험 및 기초 통계 리뷰</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chapter3.html">Chapter 3. 그래프 인과모델</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chapter4.html">Chapter 4. 유용한 선형회귀</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Chapter5.html">Chapter 5. 성향점수</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chapter6.html">Chapter 6. 이질적 처치효과</a></li>
+
+
+
+
+
+
+
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Chapter 7. 메타러너</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Chapter8_1.html">Chapter 8. 이중차분법 (8.1~8.3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chapter8_2.html">Chapter 8.4 ~ 8.8</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chapter9.html">Chapter 9. 통제집단합성법</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chapter10.html">Chapter 10. 지역 실험과 스위치백 실험</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chapter11_1.html">Chapter 11.1-11.6 불응과 도구변수</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Chapter11_2.html">Chapter 11.1-11.6 불응과 도구변수</a></li>
+
+
+
+
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/docs/Chapter7.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Chapter 7. 메타러너</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Chapter 7. 메타러너</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">들어가며</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#metalearner">메타러너 (metalearner)</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">1. 이산형 처치 메타러너</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#t">1-1. T 러너</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">#. 추정 방법</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#x">1-2. X 러너</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">#. 추정 방법</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">2. 연속형 처지 메타러너</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#s">2-1. S 러너</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">#. 추정 방법</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#r">2-2. 이중/편향 제거 머신러닝 (= R 러너)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">#. 주요개념</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cate">#. CATE 추정</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">요약</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="chapter-7">
+<h1>Chapter 7. 메타러너<a class="headerlink" href="#chapter-7" title="Permalink to this heading">#</a></h1>
+<p>작성자 : 김혜민</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1>들어가며<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
+<ul class="simple">
+<li><p>이질적 처치효과, 즉 실험 대상이 어떻게 처지에 따라 다르게 반응하는 지를 식별하는 데 중점을 둠</p></li>
+<li><p>이전 장에서 상호작용 항을 포함한 <strong>회귀분석을 사용</strong>하여 CATE 추정값을 구하는 방법을 살펴봄.</p></li>
+<li><p>이번 장에서는 몇 가지 <strong>머신러닝 알고리즘</strong>을 섞어서 CATE 추정을 진행</p></li>
+</ul>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="metalearner">
+<h1>메타러너 (metalearner)<a class="headerlink" href="#metalearner" title="Permalink to this heading">#</a></h1>
+<ul class="simple">
+<li><p>기존 예측 머신러닝 알고리즘을 활용하여 처치효과를 추정하는 간단한 방법</p></li>
+<li><p>메타러너를 <strong>ATE (처지의 평균 효과) 추정</strong>에 사용할 수 있지만, 일반적으로 고차원 데이터를 잘 처리하기 때문에 주로 <strong>CATE</strong> (조건부 처지 평균 효과) 사용함</p></li>
+<li><p>메타러너는 사용하는 머신러닝 방법에 크게 좌우됨 → 여러 방법을 시도해보고 가장 효과적인 것을 확인</p></li>
+<li><p>ATE : 처지의 평균적인 효과</p></li>
+<li><p>CATE : 조건부 처지 효과</p>
+<ul>
+<li><p>개인마다 각각 어떤식으로 작동할지?</p></li>
+<li><p>관찰된 공번량(X)에 대한 조건부 처리 효과</p></li>
+</ul>
+</li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+(CATE,  τ(x)= E[D|X=x] = E[Y(1)-Y(0)|X=x])
+\]</div>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="id2">
+<h1>1. 이산형 처치 메타러너<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h1>
+<p>➡️ 가정</p>
+<ul class="simple">
+<li><p>온라인 소매업체의 마케팅 팀에서 근무</p></li>
+<li><p>마케팅 이메일을 통하여 클릭 전환율 상승</p></li>
+<li><p>어떤 고객이 마케팅 이메일을 잘 받는지 파악하는 것이 중요</p></li>
+</ul>
+<p>이 문제를 해결하기 위해서 이메일이 고객의 미래 구매량에 미치는 조건부 평균 처지효과를 추정하려고 함</p>
+<p>CATE 추정값을 바탕으로 누구에게 메일을 발송하면 효율적일지 전략 수립 가능</p>
+<p><img alt="Untitled" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/b6051e5a-8440-4941-8bec-ad704f5052db/Untitled.png" /></p>
+<p>T : 이메일 발송 여부 mkt_email</p>
+<p>Y : 한달 후 구매 금액 next_month_pv</p>
+<hr class="docutils" />
+<section id="t">
+<h2>1-1. T 러너<a class="headerlink" href="#t" title="Permalink to this heading">#</a></h2>
+<p>통제, 처리 그룹을 각각 다른 모형으로 학습, 두 차이로 CATE를 추정</p>
+<p><img alt="Untitled" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/846a8e9d-a28d-4f58-82c4-c67503451fc5/Untitled.png" /></p>
+<section id="id3">
+<h3>#. 추정 방법<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h3>
+<p><strong>Step1</strong> :  처치를 받지 않은 개체와 처리를 받은 개체를 각각 다른 모형을 사용해서 학습</p>
+<div class="math notranslate nohighlight">
+\[
+μ_0(x) = E[Y|T=0,X]\]</div>
+<div class="math notranslate nohighlight">
+\[
+μ_1(x) = E[Y|T=1,X]\]</div>
+<p><strong>Step2</strong> : 이 두 그룹의 차이로 CATE를 추정</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{τ}(x)_i = \hat{μ_1}(X_i) — \hat{μ_0}(X_i)\]</div>
+<ul class="simple">
+<li><p>T 러너가 T = 0, T=1 에서 각자 머신러닝 모델을 학습</p></li>
+<li><p>예측 시점에 두 모델을 모두 사용해서 실험군과 대조군 차이를 추정</p></li>
+</ul>
+<p><img alt="상대 누적 이득 곡선 AUC : 처치효과 높은 - 낮은 순서대로 올바르게 정렬했는 지를 확인" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/2ce1a3e1-f8a7-4a60-872e-e7884a2b5f4f/Untitled.png" /></p>
+<p>상대 누적 이득 곡선 AUC : 처치효과 높은 - 낮은 순서대로 올바르게 정렬했는 지를 확인</p>
+<p><strong>한계점 : 정규화 편향</strong></p>
+<ul class="simple">
+<li><p>대조군은 많고 실험군은 적은 상황</p>
+<ul>
+<li><p>과적합을 피하기 위해 모델이 단순해질 수 있음</p></li>
+</ul>
+</li>
+<li><p>실제 해당 데이터 CATE = 1 이 나와야 함</p></li>
+</ul>
+<p><img alt="Untitled" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/23aff029-b6bc-47b4-9d17-63c65561fee8/Untitled.png" /></p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="x">
+<h2>1-2. X 러너<a class="headerlink" href="#x" title="Permalink to this heading">#</a></h2>
+<p>통제, 처리 그룹을 각각 다른 모형을 사용하여 학습하고, 해당 모형을 활용하여 각 그룹의 개별 처치 효과를 추정</p>
+<p>개별 처지 효과에  가중치를 적용하여 최종 결과값 도출</p>
+<blockquote>
+<div><p>두 집단의 데이터 양 차이가 많을 때 용이</p>
+</div></blockquote>
+<p><img alt="Untitled" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/a08b4301-ae8e-4bcc-af6c-8dbef994dc19/Untitled.png" /></p>
+<section id="id4">
+<h3>#. 추정 방법<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h3>
+<p><strong>Step1</strong> :  처치를 받지 않은 개체와 처리를 받은 개체를 각각 다른 모형을 사용해서 학습</p>
+<div class="math notranslate nohighlight">
+\[
+ \hat{μ_0}(x) ≈ E[Y|T=0,X]\]</div>
+<div class="math notranslate nohighlight">
+\[
+ \hat{μ_1}(x) ≈ E[Y|T=1,X]\]</div>
+<p><strong>Step2</strong>: 통제그룹, 처리 그룹의 개별 치료 효과 추정</p>
+<ol class="arabic simple">
+<li><p>통제 그룹의 개별 치료 효과 추정</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[
+\hat{τ}(X,T=0)=\hat{μ}_1(X,T=0)−Y_{T=0}\]</div>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(μ_1(X,T=0)\)</span>는 통제 그룹의 데이터 X를 사용하여 처리 그룹 모델 <span class="math notranslate nohighlight">\(\hat{μ}_1\)</span>이 예측한 결과입니다.</p></li>
+<li><p>YT=0Y_{T=0}YT=0는 실제로 처리를 받지 않은 통제 그룹의 결과입니다.</p></li>
+<li><p>이 차이는 “통제 그룹이 실제로는 처리를 받지 않았지만, 처리를 받았더라면 얻었을 결과”를 나타냅니다.</p></li>
+</ul>
+<ol class="arabic simple" start="2">
+<li><p>처리 그룹의 개별 치료 효과 추정</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[
+\hat{τ}(X,T=1)=Y_{T=1}−\hat{μ}_0(X,T=1)\]</div>
+<p><img alt="**** 매우 작은 표본에 적합된 를 사용할 경우 위에 해당하는 결과값들이 잘못될 가능성이 큼" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/7b7b9513-fcc9-460b-8b06-b824643ae35e/Untitled.png" /></p>
+<p>**** 매우 작은 표본에 적합된 <span class="math notranslate nohighlight">\(\hat{μ}_1\)</span>를 사용할 경우 위에 해당하는 결과값들이 잘못될 가능성이 큼</p>
+<ul class="simple">
+<li><p>한 모델을 처치효과를 잘못 대체했기 떄문에 부정확하고</p></li>
+<li><p>다른 하나의 모델은 그 값을 올바르게 대체했으므로 정확함</p></li>
+</ul>
+<p>⇒ 두 모델을 정확한 모델에 더 많은 가중치를 부여하여 결합!</p>
+<p><strong>Step 3:</strong> 가중치 적용 및 최종 개별 치료 효과 추정</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{τ}(x)=\hat{μ}(X)_{τ0}\hat{e}(x)+\hat{μ}(X)_{τ1}(1−\hat{e}(x))
+\]</div>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\hat{e}(x)\)</span>는 성향 점수, 개체가 처리 그룹에 속할 확률을 나타냄</p></li>
+<li><p>일반적으로 성향점수를 사용한 이 가중평균은 더 많은 데이터를 사용하여 학습된 <span class="math notranslate nohighlight">\(\hatμ_t\)</span>모델에서 얻은 처치효과 추정값에 더 많은 가중치는 부여</p></li>
+</ul>
+<p><img alt="Untitled" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/9400730a-e8ac-470f-8297-c99d944e1646/Untitled.png" /></p>
+<ul class="simple">
+<li><p>T러너에 비해 잘못 추정된 CATE를 보정하는 것에 더 좋은 성능</p></li>
+<li><p>일반적으로 한 실험 대상의 집단이 다른 집단보다 훨씬 클 떄 X러너의 성능이 좋음</p></li>
+</ul>
+</section>
+</section>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="id5">
+<h1>2. 연속형 처지 메타러너<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h1>
+<p>연속성 처치의 경우 메타러너를 적용하기 까다로울 수 있음</p>
+<p>➡️ 가정</p>
+<ul class="simple">
+<li><p>레스토랑 할인 정보 데이터</p></li>
+<li><p>어느 시점에 할인을 제공하면 더 좋은 매출을 발생시키는 지 궁금</p></li>
+</ul>
+<p><img alt="Untitled" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/20f6df3c-e278-4c59-a1ba-2265954b0901/Untitled.png" /></p>
+<section id="s">
+<h2>2-1. S 러너<a class="headerlink" href="#s" title="Permalink to this heading">#</a></h2>
+<p><strong>단일(Single) 머신 러닝 모델을 사용</strong>하여 결과를 예측</p>
+<div class="math notranslate nohighlight">
+\[
+{μ}(x) = E[Y|T,X]\]</div>
+<p>공변량 X와 <strong>처리 변수 T를 모두 모델의 특성</strong>으로 포함 → 이 방법은 <strong>반사실적 예측</strong>을 직접 출력하여 CATE 추정</p>
+<ul class="simple">
+<li><p>이산형 처치에서도 사용가능</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+\hat{τ}(x)_i = \hat{μ}_s(X_i, T=1) — \hat{μ}_s(X_i, T=0)\]</div>
+<p><img alt="Untitled" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/99146a1e-7b0c-476b-9313-e2b0c5e3220b/Untitled.png" /></p>
+<section id="id6">
+<h3>#. 추정 방법<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h3>
+<p><strong>Step1</strong> :  단일 머신 러닝 모델( <span class="math notranslate nohighlight">\(μ_s\)</span>) 을 X, T를 사용하여 학습</p>
+<div class="math notranslate nohighlight">
+\[
+μ(x,t)=E[Y∣T=t,X=x]
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\hat{Y}^=\hat{β}_0+\hat{β}_1T+\hat{β}_2X
+\]</div>
+<p><strong>Step2</strong>: 반사실적 예측 (실제로 일어나지 않은 상황에서의 결과를 예측)</p>
+<ul class="simple">
+<li><p>데이터 확장 :
+연속성 처치의 경우 처치의 그리드 정의(해당 예제에서는 0~40% 이므로 10단위로 범주 주여)</p></li>
+<li><p><span class="math notranslate nohighlight">\(μ_s\)</span> 를 사용하여 확장된 데이터에서 반사실적 결과 예측</p></li>
+</ul>
+<p><img alt="Untitled" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/40a78546-83ed-4b07-a295-44b20b0aac65/Untitled.png" /></p>
+<p>해당 그래프에서 2018-12-25에 추정된 반응 함수가 2018-06-18일보다 더 가파른 모습을 보여줌</p>
+<p>→ 고객이 크리스마스에 할인에 더 민감함을 모델이 학습했다는 의미</p>
+<p><strong>Step3</strong>: <strong>CATE 추정</strong></p>
+<ul>
+<li><p>기울기 매개변수는 각 처지 값에 해당하는 결과의 변화율을 나타냄</p></li>
+<li><p>이러한 기울기 매개변수의 차이를 통해 조건부 평균 치료 효과(CATE)를 추정</p>
+<ul>
+<li><p>단순선형회귀 계수 공식 활용</p>
+<div class="math notranslate nohighlight">
+\[
+        \hat{β} = Cov(t,y) / Var(t)
+        \]</div>
+</li>
+</ul>
+</li>
+<li><p><strong>T=1 일 때</strong>  <span class="math notranslate nohighlight">\(\hat{Y}_1 = \hat{β}_0 + \hat{β}_1​⋅1 + \hat{β}_2X\)</span></p></li>
+<li><p><strong>T=0 일 때</strong> <span class="math notranslate nohighlight">\(\hat{Y}_0 = \hat{β}_0 + \hat{β}_1​⋅0 + \hat{β}_2X\)</span></p></li>
+<li><p><strong>CATE 계산</strong></p>
+<p><span class="math notranslate nohighlight">\(CATE(X) = \hat{Y}_1 - \hat(Y)_0 = (\hat{β}_0 + \hat{β}_1⋅1 + \hat{β}_2X) -  (\hat{β}_0 + \hat{β}_1⋅0 + \hat{β}_2X) = \hat{β}_1\)</span></p>
+</li>
+</ul>
+<p>한계점</p>
+<p><img alt="Untitled" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/25453f3e-a97f-499b-b152-990e573353df/Untitled.png" /></p>
+<ul class="simple">
+<li><p>누적 이득 곡선에서 보면 S러너는 간단하지만 괜찮은 성능을 보여주는 것처럼 보임</p></li>
+<li><p>S 러너는 랜덤화된 데이터가 많고 상대적으로 쉬운 데이터셋에 특화된 성능</p></li>
+<li><p><strong>큰 단점으로 처치효과를 0으로 편향시키려는 경향 존재</strong></p>
+<ul>
+<li><p>일반적으로 <strong>정규화 머신러닝 모델</strong>을 사용 → 정규화는 추정된 처치효과를 제한할 수 있음</p></li>
+</ul>
+</li>
+<li><p>처치변수가 다른 공변량보다 결과를 설명하는 데 영향력이 매우 적다면, S러너는 처치변수를 완전히 버릴 수 있음</p></li>
+</ul>
+<p>이러한 ATE 편향문제를 해결하는 방법으로 이중/편향 제거 머신러닝 (R 러너)를 활용</p>
+</section>
+</section>
+<section id="r">
+<h2>2-2. 이중/편향 제거 머신러닝 (= R 러너)<a class="headerlink" href="#r" title="Permalink to this heading">#</a></h2>
+<p>결과와 처치의 잔차를 구성할 때 머신러닝 모델을 사용</p>
+<ul class="simple">
+<li><p>복잡한 함수 형태 포착 가능 → 과적합 가능성 있음</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+Y_i -\hat{μ}_y(X_i) = τ⋅(T_i - \hat{μ}_i(X_i)) + ϵ_i
+\]</div>
+<section id="id7">
+<h3>#. 주요개념<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h3>
+<ol class="arabic">
+<li><p>결과 Y 추정 (머신러닝 회귀 모델 <span class="math notranslate nohighlight">\({μ}_y\)</span> 사용)</p></li>
+<li><p>처치 T 추정 (머신러닝 회귀 모델 <span class="math notranslate nohighlight">\({μ}_t\)</span> 사용)</p></li>
+<li><p>잔차 계산</p>
+<ul class="simple">
+<li><p>결과 잔차 : <span class="math notranslate nohighlight">\(\tilde{Y} = Y−μ_y(X)\)</span></p></li>
+<li><p>처지 잔차 : <span class="math notranslate nohighlight">\(\tilde{T} = T−μ_t(X)\)</span></p></li>
+</ul>
+</li>
+<li><p>결과의 잔차를 처치의 잔차에 회귀</p>
+<p><span class="math notranslate nohighlight">\(\tilde{Y} = τ\tilde{T} + ϵ\)</span></p>
+<ul class="simple">
+<li><p>τ : 추정하려고자 하는 처치 효과 : ATE에 해당</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+    ⁍
+    \]</div>
+</li>
+</ol>
+<p><strong>문제점 : 과적합</strong></p>
+<p>→ k fold 교차 검증에서 잔차를 얻는 방법으로 해당 문제를 완화 시킬 수 있음</p>
+<p>K-1 모델 추정, 남겨진 폴드에서 잔차를 얻음 * K번 반복</p>
+<p>의도적으로 잔차를 0으로 만들지 않음</p>
+</section>
+<section id="cate">
+<h3>#. CATE 추정<a class="headerlink" href="#cate" title="Permalink to this heading">#</a></h3>
+<div class="math notranslate nohighlight">
+\[
+Y_i -\hat{μ}_y(X_i) = τ(X_i)⋅(T_i - \hat{μ}_i(X_i)) + ϵ_i
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\tilde{Y} = τ(X_i)\tilde{T} + ϵ
+\]</div>
+<ul>
+<li><p>오차 관련 식으로 조정 → <strong>인과 손실 함수</strong></p>
+<div class="math notranslate nohighlight">
+\[
+    ⁍
+    \]</div>
+</li>
+<li><p>손실의 제곱을 최소화하면 원하는 CATE <span class="math notranslate nohighlight">\(τ(X_i)\)</span> 의 기댓값을 추정 가능</p>
+<div class="math notranslate nohighlight">
+\[
+    τ(X_i) = \tilde{Y} /\tilde{T} + ϵ
+    \]</div>
+<div class="math notranslate nohighlight">
+\[
+    \hat{L}_n(τ(x)) =1/n∑[(Y_i-\hat{M}_y(X_i)) -  τ(X_i)(T_i-\hat{M}_t(X_i))]
+    \]</div>
+<p>R러너가 최소하하려는 손실이므로 R 손실이라고도 부름</p>
+<div class="math notranslate nohighlight">
+\[
+    ⁍
+    \]</div>
+</li>
+</ul>
+<p><img alt="Untitled" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/9c043318-a066-469e-94e2-f205b2571d2a/Untitled.png" /></p>
+<ul>
+<li><p>시각화</p>
+<p><img alt="Untitled" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/1fea1481-cb36-47b9-b252-2b4e1fb4b0e8/Untitled.png" /></p>
+<p><img alt="Untitled" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/4e5244e5-e13e-448f-a5ec-886fe045c908/Untitled.png" /></p>
+<p><img alt="Untitled" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/082f7e37-6766-4909-b567-10fa9cdae8b5/Untitled.png" /></p>
+</li>
+</ul>
+</section>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="id8">
+<h1>요약<a class="headerlink" href="#id8" title="Permalink to this heading">#</a></h1>
+<p><strong>이산형</strong></p>
+<ol class="arabic simple">
+<li><p>T-러너</p>
+<ul class="simple">
+<li><p>두 개의 모델을 각각 학습하고 차이로 처리 효과를 추정</p></li>
+<li><p>정규화 편향이 발생하기 쉬움</p></li>
+</ul>
+</li>
+<li><p>X-러너</p>
+<ul class="simple">
+<li><p>두 개의 모델을 각각 학습</p></li>
+<li><p>각 그룹의 개별 치료효과 추정 후 성향점수로 가중치 부여 (작은 표본 학습 모델의 의존도 낮추기 위함)</p></li>
+<li><p>일반적으로 한 실험 대상의 집단이 다른 집단보다 훨씬 클 때 X러너의 성능이 좋음</p></li>
+</ul>
+</li>
+</ol>
+<p><strong>연속형</strong></p>
+<ol class="arabic simple">
+<li><p>S-러너</p>
+<ul class="simple">
+<li><p>단일 모델 학습</p></li>
+<li><p>처지값의 그리드를 주어 반사실 예측에 모델 사용</p></li>
+<li><p>기울기 매개변수를 추정</p></li>
+</ul>
+</li>
+<li><p>이중 머신러닝</p>
+<ul class="simple">
+<li><p>결과 모델, 처치 모델 추정</p></li>
+<li><p>각각의 잔차 추정</p></li>
+<li><p>과적합 해결 위해 k fold 교차 검증에서 잔차를 얻는 방법 사용</p></li>
+</ul>
+</li>
+</ol>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./docs"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Chapter6.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Chapter 6. 이질적 처치효과</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Chapter8_1.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Chapter 8. 이중차분법 (8.1~8.3)</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Chapter 7. 메타러너</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">들어가며</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#metalearner">메타러너 (metalearner)</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">1. 이산형 처치 메타러너</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#t">1-1. T 러너</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">#. 추정 방법</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#x">1-2. X 러너</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">#. 추정 방법</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">2. 연속형 처지 메타러너</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#s">2-1. S 러너</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">#. 추정 방법</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#r">2-2. 이중/편향 제거 머신러닝 (= R 러너)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">#. 주요개념</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cate">#. CATE 추정</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">요약</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Smart Causal Inference Team
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
