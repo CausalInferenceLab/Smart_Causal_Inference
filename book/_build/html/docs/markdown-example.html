@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>markdown 예시 &#8212; Smart Causal Inference [SCI]</title>
+    <title>Chapter 1. 인과추론 소개 &#8212; Smart Causal Inference [SCI]</title>
   
   
   
@@ -62,6 +62,8 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'docs/markdown-example';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -161,9 +163,7 @@ const thebe_selector_output = ".output, .cell_output"
         <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">markdown 예시</a></li>
-
-
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Chapter 1. 인과추론 소개</a></li>
 </ul>
 
     </div>
@@ -302,7 +302,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>markdown 예시</h1>
+    <h1>Chapter 1. 인과추론 소개</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -312,23 +312,12 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">markdown 예시</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#this-is-an-h1-tag">This is an <h1> tag</h1></a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#this-is-an-h2-tag">This is an <h2> tag</h2></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#this-is-an-h6-tag">This is an <h6> tag</h6></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#potential-outcome">Potential outcome</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sutva">SUTVA 가정</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">인과추정량과 편향</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">용어 설명</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">요약</a></li>
 </ul>
-</li>
-</ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">This is an <h1> tag</h1></a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">This is an <h2> tag</h2></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">This is an <h6> tag</h6></a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-
             </nav>
         </div>
     </div>
@@ -339,78 +328,94 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="markdown">
-<h1>markdown 예시<a class="headerlink" href="#markdown" title="Permalink to this heading">#</a></h1>
-<p>Jupyter Book은 markdown 문서를 지원합니다.</p>
-<p>아래와 같은 예시 코드를 입력하면 markdown 문법이 적용됩니다.</p>
-<p>​```</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="chapter-1">
+<h1>Chapter 1. 인과추론 소개<a class="headerlink" href="#chapter-1" title="Permalink to this heading">#</a></h1>
+<p>1인당 초콜릿 소비량과 노벨상 수상자 수의 관계</p>
+<p><img alt="스크린샷 2024-03-27 오후 5.49.50.png" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/8f3909bd-9799-4def-92e8-e3e58236b6cf/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2024-03-27_%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE_5.49.50.png" /></p>
+<p>Messerli, F. H. (2012). Chocolate consumption, cognitive function, and Nobel laureates. <em>N Engl J Med</em>, <em>367</em>(16), 1562-1564.</p>
+<p>연관관계와 인과관계는 어떻게 다른가? 위의 1인당 초콜릿 소비량과 노벨상 수상자 수의 관계는 연관관계가 있다. 그러나 1인당 초콜릿 소비량이 많기 때문에 노벨상 수상자 수가 많다고 말하기 어렵다. 때로는 연관관계 중에서 인과관계를 이야기할 수 있는 경우가 있다. 언제 그럴까?</p>
+<section id="potential-outcome">
+<h2>Potential outcome<a class="headerlink" href="#potential-outcome" title="Permalink to this heading">#</a></h2>
+<p>인과추론 문제에서는 풀리지 않는 문제가 있다. 한 사람이 특정 처치 <span class="math notranslate nohighlight">\(T_i\)</span>=t를 받았을 경우에는 t를 받지 않은 상황을 알 수가 없다. t를 받은 상황과 t를 받지 않은 상황을 비교하여야 인과추론을 할 수 있는데, 관찰 자료에서는 특정 처치 t를 받은 상황만 고려할 수 있다. t를 받은 상황과 t를 받지 않은 상황을 고려하기 위해서 다음과 같은 수식을 고려한다.</p>
+<p><span class="math notranslate nohighlight">\(Y_{ti} = Y_i|do(T_i = t)\)</span></p>
+<p>‘처치가 t인 상태일 때, 실험 대상 i의 결과는 Y가 될 것이다’라는 potential outcome을 정의한다.</p>
+<p><span class="math notranslate nohighlight">\(Y_{1i}\)</span> : 실험 대상 i가 처치 받은 잠재적 결과</p>
+<p><span class="math notranslate nohighlight">\(Y_{0i}\)</span> : 실험 대상 i가 처치 받지 않은 잠재적 결과</p>
+<p>우리가 구하고자 하는 인과효과는 다음과 같다.</p>
+<p><span class="math notranslate nohighlight">\(\tau_i = Y_{1i}-Y_{0i}\)</span></p>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="this-is-an-h1-tag">
-<h1>This is an <h1> tag<a class="headerlink" href="#this-is-an-h1-tag" title="Permalink to this heading">#</a></h1>
-<section id="this-is-an-h2-tag">
-<h2>This is an <h2> tag<a class="headerlink" href="#this-is-an-h2-tag" title="Permalink to this heading">#</a></h2>
-<section id="this-is-an-h6-tag">
-<h3>This is an <h6> tag<a class="headerlink" href="#this-is-an-h6-tag" title="Permalink to this heading">#</a></h3>
-<p><em>This text will be italic</em>
-<em>This will also be italic</em></p>
-<p><strong>This text will be bold</strong>
-<strong>This will also be bold</strong></p>
-<p><em>You <strong>can</strong> combine them</em></p>
-<ul class="simple">
-<li><p>Item 1</p></li>
-<li><p>Item 2</p>
-<ul>
-<li><p>Item 2a</p></li>
-<li><p>Item 2b</p></li>
-</ul>
-</li>
-</ul>
+<section id="sutva">
+<h2>SUTVA 가정<a class="headerlink" href="#sutva" title="Permalink to this heading">#</a></h2>
+<p>SUTVA는 stable unit of treatment value assumption을 의미한다. 이는 두 가지 의미를 함의한다. 첫째는 일치성(consistency)이고 둘째는 상호 간섭없음(no interference)이다.</p>
 <ol class="arabic simple">
-<li><p>Item 1</p></li>
-<li><p>Item 2</p></li>
-<li><p>Item 3</p>
+<li><p>일치성</p></li>
+</ol>
+<p><span class="math notranslate nohighlight">\(T_i=t\)</span>일 때 <span class="math notranslate nohighlight">\(Y_i(t)=Y\)</span>이다. 실험 계획 단계에서 고려한 T만 존재하여야 한다. 처치를 여러 번 했는데 한 번만 고려한 경우나 처치가 잘못 정의된 경우에는 일치성 가정이 위배될 수 있다.</p>
 <ol class="arabic simple">
-<li><p>Item 3a</p></li>
-<li><p>Item 3b
-​```</p></li>
+<li><p>상호 간섭없음</p></li>
 </ol>
-</li>
-</ol>
-<p>입력 결과</p>
+<p>하나의 실험 대상에 대한 효과는 다른 실험 대상의 영향을 받지 않는다. 예를 들어, 백신의 경우에는 백신 접종률이 높아지면 다른 사람들이 해당 질병에 걸릴 확률이 낮아질 수 있다.</p>
 </section>
+<section id="id1">
+<h2>인과추정량과 편향<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
+<p>가격할인이 개별 회사에 미치는 영향을 확인하기 위해 두 가지 잠재적 결과(<span class="math notranslate nohighlight">\(AmountSold_{0i}\)</span>, <span class="math notranslate nohighlight">\(AmountSold_{1i}\)</span>)를 확인하자. 가격할인이 판매량에 미치는 평균 영향은 추정할 수 있으므로 다음과 같은 인과 추정량을 고려하자.</p>
+<p>평균처치효과 (average treatment effect)</p>
+<p><span class="math notranslate nohighlight">\(ATE =E[AmountSold_{1i}-AmountSold_{0i}]\)</span></p>
+<p>가격을 할인한 회사가 어떻게 판매량을 늘렸는지 알아보자.</p>
+<p>실험군에 대한 평균 처치효과 (average treatment effect on the treated)</p>
+<p><span class="math notranslate nohighlight">\(ATT =E[AmountSold_{1i}-AmountSold_{0i}|IsOnSales=1]\)</span></p>
+<p>조건부 평균 처치효과(conditional average treatment effect)</p>
+<p>크리스마스 주간의 할인 여부가 미치는 영향을 확인해보자.</p>
+<p><span class="math notranslate nohighlight">\(CATE =E[AmountSold_{1i}-AmountSold_{0i}|weeksToXmas=0]\)</span></p>
+<p>우리가 이론적으로 다음과 같은 potential outcome을 알 수 있다고 하자. 다음 표에서 <span class="math notranslate nohighlight">\(i\)</span>는 실험 대상, <span class="math notranslate nohighlight">\(y\)</span>는 관측한 결과, <span class="math notranslate nohighlight">\(y_0\)</span>과 <span class="math notranslate nohighlight">\(y_1\)</span>은 각각 실험군 및 대조군에 따른 잠재적 결과, <span class="math notranslate nohighlight">\(t\)</span>는 처치 여부, <span class="math notranslate nohighlight">\(x\)</span>는 크리스마스까지의 시간을 표시하는 공변량이다.</p>
+<p><img alt="스크린샷 2024-03-28 오전 8.13.24.png" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/0dda1a97-1598-4fc9-a5f7-f0d18d7678db/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2024-03-28_%E1%84%8B%E1%85%A9%E1%84%8C%E1%85%A5%E1%86%AB_8.13.24.png" /></p>
+<p>여기서 위에서 구한 <span class="math notranslate nohighlight">\(ATE, ATT, CATE\)</span>를 추정해보자.</p>
+<p><span class="math notranslate nohighlight">\(ATE = (20+20+100+50+0+200)/6=65\)</span></p>
+<p>가격할인으로 판매량이 평균 65개 증가한다. ATT는 <span class="math notranslate nohighlight">\(T=1\)</span>일 때 마지막 열의 평균이 된다.</p>
+<p><span class="math notranslate nohighlight">\(ATT = (50+0+200)/3=83.33\)</span></p>
+<p>크리스마스 1주일 전이라는 조건부 평균 효과(<span class="math notranslate nohighlight">\(x=1\)</span>)는 회사 3번과 6번 효과의 평균에 해당한다.</p>
+<p><span class="math notranslate nohighlight">\(CATE(x=1) = (100+200)/2=150\)</span></p>
+<p>하지만, 실제 관측된 값과는 차이가 존재한다.</p>
+<p><img alt="스크린샷 2024-03-28 오전 8.22.08.png" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/67706fdb-7dac-41ef-aacc-dc05b53b28eb/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2024-03-28_%E1%84%8B%E1%85%A9%E1%84%8C%E1%85%A5%E1%86%AB_8.22.08.png" /></p>
+<p>위의 표에서 관측된 값을 기반으로 계산해보자.</p>
+<p><span class="math notranslate nohighlight">\(ATE = (500+600+800)/3-(200+120+300)/3=426.67\)</span></p>
+<p>가격할인으로 판매량이 평균 427개 증가한다. ATT는 <span class="math notranslate nohighlight">\(T=1\)</span>일 때를 구하는 것이므로 <span class="math notranslate nohighlight">\(E[AmountSold_{0i}|T=1]\)</span>을 추정할 수가 없다.</p>
+<p><span class="math notranslate nohighlight">\(ATT = E[AmountSold_{1i}-AmountSold_{0i}|IsOnSales=1]=E[AmountSold_{1i}|IsOnSales=1]=(800+600+500)/3=633.33\)</span></p>
+<p>크리스마스 1주일 전이라는 조건부 평균 효과(<span class="math notranslate nohighlight">\(x=1\)</span>)는 회사 3번과 6번 관측값의 차이에 해당한다.</p>
+<p><span class="math notranslate nohighlight">\(CATE(x=1) = E[AmountSold_{1i}-AmountSold_{0i}|weeksToXmas=1]=800-300=500\)</span></p>
+<p>이론적인 결과값과 관측값은 큰 차이를 보인다. 이는 할인한 회사와 그렇지 않은 회사의 특성이 크게 다르기 때문이다. 실험군의 <span class="math notranslate nohighlight">\(Y_0\)</span>가 대조군보다 훨씬 높다. 인과관계와 연관관계를 다르게 만드는 요소인 편향에 대해 살펴보자. 편향을 수식적으로 다음과 같이 이해해보자. 할인 예제에서 처치와 결과 간의 연관관계는 다음과 같다.</p>
+<p><span class="math notranslate nohighlight">\(E[Y|T=1]-E[Y|T=0]=E[Y_1|T=1]-E[Y_0|T=0]\)</span></p>
+<p><span class="math notranslate nohighlight">\(=E[Y_1|T=1]-E[Y_0|T=1]+E[Y_0|T=1]-E[Y_0|T=0]\)</span></p>
+<p><span class="math notranslate nohighlight">\(=E[Y_1-Y_0|T=1]+E[Y_0|T=1]-E[Y_0|T=0]\)</span></p>
+<p><span class="math notranslate nohighlight">\(=ATT+편향\)</span></p>
+<p>따라서,</p>
+<p><span class="math notranslate nohighlight">\(E[Y_0|T=1]-E[Y_0|T=0]\)</span></p>
+<p>이 두 군 사이의 편향에 해당한다. 두 군 사이에서는 할인 여부 외에도 수많은 변수가 차이가 있기 때문에 편향이 발생한다. 가격할인이 판매량에 미치는 영향을 파악하기 위해서는 할인한 회사와 하지 않는 회사가 평균적으로 비슷해야 한다. 따라서, 편향이 0이 되고, 실험군과 대조군이 처치에 유사하게 반응하면 평균의 차이가 평균 인과효과가 된다.</p>
+<p><span class="math notranslate nohighlight">\(E[Y_1-Y_0|T=1]=E[Y_1-Y_0|T=0]\)</span></p>
+<p>→ <span class="math notranslate nohighlight">\(E[Y|T=1] - E[Y|T=0] = ATT = ATE = E[Y_1-Y_0]\)</span></p>
+<p><em><strong>실험군과 대조군이 서로 교환 가능</strong></em>하다면 인과추론을 할 수 있게 된다. 교환 가능성은 다음과 같은 수식으로 설명된다. 잠재적 결과가 처치와 독립적이다.</p>
+<p><span class="math notranslate nohighlight">\((Y_0,Y_1)\perp T\)</span></p>
+<p>잠재적 결과가 처치와 독립적인 상황을 만들기 위해서 randomization을 사용한다. 실험 대상에 처치를 무작위로 지정하게 되면, 실험 대상은 잠재적 결과는 물론이고 어떤 변수와도 독립적으로 된다. 무작위 대조 연구에서도 randomization이 중요한 요소인 이유이다.</p>
+<p><img alt="스크린샷 2024-03-28 오전 9.09.57.png" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/fe0c79a3-9fc1-4cd5-a4bc-c0d0f556596c/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2024-03-28_%E1%84%8B%E1%85%A9%E1%84%8C%E1%85%A5%E1%86%AB_9.09.57.png" /></p>
+<p><img alt="스크린샷 2024-03-28 오전 9.10.23.png" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/fe95da26-d8be-4b6e-9c09-befbaf18e416/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2024-03-28_%E1%84%8B%E1%85%A9%E1%84%8C%E1%85%A5%E1%86%AB_9.10.23.png" /></p>
+<p>만약, <span class="math notranslate nohighlight">\(Y_0\)</span>만 관측할 수 있다면 다음과 같이 된다.</p>
+<p><img alt="스크린샷 2024-03-28 오전 9.11.04.png" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/6c0c8ecd-b665-479c-9aba-eef177e0552e/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2024-03-28_%E1%84%8B%E1%85%A9%E1%84%8C%E1%85%A5%E1%86%AB_9.11.04.png" /></p>
 </section>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="id1">
-<h1>This is an <h1> tag<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
 <section id="id2">
-<h2>This is an <h2> tag<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
-<section id="id3">
-<h3>This is an <h6> tag<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h3>
-<p><em>This text will be italic</em>
-<em>This will also be italic</em></p>
-<p><strong>This text will be bold</strong>
-<strong>This will also be bold</strong></p>
-<p><em>You <strong>can</strong> combine them</em></p>
-<ul class="simple">
-<li><p>Item 1</p></li>
-<li><p>Item 2</p>
-<ul>
-<li><p>Item 2a</p></li>
-<li><p>Item 2b</p></li>
-</ul>
-</li>
-</ul>
-<ol class="arabic simple">
-<li><p>Item 1</p></li>
-<li><p>Item 2</p></li>
-<li><p>Item 3</p>
-<ol class="arabic simple">
-<li><p>Item 3a</p></li>
-<li><p>Item 3b</p></li>
-</ol>
-</li>
-</ol>
+<h2>용어 설명<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<p>식별 (identification) : 관측 가능한 데이터로 인과 추정량을 표현하는 방법을 알아내는 단계</p>
+<p>추정 (estimation) : 실제로 데이터를 사용하여 앞서 식별한 인과 추정량을 추정하는 단계</p>
+<p>인과적 식별 : 편향을 제거하고 실험군과 대조군을 비교할 수 있게 만드는 현명한 방법을 찾아내서 눈에 보이는 모든 차이를 처치에 따른 효과로 돌리도록 하는 과정</p>
+<p>우리가 여기서 식별을 할 수 있는 이유는 데이터 생성 과정(처치 배정 메커니즘; 이 예시에서는 randomization)을 알거나 기꺼이 가정할 수 있기 때문이다.</p>
 </section>
+<section id="id3">
+<h2>요약<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>Potential outcome</p></li>
+<li><p><span class="math notranslate nohighlight">\((Y_0,Y_1)\perp T\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(E[Y|T=1] - E[Y|T=0] = ATT = ATE = E[Y_1-Y_0]\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(Y_i = (1-T_i)Y_{0i}+T_iY_{1i}\)</span> (SUTVA 가정)</p></li>
+</ol>
 </section>
 </section>
 
@@ -477,23 +482,12 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">markdown 예시</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#this-is-an-h1-tag">This is an <h1> tag</h1></a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#this-is-an-h2-tag">This is an <h2> tag</h2></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#this-is-an-h6-tag">This is an <h6> tag</h6></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#potential-outcome">Potential outcome</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sutva">SUTVA 가정</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">인과추정량과 편향</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">용어 설명</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">요약</a></li>
 </ul>
-</li>
-</ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">This is an <h1> tag</h1></a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">This is an <h2> tag</h2></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">This is an <h6> tag</h6></a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-
   </nav></div>
 
 </div></div>
