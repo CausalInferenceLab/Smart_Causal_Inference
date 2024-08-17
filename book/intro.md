@@ -14,7 +14,7 @@
 | 2024/05/09 | Chapter 5.4 - 5.끝 성향점수 (임시)  | [임시]() | [링크](https://causalinferencelab.github.io/Smart_Causal_Inference/docs/Chapter5.html) | 
 | 2024/05/16 | Chapter 6. 이질적 처치효과 | [하소희]() | [링크](https://causalinferencelab.github.io/Smart_Causal_Inference/docs/Chapter6.html) | 
 | 2024/05/23 | Chapter 7. 메타러너 | [김혜민]() | [링크](https://causalinferencelab.github.io/Smart_Causal_Inference/docs/Chapter7.html) | 
-| 2024/06/06 | Chapter 8. 이중차분법 (8.1~8.3) | [안시형]() | [링크](https://causalinferencelab.github.io/Smart_Causal_Inference/docs/Chapter8_1.html | 
+| 2024/06/06 | Chapter 8. 이중차분법 (8.1~8.3) | [안시형]() | [링크](https://causalinferencelab.github.io/Smart_Causal_Inference/docs/Chapter8_1.html) | 
 | 2024/06/13 | Chapter 8.4 ~ 8.8 이중차분법 | [박상호]() | [링크](https://causalinferencelab.github.io/Smart_Causal_Inference/docs/Chapter8_2.html) | 
 | 2024/06/20 | Chapter 9.1 - 9.4 표준통제집단합성법 (임시) | [임시]() | [링크](https://causalinferencelab.github.io/Smart_Causal_Inference/docs/Chapter9.html) | 
 | 2024/06/27 | Chapter 9.5 - 9.끝 표준통제집단합성법| [최의관]() | [링크](https://causalinferencelab.github.io/Smart_Causal_Inference/docs/Chapter9.html) | 
