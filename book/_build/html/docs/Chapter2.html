@@ -175,6 +175,37 @@ const thebe_selector_output = ".output, .cell_output"
 
 
 <li class="toctree-l1"><a class="reference internal" href="Chapter5.html">Chapter 5. 성향점수</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chapter6.html">Chapter 6. 이질적 처치효과</a></li>
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Chapter7.html">Chapter 7. 메타러너</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Chapter8_1.html">Chapter 8. 이중차분법 (8.1~8.3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chapter8_2.html">Chapter 8.4 ~ 8.8</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chapter9.html">Chapter 9. 통제집단합성법</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chapter10.html">Chapter 10. 지역 실험과 스위치백 실험</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chapter11_1.html">Chapter 11.1-11.6 불응과 도구변수</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Chapter11_2.html">Chapter 11.1-11.6 불응과 도구변수</a></li>
+
+
+
+
+
 </ul>
 
     </div>
@@ -374,7 +405,7 @@ E[Y_1-Y_0|T=1]_(ATT_)+[E[Y_0|T=1]-E[Y_0|T=0]]_(편향_)
 <h2><strong>RCT (Randomized Control Trial)</strong><a class="headerlink" href="#rct-randomized-control-trial" title="Permalink to this heading">#</a></h2>
 <p>RCT를 통해서 이론적으로는 독립성이 성립해야 하지만, 실제로는 반드시 그렇지 않다.</p>
 <p>실험군과 대조군이 비슷한지 확인하기 위해서 정규화 차이(normalized difference)를 계산해 볼 수 있다.</p>
-<p><img alt="Untitled" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/654ef806-da34-4beb-a6b4-8a561b86543f/Untitled.png" /></p>
+<p><img alt="" src="../_images/Chapter2-01.png" /></p>
 <p>(μ_hat와 σ_hat는 표본 평균과 분산을 뜻함)</p>
 <p>→ 정해진 임계값은 없지만 일반적으로 0.5 정도가 적절</p>
 <p>→ 대규모 표본에서는 정규화 차이가 사라지는 경향이 있음</p>
@@ -402,7 +433,7 @@ E[Y_1-Y_0|T=1]_(ATT_)+[E[Y_0|T=1]-E[Y_0|T=0]]_(편향_)
 </section>
 <section id="standard-error-confidence-interval">
 <h2>추정값의 표준오차 (Standard Error), 신뢰구간 (Confidence Interval)<a class="headerlink" href="#standard-error-confidence-interval" title="Permalink to this heading">#</a></h2>
-<p><img alt="Untitled" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/a9128c71-26dc-4f91-9b7c-46d1f555f52c/Untitled.png" /></p>
+<p><img alt="" src="../_images/Chapter2-02.png" /></p>
 <p>(SE : 평균의 표준오차, σ : 표준편차, n : 표본크기)</p>
 <ul class="simple">
 <li><p><strong>실험의 평균 값은 실제 평균과 항상 동일할 순 없지만, 표준오차를 사용해 진행하는 실험의 95%에서 실제 평균을 포함하는 구간을 만들 수 있다.  → 신뢰구간</strong></p></li>
@@ -425,8 +456,8 @@ E[Y_1-Y_0|T=1]_(ATT_)+[E[Y_0|T=1]-E[Y_0|T=0]]_(편향_)
 <p>불확실성을 나타내는 또 다른 방법은 가설검정을 통해 결과를 제시하는 것이다.</p>
 <p>두 그룹 간 평균 차이가 통계적으로 유의한 차이가 있는지에 대한 물음에 답을 하기 위해서는 두 독립 정규분포의 합이나 차 역시 정규분포라는 점을 기억해야 한다.</p>
 <p>정규분포의 합이나 차는 아래와 같은 분포를 따른다.</p>
-<p><img alt="Untitled" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/2f13e6f1-011b-429a-8e5e-9a4c525a99eb/Untitled.png" /></p>
-<p><img alt="Untitled" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/4c000ce1-3ded-46d7-9adf-00416487acd3/Untitled.png" /></p>
+<p><img alt="" src="../_images/Chapter2-03.png" /></p>
+<p><img alt="" src="../_images/Chapter2-04.png" /></p>
 </section>
 <section id="null-hypothesis">
 <h2>귀무 가설 (Null Hypothesis)<a class="headerlink" href="#null-hypothesis" title="Permalink to this heading">#</a></h2>
@@ -455,8 +486,8 @@ E[Y_1-Y_0|T=1]_(ATT_)+[E[Y_0|T=1]-E[Y_0|T=0]]_(편향_)
 → 표본 크기를 크게 하면, 표본 분포의 분산이 감소하여 좁은 모양이 되므로 유의수준이 일정하더라도 채택역의 크기가 감소하는 효과가 있게 됨
 → 신뢰수준과 검정력은 서로 반대되는 방향이어서, 하나가 커지면 나머지 하나는 줄어듬</p>
 </aside>
-<p><img alt="Untitled" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/937d0256-9d0a-479f-8df0-5137355dbe2f/Untitled.png" /></p>
-<p><img alt="Untitled" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/b84cda81-cbb4-4d9d-bce7-91ec845b2871/Untitled.png" /></p>
+<p><img alt="" src="../_images/Chapter2-05.png" /></p>
+<p><img alt="" src="../_images/Chapter2-06.png" /></p>
 <p><em>(출처: <a class="reference external" href="http://www.ktword.co.kr/test/view/view.php?m_temp1=5094">http://www.ktword.co.kr/test/view/view.php?m_temp1=5094</a>)</em></p>
 <p><em>※ 귀무가설을 꼭 두 그룹이 동등함을 전제로 설정되어야 하는 것은 아니다.</em></p>
 <p><em>매개변수가 특정 값과 다른 경우를 귀무가설로 세워야 하는 경우도 있다.</em></p>
@@ -474,10 +505,10 @@ E[Y_1-Y_0|T=1]_(ATT_)+[E[Y_0|T=1]-E[Y_0|T=0]]_(편향_)
 <p>위에서 설명한 신뢰구간 외에도, 검정통계량을 사용하여 귀무가설을 기각할 수도 있다.</p>
 <p>대체로 값이 클수록 귀무가설을 기각하는 방향으로 설정하게 된다.</p>
 <p>가장 널리 사용하는 통계량 중 하나는 t-통계량이고, 신뢰구간을 형성하는 분포를 정규화함으로써 아래와 같이 정의된다.</p>
-<p><img alt="Untitled" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/408f9130-9c08-43e0-b880-561445a494fa/Untitled.png" /></p>
+<p><img alt="" src="../_images/Chapter2-07.png" /></p>
 <p><strong>귀무가설이 참인 경우 위 통계량의 분포는 평균이 0이고 분산이 1인 정규분포를 따릅니다.</strong> (95%의 질량이 0을 중심으로 1.96과 -1.96 내에 형성 되어있습니다.)</p>
 <p>통계량 값이 1.96보다 크거나 -1.96보다 작은 경우, 유의수준 5% 하에서 기각할 수 있습니다.</p>
-<p><img alt="Untitled" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/c0f08502-9404-4ce9-b2c8-1d897065bd9e/Untitled.png" /></p>
+<p><img alt="" src="../_images/Chapter2-08.png" /></p>
 <p><em>(출처 : <a class="reference external" href="https://blog.naver.com/uranusjj/221606736038">https://blog.naver.com/uranusjj/221606736038</a>)</em></p>
 </section>
 <section id="p-p-value">
@@ -496,31 +527,30 @@ p값은 P(H_0|data)가 아니라 P(data|H_0)
 </section>
 <section id="id2">
 <h2>표본 크기 계산<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
-<ul>
-<li><p><strong>표본계산 추가자료</strong></p>
-<p><img alt="Untitled" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/ef4fa8cc-6cef-4717-9f7e-72a8d4d029f9/Untitled.png" /></p>
-</li>
+<ul class="simple">
+<li><p><strong>표본계산 추가자료</strong></p></li>
 </ul>
+<p><img alt="" src="../_images/Chapter2-09.png" /></p>
 <p>실험을 설계할 때, 각 그룹에 표본을 최소 어느 정도 설정해야 하는지 중요하다.</p>
 <p>귀무가설이 거짓일 경우 이를 정확하게 기각할 만큼 충분히 큰 표본을 확보해야 한다.</p>
 <p>(표본이 작으면 추정량의 분산이 커지고, 분산이 커질수록 추정이 부정확하기 때문에 표본의 확보가 중요하다.)</p>
 <p>95% 신뢰구간이란, 우리가 실험을 통해 얻은 신뢰구간 중 95%가 추정하고자 하는 매개변수의 실젯값을 포함함을 의미한다. 나머지 5%에서 실젯값을 포함하지 않음을 의미한다.</p>
 <p>유의수준 5%일 경우, 5% 확률로 귀무가설을 잘못 기각하게 된다.  차이가 유의하다고 결론을 내리려면 매개변수 추정값과 귀무가설 사이의 차이인 δ가 최소한 0에서 1.96SE 만큼 떨어져 있어야 한다.</p>
 <p>(δ-1.96SE가 95% 신뢰구간의 하한이기 때문이다. δ-1.96SE &gt; 0 보다 크면 통계적으로 유의하다고 할 수 있다.)</p>
-<p><img alt="Untitled" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/408f9130-9c08-43e0-b880-561445a494fa/Untitled.png" /></p>
+<p><img alt="" src="../_images/Chapter2-10.png" /></p>
 <p><strong>귀무가설을 올바르게 기각할 확률을 검정력이라고 한다.</strong></p>
 <p>검정력의 일반적인 기준은 80%로 설정하고, 귀무가설이 거짓일 때 80%의 확률로 귀무가설을 기각하는 것을 의미한다.</p>
 <p><strong>즉, 95% 신뢰구간의 하한이 0보다 높은 경우가 전체 실험의 80%에 달해야 한다.</strong></p>
 <p><strong>δ-1.96SE 는 평균이 δ-1.96SE고 표준오차와 같은 분산을 갖는 정규분포입니다.</strong></p>
 <p>δ-1.96SE&gt;0 인 경우가 80% 되려면(검정력의 80%), 차이가 0에서 1.96SE + 0.84SE만큼 떨어져야 한다.  (1.96은 95% 신뢰구간을 확보하기 위한 값이고, 0.84는 신뢰구간의 하한이 0을 초과하는 경우가 전체의 80%에 해당하도록 하기 위한 값)</p>
-<p><img alt="Untitled" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/c0f08502-9404-4ce9-b2c8-1d897065bd9e/Untitled.png" /></p>
+<p><img alt="" src="../_images/Chapter2-11.png" /></p>
 <ul class="simple">
 <li><p>귀무가설과 관측된 추정값의 차이인 δ를 감지할 수 있어야 합니다.</p></li>
 <li><p>유의수준(α) = 5%, 검정력(1-β) = 80% 라면, 감지 가능한 효과는 2.8SE = 1.96SE + 0.84SE</p></li>
 <li><p>δ(8%) = 2.8SE를 감지한 표본크기를 확보해야함.</p></li>
 <li><p>설계자 입장에서는 실험전이라 실험군의 표준오차를 알 수 없지만, 실험군과 대조군의 분산이 같을 것이라고 가정할 수 있다.</p></li>
 </ul>
-<p><img alt="Untitled" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/8fa2ed9f-57e4-4cb8-96e1-db688743c86d/Untitled.png" /></p>
+<p><img alt="" src="../_images/Chapter2-12.png" /></p>
 <p>→ <strong>대조군의 분산(σ^2)을 가장 타당한 추정값으로 사용해서 필요한 표본 크기를 정할 수 있다.</strong></p>
 </section>
 <section id="summary">
@@ -542,9 +572,9 @@ p값은 P(H_0|data)가 아니라 P(data|H_0)
 </li>
 <li><p>추정: 식별을 통해 발생한 통계량을 활용해 추정 (표준오차, 신뢰구간, 그룹간 평균차이의 표준오차)</p></li>
 </ol>
-<p><img alt="Untitled" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/a9128c71-26dc-4f91-9b7c-46d1f555f52c/Untitled.png" /></p>
-<p><img alt="Untitled" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/1f056f89-37af-4752-9947-a97e64c47374/Untitled.png" /></p>
-<p><img alt="Untitled" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/4c000ce1-3ded-46d7-9adf-00416487acd3/Untitled.png" /></p>
+<p><img alt="" src="../_images/Chapter2-13.png" /></p>
+<p><img alt="" src="../_images/Chapter2-14.png" /></p>
+<p><img alt="" src="../_images/Chapter2-15.png" /></p>
 <ol class="arabic simple">
 <li><p>설계 시 표본크기 (유의수준(α) = 5%, 검정력(1-β) = 80%)</p></li>
 </ol>
