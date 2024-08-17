@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>그래프 모델 집중 훈련 &#8212; Smart Causal Inference [SCI]</title>
+    <title>Chapter 3. 그래프 인과모델 &#8212; Smart Causal Inference [SCI]</title>
   
   
   
@@ -67,8 +67,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'docs/Chapter3';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="1. 선형회귀분석의 필요성" href="Chapter4.html" />
-    <link rel="prev" title="Recap" href="Chapter2.html" />
+    <link rel="next" title="Chapter 4. 유용한 선형회귀" href="Chapter4.html" />
+    <link rel="prev" title="Chapter 2. 무작위 실험 및 기초 통계 리뷰" href="Chapter2.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -164,7 +164,9 @@ const thebe_selector_output = ".output, .cell_output"
     <div class="bd-toc-item navbar-nav active">
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="Chapter1.html">Chapter 1. 인과추론 소개</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Chapter2.html"><strong>Recap</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chapter2.html">Chapter 2. 무작위 실험 및 기초 통계 리뷰</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Chapter 3. 그래프 인과모델</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chapter4.html">Chapter 4. 유용한 선형회귀</a></li>
 
 
 
@@ -172,19 +174,7 @@ const thebe_selector_output = ".output, .cell_output"
 
 
 
-
-
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">그래프 모델 집중 훈련</a></li>
-
-
-
-<li class="toctree-l1"><a class="reference internal" href="Chapter4.html">1. 선형회귀분석의 필요성</a></li>
-
-
-
-
-
-
+<li class="toctree-l1"><a class="reference internal" href="Chapter5.html">Chapter 5. 성향점수</a></li>
 </ul>
 
     </div>
@@ -323,7 +313,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>그래프 모델 집중 훈련</h1>
+    <h1>Chapter 3. 그래프 인과모델</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -333,29 +323,28 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">그래프 모델 집중 훈련</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">인과 그래프 예시</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">인과 그래프에서의 변수 관계 유형</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chain">1) 사슬 구조 (Chain)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fork">2) 분기 구조 (Fork)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#collider">3) 충돌부 구조 (Collider)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">연관성 흐름 치트 시트</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">퀴즈)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">그래프 모델 집중 훈련</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">인과 그래프 예시</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">인과 그래프에서의 변수 관계 유형</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chain">1) 사슬 구조 (Chain)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fork">2) 분기 구조 (Fork)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#collider">3) 충돌부 구조 (Collider)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">연관성 흐름 치트 시트</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">퀴즈)</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">식별 재해석</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cia-conditional-independence-assumption">조건부 독립성 가정(CIA; Conditional Independence Assumption)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#positivity">양수성 (Positivity) 가정</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">식별 재해석</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cia-conditional-independence-assumption">조건부 독립성 가정(CIA; Conditional Independence Assumption)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#positivity">양수성 (Positivity) 가정</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">두 가지 주요 편향</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">1) 교란 편향</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">2) 선택 편향</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">두 가지 주요 편향</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">1) 교란 편향</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">2) 선택 편향</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">요약</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">요약</a></li>
 </ul>
-
             </nav>
         </div>
     </div>
@@ -366,7 +355,9 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <aside>
+  <section class="tex2jax_ignore mathjax_ignore" id="chapter-3">
+<h1>Chapter 3. 그래프 인과모델<a class="headerlink" href="#chapter-3" title="Permalink to this heading">#</a></h1>
+<aside>
 <p>작성자 : 안시형</p>
 <p>🔥 <strong>이번 장에서 다룰 것</strong></p>
 <ul class="simple">
@@ -376,9 +367,9 @@ document.write(`
 </ul>
 </aside>
 <section id="id1">
-<h1>그래프 모델 집중 훈련<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
+<h2>그래프 모델 집중 훈련<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
 <section id="id2">
-<h2>인과 그래프 예시<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<h3>인과 그래프 예시<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h3>
 <p><img alt="Untitled" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/8d7f6034-cfbe-4fcf-8ba9-cb7f6ed2e2b8/Untitled.png" /></p>
 <p>인과 그래프는 DAG(directed acyclic graph)이라고도 불리며, 방향이 있있고, 순환되는 부분이 없는 유향 비순환 그래프이다.</p>
 <ul class="simple">
@@ -389,12 +380,12 @@ document.write(`
 <p>→ 우리가 개념적으로 알고 있는 영역들을 도식화하여 인과관계를 표현하고 연관성이 어떻게 흐르는지, 어디에서 편향이 발생하고 어떻게 통제해야 편향을 막을 수 있는지를 쉽게 이해할 수 있는 표현 방법</p>
 </section>
 <section id="id3">
-<h2>인과 그래프에서의 변수 관계 유형<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
+<h3>인과 그래프에서의 변수 관계 유형<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h3>
 <p><img alt="Untitled" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/4ba7dbea-e0f9-4219-85ce-0e68ed92684d/Untitled.png" /></p>
 <p>인과 그래프에서는 대표적으로 3가지 구조가 있다.</p>
 </section>
 <section id="chain">
-<h2>1) 사슬 구조 (Chain)<a class="headerlink" href="#chain" title="Permalink to this heading">#</a></h2>
+<h3>1) 사슬 구조 (Chain)<a class="headerlink" href="#chain" title="Permalink to this heading">#</a></h3>
 <p><img alt="Untitled" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/1afb5035-4ef9-4071-915f-2d8f1578552c/Untitled.png" /></p>
 <p>T는 M의 원인, M은 Y의 원인. 중간 노드 M은 매개자 (Mediator)라고 불림</p>
 <p><strong>사슬 구조에서의 연관성</strong></p>
@@ -437,7 +428,7 @@ document.write(`
 <p>→ 인과추론 지식 <span class="math notranslate nohighlight">\(\perp\)</span> 승진 <span class="math notranslate nohighlight">\(\mid\)</span> 문제해결력</p>
 </section>
 <section id="fork">
-<h2>2) 분기 구조 (Fork)<a class="headerlink" href="#fork" title="Permalink to this heading">#</a></h2>
+<h3>2) 분기 구조 (Fork)<a class="headerlink" href="#fork" title="Permalink to this heading">#</a></h3>
 <p><img alt="Untitled" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/5448b94a-0156-470a-85da-0b78f5264c7e/Untitled.png" /></p>
 <p>T의 원인은 X, Y의 원인도 X.</p>
 <p>X를 공통 원인 (commmon cause)라 부르며, 교란 요인(confounder)라고도 한다.</p>
@@ -490,7 +481,7 @@ document.write(`
 </ul>
 </section>
 <section id="collider">
-<h2>3) 충돌부 구조 (Collider)<a class="headerlink" href="#collider" title="Permalink to this heading">#</a></h2>
+<h3>3) 충돌부 구조 (Collider)<a class="headerlink" href="#collider" title="Permalink to this heading">#</a></h3>
 <p><img alt="Untitled" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/7f3685ec-4dc9-4daa-b439-f745db637b74/Untitled.png" /></p>
 <p>X의 원인은 T, Y 모두</p>
 <p>T와 Y 사이에 직접적인 관계는 없는 경우</p>
@@ -541,14 +532,14 @@ document.write(`
 </ul>
 </section>
 <section id="id4">
-<h2>연관성 흐름 치트 시트<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h2>
+<h3>연관성 흐름 치트 시트<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h3>
 <p><img alt="Untitled" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/5a13f24a-21f4-4ff2-ba02-e61c6a889613/Untitled.png" /></p>
 <ul class="simple">
 <li><p>위의 세 가지(Chain, Fork, Collider) 구조를 알면 독립성과 연관성에 대한 흐름의 일반적인 규칙을 정리</p></li>
 </ul>
 </section>
 <section id="id5">
-<h2>퀴즈)<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h2>
+<h3>퀴즈)<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h3>
 <p><img alt="Untitled" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/59e88915-b527-4b40-88c8-16f81ba78cf6/Untitled.png" /></p>
 <ul>
 <li><p>정답</p>
@@ -558,7 +549,7 @@ document.write(`
 </section>
 </section>
 <section id="id6">
-<h1>식별 재해석<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h1>
+<h2>식별 재해석<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h2>
 <p>기업에서 컨설팅을 받는게 이후 6개월 수익에 도움이 되는지 알고 싶음</p>
 <p>이전 6개월의 수익이 좋은 경우 좋은 컨설턴트를 고용할 가능성이 높음</p>
 <p>그리고, 이전에도 수익이 좋았으면 미래에도 수익이 좋을 것</p>
@@ -581,7 +572,7 @@ document.write(`
 </li>
 </ul>
 <section id="cia-conditional-independence-assumption">
-<h2>조건부 독립성 가정(CIA; Conditional Independence Assumption)<a class="headerlink" href="#cia-conditional-independence-assumption" title="Permalink to this heading">#</a></h2>
+<h3>조건부 독립성 가정(CIA; Conditional Independence Assumption)<a class="headerlink" href="#cia-conditional-independence-assumption" title="Permalink to this heading">#</a></h3>
 <ul>
 <li><p>회사의 과거 실적(이전 6개월 수익)이 비슷한 실험군으로 실험하면, 이후 6개월 수익은 평균적으로 같음</p>
 <p>= 공변량 X 수준이 동일한 대상을 비교하면, 잠재적 결과는 평균적으로 같음</p>
@@ -589,7 +580,7 @@ document.write(`
 </ul>
 </section>
 <section id="positivity">
-<h2>양수성 (Positivity) 가정<a class="headerlink" href="#positivity" title="Permalink to this heading">#</a></h2>
+<h3>양수성 (Positivity) 가정<a class="headerlink" href="#positivity" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p>회사의 과거 실적(이전 6개월 수익)이 비슷한 대상이 대조군(컨설팅하지 않음)에도 있어야함</p></li>
 <li><p>X의 모든 그룹에 실험군과 대조군의 실험대상이 반드시 존재해야함</p>
@@ -651,9 +642,9 @@ document.write(`
 </section>
 </section>
 <section id="id7">
-<h1>두 가지 주요 편향<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h1>
+<h2>두 가지 주요 편향<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h2>
 <section id="id8">
-<h2>1) 교란 편향<a class="headerlink" href="#id8" title="Permalink to this heading">#</a></h2>
+<h3>1) 교란 편향<a class="headerlink" href="#id8" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p>뒷문 경로가 있을 경우 발생</p></li>
 <li><p>처치와 결과가 공통적인 원인을 공유하는 경우</p>
@@ -687,7 +678,7 @@ document.write(`
 </ul>
 </section>
 <section id="id9">
-<h2>2) 선택 편향<a class="headerlink" href="#id9" title="Permalink to this heading">#</a></h2>
+<h3>2) 선택 편향<a class="headerlink" href="#id9" title="Permalink to this heading">#</a></h3>
 <p>교란편향은 처치와 결과의 공통 원인을 통제하지 않았을 때 발생하지만, 선택 편향은 common effect (충돌부 구조의 충돌 노드)와 mediator (사슬 구조의 중간 노드)에 대한 조건부와 더 밀접한 관련이 있음</p>
 <p><strong>신규 기능 NPS 평가 사례</strong></p>
 <p>소프트웨어에서 신규 기능의 영향을 평가하고 싶어함</p>
@@ -776,7 +767,7 @@ document.write(`
 </section>
 </section>
 <section id="id10">
-<h1>요약<a class="headerlink" href="#id10" title="Permalink to this heading">#</a></h1>
+<h2>요약<a class="headerlink" href="#id10" title="Permalink to this heading">#</a></h2>
 <ul>
 <li><p>인과 그래프의 주요 구조와 연관성 흐름을 알아봄</p>
 <ul>
@@ -802,6 +793,7 @@ document.write(`
 </ul>
 </li>
 </ul>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -840,7 +832,7 @@ document.write(`
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><strong>Recap</strong></p>
+        <p class="prev-next-title">Chapter 2. 무작위 실험 및 기초 통계 리뷰</p>
       </div>
     </a>
     <a class="right-next"
@@ -848,7 +840,7 @@ document.write(`
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">1. 선형회귀분석의 필요성</p>
+        <p class="prev-next-title">Chapter 4. 유용한 선형회귀</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -867,29 +859,28 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">그래프 모델 집중 훈련</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">인과 그래프 예시</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">인과 그래프에서의 변수 관계 유형</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chain">1) 사슬 구조 (Chain)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fork">2) 분기 구조 (Fork)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#collider">3) 충돌부 구조 (Collider)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">연관성 흐름 치트 시트</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">퀴즈)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">그래프 모델 집중 훈련</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">인과 그래프 예시</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">인과 그래프에서의 변수 관계 유형</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chain">1) 사슬 구조 (Chain)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fork">2) 분기 구조 (Fork)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#collider">3) 충돌부 구조 (Collider)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">연관성 흐름 치트 시트</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">퀴즈)</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">식별 재해석</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cia-conditional-independence-assumption">조건부 독립성 가정(CIA; Conditional Independence Assumption)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#positivity">양수성 (Positivity) 가정</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">식별 재해석</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cia-conditional-independence-assumption">조건부 독립성 가정(CIA; Conditional Independence Assumption)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#positivity">양수성 (Positivity) 가정</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">두 가지 주요 편향</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">1) 교란 편향</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">2) 선택 편향</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">두 가지 주요 편향</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">1) 교란 편향</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">2) 선택 편향</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">요약</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">요약</a></li>
 </ul>
-
   </nav></div>
 
 </div></div>

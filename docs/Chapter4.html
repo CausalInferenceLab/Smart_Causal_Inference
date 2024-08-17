@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>1. 선형회귀분석의 필요성 &#8212; Smart Causal Inference [SCI]</title>
+    <title>Chapter 4. 유용한 선형회귀 &#8212; Smart Causal Inference [SCI]</title>
   
   
   
@@ -67,8 +67,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'docs/Chapter4';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="&lt;no title&gt;" href="Chapter5.html" />
-    <link rel="prev" title="그래프 모델 집중 훈련" href="Chapter3.html" />
+    <link rel="next" title="Chapter 5. 성향점수" href="Chapter5.html" />
+    <link rel="prev" title="Chapter 3. 그래프 인과모델" href="Chapter3.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -164,7 +164,9 @@ const thebe_selector_output = ".output, .cell_output"
     <div class="bd-toc-item navbar-nav active">
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="Chapter1.html">Chapter 1. 인과추론 소개</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Chapter2.html"><strong>Recap</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chapter2.html">Chapter 2. 무작위 실험 및 기초 통계 리뷰</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chapter3.html">Chapter 3. 그래프 인과모델</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Chapter 4. 유용한 선형회귀</a></li>
 
 
 
@@ -172,19 +174,7 @@ const thebe_selector_output = ".output, .cell_output"
 
 
 
-
-
-<li class="toctree-l1"><a class="reference internal" href="Chapter3.html">그래프 모델 집중 훈련</a></li>
-
-
-
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">1. 선형회귀분석의 필요성</a></li>
-
-
-
-
-
-
+<li class="toctree-l1"><a class="reference internal" href="Chapter5.html">Chapter 5. 성향점수</a></li>
 </ul>
 
     </div>
@@ -323,7 +313,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>1. 선형회귀분석의 필요성</h1>
+    <h1>Chapter 4. 유용한 선형회귀</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -333,7 +323,8 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">1. 선형회귀분석의 필요성</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Chapter 4. 유용한 선형회귀</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">1. 선형회귀분석의 필요성</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">2. 회귀분석 이론</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">3. 프리슈-워-로벨 정리와 직교화</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">4. 양수성과 외삽</a></li>
@@ -352,7 +343,10 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="id1">
+  <section class="tex2jax_ignore mathjax_ignore" id="chapter-4">
+<h1>Chapter 4. 유용한 선형회귀<a class="headerlink" href="#chapter-4" title="Permalink to this heading">#</a></h1>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="id1">
 <h1>1. 선형회귀분석의 필요성<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
 <p>작성자 : 박상호</p>
 <ol class="arabic simple">
@@ -558,7 +552,7 @@ document.write(`
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">그래프 모델 집중 훈련</p>
+        <p class="prev-next-title">Chapter 3. 그래프 인과모델</p>
       </div>
     </a>
     <a class="right-next"
@@ -566,7 +560,7 @@ document.write(`
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">&lt;no title&gt;</p>
+        <p class="prev-next-title">Chapter 5. 성향점수</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -585,7 +579,8 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">1. 선형회귀분석의 필요성</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Chapter 4. 유용한 선형회귀</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">1. 선형회귀분석의 필요성</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">2. 회귀분석 이론</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">3. 프리슈-워-로벨 정리와 직교화</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">4. 양수성과 외삽</a></li>
