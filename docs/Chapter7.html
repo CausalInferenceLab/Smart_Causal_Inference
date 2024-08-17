@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Chapter 7. 메타러너 &#8212; Smart Causal Inference [SCI]</title>
+    <title>들어가며 &#8212; Smart Causal Inference [SCI]</title>
   
   
   
@@ -184,8 +184,7 @@ const thebe_selector_output = ".output, .cell_output"
 
 
 
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Chapter 7. 메타러너</a></li>
-
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">들어가며</a></li>
 
 
 
@@ -200,12 +199,7 @@ const thebe_selector_output = ".output, .cell_output"
 
 
 
-<li class="toctree-l1"><a class="reference internal" href="Chapter11_2.html">Chapter 11.1-11.6 불응과 도구변수</a></li>
-
-
-
-
-
+<li class="toctree-l1"><a class="reference internal" href="Chapter11_2.html">Chapter 11.7 ~ 11장 끝 도구변수</a></li>
 </ul>
 
     </div>
@@ -344,7 +338,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Chapter 7. 메타러너</h1>
+    <h1>들어가며</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -354,8 +348,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Chapter 7. 메타러너</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">들어가며</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">들어가며</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#metalearner">메타러너 (metalearner)</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">1. 이산형 처치 메타러너</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#t">1-1. T 러너</a><ul class="nav section-nav flex-column">
@@ -393,11 +386,7 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="chapter-7">
-<h1>Chapter 7. 메타러너<a class="headerlink" href="#chapter-7" title="Permalink to this heading">#</a></h1>
-<p>작성자 : 김혜민</p>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="id1">
+  <section class="tex2jax_ignore mathjax_ignore" id="id1">
 <h1>들어가며<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
 <ul class="simple">
 <li><p>이질적 처치효과, 즉 실험 대상이 어떻게 처지에 따라 다르게 반응하는 지를 식별하는 데 중점을 둠</p></li>
@@ -435,14 +424,14 @@ document.write(`
 </ul>
 <p>이 문제를 해결하기 위해서 이메일이 고객의 미래 구매량에 미치는 조건부 평균 처지효과를 추정하려고 함</p>
 <p>CATE 추정값을 바탕으로 누구에게 메일을 발송하면 효율적일지 전략 수립 가능</p>
-<p><img alt="Untitled" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/b6051e5a-8440-4941-8bec-ad704f5052db/Untitled.png" /></p>
+<p><img alt="" src="../_images/Chapter7-01.png" /></p>
 <p>T : 이메일 발송 여부 mkt_email</p>
 <p>Y : 한달 후 구매 금액 next_month_pv</p>
 <hr class="docutils" />
 <section id="t">
 <h2>1-1. T 러너<a class="headerlink" href="#t" title="Permalink to this heading">#</a></h2>
 <p>통제, 처리 그룹을 각각 다른 모형으로 학습, 두 차이로 CATE를 추정</p>
-<p><img alt="Untitled" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/846a8e9d-a28d-4f58-82c4-c67503451fc5/Untitled.png" /></p>
+<p><img alt="" src="../_images/Chapter7-02.png" /></p>
 <section id="id3">
 <h3>#. 추정 방법<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h3>
 <p><strong>Step1</strong> :  처치를 받지 않은 개체와 처리를 받은 개체를 각각 다른 모형을 사용해서 학습</p>
@@ -460,7 +449,7 @@ document.write(`
 <li><p>T 러너가 T = 0, T=1 에서 각자 머신러닝 모델을 학습</p></li>
 <li><p>예측 시점에 두 모델을 모두 사용해서 실험군과 대조군 차이를 추정</p></li>
 </ul>
-<p><img alt="상대 누적 이득 곡선 AUC : 처치효과 높은 - 낮은 순서대로 올바르게 정렬했는 지를 확인" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/2ce1a3e1-f8a7-4a60-872e-e7884a2b5f4f/Untitled.png" /></p>
+<p><img alt="상대 누적 이득 곡선 AUC : 처치효과 높은 - 낮은 순서대로 올바르게 정렬했는 지를 확인" src="../_images/Chapter7-03.png" /></p>
 <p>상대 누적 이득 곡선 AUC : 처치효과 높은 - 낮은 순서대로 올바르게 정렬했는 지를 확인</p>
 <p><strong>한계점 : 정규화 편향</strong></p>
 <ul class="simple">
@@ -471,7 +460,7 @@ document.write(`
 </li>
 <li><p>실제 해당 데이터 CATE = 1 이 나와야 함</p></li>
 </ul>
-<p><img alt="Untitled" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/23aff029-b6bc-47b4-9d17-63c65561fee8/Untitled.png" /></p>
+<p><img alt="" src="../_images/Chapter7-04.png" /></p>
 </section>
 </section>
 <hr class="docutils" />
@@ -482,7 +471,7 @@ document.write(`
 <blockquote>
 <div><p>두 집단의 데이터 양 차이가 많을 때 용이</p>
 </div></blockquote>
-<p><img alt="Untitled" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/a08b4301-ae8e-4bcc-af6c-8dbef994dc19/Untitled.png" /></p>
+<p><img alt="" src="../_images/Chapter7-05.png" /></p>
 <section id="id4">
 <h3>#. 추정 방법<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h3>
 <p><strong>Step1</strong> :  처치를 받지 않은 개체와 처리를 받은 개체를 각각 다른 모형을 사용해서 학습</p>
@@ -510,7 +499,7 @@ document.write(`
 <div class="math notranslate nohighlight">
 \[
 \hat{τ}(X,T=1)=Y_{T=1}−\hat{μ}_0(X,T=1)\]</div>
-<p><img alt="**** 매우 작은 표본에 적합된 를 사용할 경우 위에 해당하는 결과값들이 잘못될 가능성이 큼" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/7b7b9513-fcc9-460b-8b06-b824643ae35e/Untitled.png" /></p>
+<p><img alt="**** 매우 작은 표본에 적합된 를 사용할 경우 위에 해당하는 결과값들이 잘못될 가능성이 큼" src="../_images/Chapter7-06.png" /></p>
 <p>**** 매우 작은 표본에 적합된 <span class="math notranslate nohighlight">\(\hat{μ}_1\)</span>를 사용할 경우 위에 해당하는 결과값들이 잘못될 가능성이 큼</p>
 <ul class="simple">
 <li><p>한 모델을 처치효과를 잘못 대체했기 떄문에 부정확하고</p></li>
@@ -526,7 +515,7 @@ document.write(`
 <li><p><span class="math notranslate nohighlight">\(\hat{e}(x)\)</span>는 성향 점수, 개체가 처리 그룹에 속할 확률을 나타냄</p></li>
 <li><p>일반적으로 성향점수를 사용한 이 가중평균은 더 많은 데이터를 사용하여 학습된 <span class="math notranslate nohighlight">\(\hatμ_t\)</span>모델에서 얻은 처치효과 추정값에 더 많은 가중치는 부여</p></li>
 </ul>
-<p><img alt="Untitled" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/9400730a-e8ac-470f-8297-c99d944e1646/Untitled.png" /></p>
+<p><img alt="" src="../_images/Chapter7-07.png" /></p>
 <ul class="simple">
 <li><p>T러너에 비해 잘못 추정된 CATE를 보정하는 것에 더 좋은 성능</p></li>
 <li><p>일반적으로 한 실험 대상의 집단이 다른 집단보다 훨씬 클 떄 X러너의 성능이 좋음</p></li>
@@ -543,7 +532,7 @@ document.write(`
 <li><p>레스토랑 할인 정보 데이터</p></li>
 <li><p>어느 시점에 할인을 제공하면 더 좋은 매출을 발생시키는 지 궁금</p></li>
 </ul>
-<p><img alt="Untitled" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/20f6df3c-e278-4c59-a1ba-2265954b0901/Untitled.png" /></p>
+<p><img alt="" src="../_images/Chapter7-08.png" /></p>
 <section id="s">
 <h2>2-1. S 러너<a class="headerlink" href="#s" title="Permalink to this heading">#</a></h2>
 <p><strong>단일(Single) 머신 러닝 모델을 사용</strong>하여 결과를 예측</p>
@@ -557,7 +546,7 @@ document.write(`
 <div class="math notranslate nohighlight">
 \[
 \hat{τ}(x)_i = \hat{μ}_s(X_i, T=1) — \hat{μ}_s(X_i, T=0)\]</div>
-<p><img alt="Untitled" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/99146a1e-7b0c-476b-9313-e2b0c5e3220b/Untitled.png" /></p>
+<p><img alt="" src="../_images/Chapter7-09.png" /></p>
 <section id="id6">
 <h3>#. 추정 방법<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h3>
 <p><strong>Step1</strong> :  단일 머신 러닝 모델( <span class="math notranslate nohighlight">\(μ_s\)</span>) 을 X, T를 사용하여 학습</p>
@@ -575,7 +564,7 @@ document.write(`
 연속성 처치의 경우 처치의 그리드 정의(해당 예제에서는 0~40% 이므로 10단위로 범주 주여)</p></li>
 <li><p><span class="math notranslate nohighlight">\(μ_s\)</span> 를 사용하여 확장된 데이터에서 반사실적 결과 예측</p></li>
 </ul>
-<p><img alt="Untitled" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/40a78546-83ed-4b07-a295-44b20b0aac65/Untitled.png" /></p>
+<p><img alt="" src="../_images/Chapter7-10.png" /></p>
 <p>해당 그래프에서 2018-12-25에 추정된 반응 함수가 2018-06-18일보다 더 가파른 모습을 보여줌</p>
 <p>→ 고객이 크리스마스에 할인에 더 민감함을 모델이 학습했다는 의미</p>
 <p><strong>Step3</strong>: <strong>CATE 추정</strong></p>
@@ -598,7 +587,7 @@ document.write(`
 </li>
 </ul>
 <p>한계점</p>
-<p><img alt="Untitled" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/25453f3e-a97f-499b-b152-990e573353df/Untitled.png" /></p>
+<p><img alt="" src="../_images/Chapter7-11.png" /></p>
 <ul class="simple">
 <li><p>누적 이득 곡선에서 보면 S러너는 간단하지만 괜찮은 성능을 보여주는 것처럼 보임</p></li>
 <li><p>S 러너는 랜덤화된 데이터가 많고 상대적으로 쉬운 데이터셋에 특화된 성능</p></li>
@@ -682,14 +671,13 @@ Y_i -\hat{μ}_y(X_i) = τ(X_i)⋅(T_i - \hat{μ}_i(X_i)) + ϵ_i
     \]</div>
 </li>
 </ul>
-<p><img alt="Untitled" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/9c043318-a066-469e-94e2-f205b2571d2a/Untitled.png" /></p>
-<ul>
-<li><p>시각화</p>
-<p><img alt="Untitled" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/1fea1481-cb36-47b9-b252-2b4e1fb4b0e8/Untitled.png" /></p>
-<p><img alt="Untitled" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/4e5244e5-e13e-448f-a5ec-886fe045c908/Untitled.png" /></p>
-<p><img alt="Untitled" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/082f7e37-6766-4909-b567-10fa9cdae8b5/Untitled.png" /></p>
-</li>
+<p><img alt="" src="../_images/Chapter7-12.png" /></p>
+<ul class="simple">
+<li><p>시각화</p></li>
 </ul>
+<p><img alt="" src="../_images/Chapter7-13.png" /></p>
+<p><img alt="" src="../_images/Chapter7-14.png" /></p>
+<p><img alt="" src="pics/Chapter7-15.png" /></p>
 </section>
 </section>
 </section>
@@ -793,8 +781,7 @@ Y_i -\hat{μ}_y(X_i) = τ(X_i)⋅(T_i - \hat{μ}_i(X_i)) + ϵ_i
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Chapter 7. 메타러너</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">들어가며</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">들어가며</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#metalearner">메타러너 (metalearner)</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">1. 이산형 처치 메타러너</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#t">1-1. T 러너</a><ul class="nav section-nav flex-column">

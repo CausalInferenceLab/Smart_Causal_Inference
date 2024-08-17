@@ -11,19 +11,19 @@
 - 실험군과 유사한 가상의 대조군 생성시, 공변량을 추가할 수 있음
 추가 공변량과 y의 척도가 다른 경우도 존재, 척도인자 v (scaling factor) 필요
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/75faae8b-c4d0-4621-92fc-9f8bdcf99aeb/Untitled.png)
+![](../pics/Chapter9-01.png)
 
 - 제약조건: 각 공변량의 가중치의 합은 1, 가중치는 양수
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/6c7879a3-9438-43a8-b433-c006cd681a83/Untitled.png)
+![](../pics/Chapter9-02.png)
 
 *출처: 인과추론의 데이터과학(유튜브) - 박지용교수님*
 
 책에서는 공변량으로 주요 경쟁사의 일별 다운로드 수를 시장 규모에 따라 정규화한 값(comp_download_pct)을 공변량으로 사용
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/a4eac7ac-eefd-433b-b317-efe099bbe904/Untitled.png)
+![](../pics/Chapter9-03.png)
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/ec395502-ed89-4d7f-9121-3cb7d716fd99/Untitled.png)
+![](../pics/Chapter9-04.png)
 
 - *위의 통제집단합성법 예시는 공변량 추가는 임팩트가 없고, 처치 이전의 대조군 Y의 값으로 충분히 예측 가능함을 뜻함*
 
@@ -33,9 +33,9 @@
 
 해결 방법으로는 교차 예측 (cross-fitting) 방법이 있다.
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/ad7c6b62-98e1-4475-8610-ca1daae3cbef/Untitled.png)
+![](../pics/Chapter9-05.png)
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/6971ce4f-36f9-425b-9e8e-ae2b3298bacf/Untitled.png)
+![](../pics/Chapter9-06.png)
 
 *출처: 인과추론의 데이터과학(유튜브) - 박지용교수님*
 
@@ -50,13 +50,13 @@
 
 평행 추세 가정: 처치가 없었다면 평균적으로 대조군과 실험군의 추세는 평행할 것이다. 
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/4f8675a8-922f-4b91-8570-97aba61c7b91/Untitled.png)
+![](../pics/Chapter9-07.png)
 
 tau는 관심 있는 ATT, alpha는 대상 고정효과, beta는 시간 고정효과를 뜻함
 
 대상 고정효과는 실험 대상의 절편 차이, 시간 고정효과는 실험군과 대조군 모두에게 걸친 일반적인 추세를 나타냄
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/70375f46-d52e-4cbe-9668-601494c02da8/Untitled.png)
+![](../pics/Chapter9-08.png)
 
 *출처: 인과추론의 데이터과학(유튜브)*
 
@@ -66,11 +66,11 @@ tau는 관심 있는 ATT, alpha는 대상 고정효과, beta는 시간 고정효
 
 **결론적으로, 합성 이중차분법은 통제집단합성법에 시간 고정효과인 Beta를 변수로 추가하는 형태**
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/376ac826-97eb-4349-8cde-5494ef62cee7/Untitled.png)
+![](../pics/Chapter9-09.png)
 
 람다는 시간 가중치를 뜻하고, 위 식은 통제집단합성법과 이중차분법의 요소를 모두 포함하고 있음.
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/51e6dc4f-3f54-48b1-b966-6a34351e8220/Untitled.png)
+![](../pics/Chapter9-10.png)
 
 *출처: 인과추론의 데이터과학(유튜브) - 박지용교수님*
 
@@ -87,17 +87,17 @@ tau는 관심 있는 ATT, alpha는 대상 고정효과, beta는 시간 고정효
 - 이 장에서는 처치 시점 이후의 실험군이 처치를 받지 않았을 경우의 결과, 즉 잠재적 결과를 추정하는데 있어서 모델 기반 접근법인 통제집단합성법을 배움
 - 처치이전 대조군 활용을 통해 처치군과 유사한 가상의 대조군(Synthetic Control) 생성
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/0cead5a6-dd13-47d2-9cb3-1cdfbab55c7b/Untitled.png)
+![](../pics/Chapter9-11.png)
 
 - 가상의 대조군을 활용해 처치 이후 예측 모델링 생성하여 실제 처치군과의 차이 비교 (ATT)
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/850680e9-2873-47b7-8149-331b1a18f061/Untitled.png)
+![](../pics/Chapter9-12.png)
 
 - Synthetic Control 제약조건: 가중치는 합이 1이며, 가중치는 양수다
 
 ### **APPENDIX**
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/fa49361a-72c1-4822-b398-6a8fbf7e145f/Untitled.png)
+![](../pics/Chapter9-13.png)
 
 *출처: 인과추론의 데이터과학(유튜브) - 박지용교수님*
 
@@ -111,7 +111,7 @@ tau는 관심 있는 ATT, alpha는 대상 고정효과, beta는 시간 고정효
 
 Extrapolation을 허용하면 fitting은 높아질 수 있어도 편향이 발생 (Overfitting 문제 발생, interpretability 떨어짐)
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/2cb302b1-e36f-4ea1-9d1e-ed4c6fb9d0db/Untitled.png)
+![](../pics/Chapter9-14.png)
 
 *출처: 인과추론의 데이터과학(유튜브) - 박지용교수님 (왼쪽: Extrapolation 허용 X, 오른쪽 extrapolation 허용 O)*
 

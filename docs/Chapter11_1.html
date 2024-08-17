@@ -67,7 +67,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'docs/Chapter11_1';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Chapter 11.1-11.6 불응과 도구변수" href="Chapter11_2.html" />
+    <link rel="next" title="Chapter 11.7 ~ 11장 끝 도구변수" href="Chapter11_2.html" />
     <link rel="prev" title="Chapter 10. 지역 실험과 스위치백 실험" href="Chapter10.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -184,8 +184,7 @@ const thebe_selector_output = ".output, .cell_output"
 
 
 
-<li class="toctree-l1"><a class="reference internal" href="Chapter7.html">Chapter 7. 메타러너</a></li>
-
+<li class="toctree-l1"><a class="reference internal" href="Chapter7.html">들어가며</a></li>
 
 
 
@@ -200,12 +199,7 @@ const thebe_selector_output = ".output, .cell_output"
 
 
 
-<li class="toctree-l1"><a class="reference internal" href="Chapter11_2.html">Chapter 11.1-11.6 불응과 도구변수</a></li>
-
-
-
-
-
+<li class="toctree-l1"><a class="reference internal" href="Chapter11_2.html">Chapter 11.7 ~ 11장 끝 도구변수</a></li>
 </ul>
 
     </div>
@@ -436,7 +430,7 @@ document.write(`
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="dag">
 <h1>불응 DAG<a class="headerlink" href="#dag" title="Permalink to this heading">#</a></h1>
-<p><img alt="Untitled" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/be280180-b960-4871-af7e-b0e443791f79/Untitled.png" /></p>
+<p><img alt="" src="../_images/Chapter11_1-01.png" /></p>
 <ul class="simple">
 <li><p>Z : 도구변수</p>
 <ul>
@@ -470,7 +464,7 @@ document.write(`
 <p>3️⃣카드 이용 선택은 고객 몫 → 불응 존재</p>
 <p>알고 싶은 것 → 프라임 카드 사용이 고객의 구매금액을 얼마나 늘리는가?</p>
 </aside>
-<p><img alt="Untitled" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/daeda477-a96d-4370-926d-319b1e6b332d/Untitled.png" /></p>
+<p><img alt="" src="../_images/Chapter11_1-02.png" /></p>
 <ul class="simple">
 <li><p>Z : 프라임 신용카드 이용 가능 여부(무작위배정)</p></li>
 <li><p>T : 프라임 카드 보유 여부</p></li>
@@ -514,9 +508,9 @@ ITTE = E[Y|Z =1]-E[Y|Z = 0] = E[Y_1,_t - Y_0,_t]
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="id7">
 <h1>도구변수 식별 가정<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h1>
-<p><img alt="Untitled" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/c48d6341-3fac-4b54-b5a9-7ca6cc50304f/Untitled.png" /></p>
+<p><img alt="" src="../_images/Chapter11_1-03.png" /></p>
 <p><strong>ITTE 에서 출발</strong></p>
-<p><img alt="Untitled" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/4ecd99f5-4c17-4962-b675-516ceedd6f49/Untitled.png" /></p>
+<p><img alt="" src="../_images/Chapter11_1-04.png" /></p>
 <section id="id8">
 <h2>1. 연관성<a class="headerlink" href="#id8" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
@@ -530,7 +524,7 @@ ITTE = E[Y|Z =1]-E[Y|Z = 0] = E[Y_1,_t - Y_0,_t]
 <li><p>도구변수가 처치를 통해서만 결과에 영향을 미침</p></li>
 <li><p><span class="math notranslate nohighlight">\(Y_z,_t = Y_t\)</span></p></li>
 </ul>
-<p><img alt="Untitled" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/e5cfcc0c-9a5b-4c78-917c-daa7fc1a064a/Untitled.png" /></p>
+<p><img alt="" src="../_images/Chapter11_1-05.png" /></p>
 </section>
 <section id="id10">
 <h2>3. 독립성<a class="headerlink" href="#id10" title="Permalink to this heading">#</a></h2>
@@ -538,15 +532,15 @@ ITTE = E[Y|Z =1]-E[Y|Z = 0] = E[Y_1,_t - Y_0,_t]
 <li><p>Z와 T 그리고 Z와 Y 사이에 측정되지않은 교란요인이 없다고 가정</p></li>
 <li><p>도구변수가 무작위로 배정된것처럼 작용</p></li>
 </ul>
-<p><img alt="Untitled" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/ef5467b0-16ce-4e18-b5e8-cd05752358fb/Untitled.png" /></p>
+<p><img alt="" src="../_images/Chapter11_1-06.png" /></p>
 </section>
 <section id="id11">
 <h2>4. 단조성<a class="headerlink" href="#id11" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>도구변수가 처치변수를 한 방향으로만 영향을 주는 것을 의미</p></li>
 </ul>
-<p><img alt="Untitled" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/dd5eaa00-bc4e-4513-9443-5320c9f34cd8/Untitled.png" /></p>
-<p><img alt="Untitled" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/31b9363a-b59a-48f7-9038-8ccf134a3cd0/Untitled.png" /></p>
+<p><img alt="" src="../_images/Chapter11_1-07.png" /></p>
+<p><img alt="" src="../_images/Chapter11_1-08.png" /></p>
 <ul>
 <li><p>참고</p>
 <p><span class="math notranslate nohighlight">\(T_1&gt;T_0\)</span>인 값을 갖는 그룹은 순응자 밖에 없음</p>
@@ -652,7 +646,7 @@ E[Y_1-Y_0|T_1&gt;T_0] = \frac{E[Y|Z=1]-E[Y|Z=0]}{E[T|Z=1]-E[T|Z=0]}
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Chapter 11.1-11.6 불응과 도구변수</p>
+        <p class="prev-next-title">Chapter 11.7 ~ 11장 끝 도구변수</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
