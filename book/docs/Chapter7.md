@@ -1,7 +1,3 @@
-# Chapter 7. 메타러너
-
-작성자 : 김혜민
-
 # 들어가며
 
 - 이질적 처치효과, 즉 실험 대상이 어떻게 처지에 따라 다르게 반응하는 지를 식별하는 데 중점을 둠
@@ -37,7 +33,7 @@ $$
 
 CATE 추정값을 바탕으로 누구에게 메일을 발송하면 효율적일지 전략 수립 가능
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/b6051e5a-8440-4941-8bec-ad704f5052db/Untitled.png)
+![](../pics/Chapter7-01.png)
 
 T : 이메일 발송 여부 mkt_email
 
@@ -49,7 +45,7 @@ Y : 한달 후 구매 금액 next_month_pv
 
 통제, 처리 그룹을 각각 다른 모형으로 학습, 두 차이로 CATE를 추정
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/846a8e9d-a28d-4f58-82c4-c67503451fc5/Untitled.png)
+![](../pics/Chapter7-02.png)
 
 ### #. 추정 방법
 
@@ -75,7 +71,7 @@ $$
 - T 러너가 T = 0, T=1 에서 각자 머신러닝 모델을 학습
 - 예측 시점에 두 모델을 모두 사용해서 실험군과 대조군 차이를 추정
 
-![상대 누적 이득 곡선 AUC : 처치효과 높은 - 낮은 순서대로 올바르게 정렬했는 지를 확인](https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/2ce1a3e1-f8a7-4a60-872e-e7884a2b5f4f/Untitled.png)
+![상대 누적 이득 곡선 AUC : 처치효과 높은 - 낮은 순서대로 올바르게 정렬했는 지를 확인](../pics/Chapter7-03.png)
 
 상대 누적 이득 곡선 AUC : 처치효과 높은 - 낮은 순서대로 올바르게 정렬했는 지를 확인
 
@@ -85,7 +81,7 @@ $$
     - 과적합을 피하기 위해 모델이 단순해질 수 있음
 - 실제 해당 데이터 CATE = 1 이 나와야 함
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/23aff029-b6bc-47b4-9d17-63c65561fee8/Untitled.png)
+![](../pics/Chapter7-04.png)
 
 ---
 
@@ -98,7 +94,7 @@ $$
 > 두 집단의 데이터 양 차이가 많을 때 용이
 > 
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/a08b4301-ae8e-4bcc-af6c-8dbef994dc19/Untitled.png)
+![](../pics/Chapter7-05.png)
 
 ### #. 추정 방법
 
@@ -134,7 +130,7 @@ $$
 
 $$
 
-![**** 매우 작은 표본에 적합된 $\hat{μ}_1$를 사용할 경우 위에 해당하는 결과값들이 잘못될 가능성이 큼](https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/7b7b9513-fcc9-460b-8b06-b824643ae35e/Untitled.png)
+![**** 매우 작은 표본에 적합된 $\hat{μ}_1$를 사용할 경우 위에 해당하는 결과값들이 잘못될 가능성이 큼](../pics/Chapter7-06.png)
 
 **** 매우 작은 표본에 적합된 $\hat{μ}_1$를 사용할 경우 위에 해당하는 결과값들이 잘못될 가능성이 큼
 
@@ -152,7 +148,7 @@ $$
 - $\hat{e}(x)$는 성향 점수, 개체가 처리 그룹에 속할 확률을 나타냄
 - 일반적으로 성향점수를 사용한 이 가중평균은 더 많은 데이터를 사용하여 학습된 $\hatμ_t$모델에서 얻은 처치효과 추정값에 더 많은 가중치는 부여
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/9400730a-e8ac-470f-8297-c99d944e1646/Untitled.png)
+![](../pics/Chapter7-07.png)
 
 - T러너에 비해 잘못 추정된 CATE를 보정하는 것에 더 좋은 성능
 - 일반적으로 한 실험 대상의 집단이 다른 집단보다 훨씬 클 떄 X러너의 성능이 좋음
@@ -170,7 +166,7 @@ $$
 
  
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/20f6df3c-e278-4c59-a1ba-2265954b0901/Untitled.png)
+![](../pics/Chapter7-08.png)
 
 ## 2-1. S 러너
 
@@ -190,7 +186,7 @@ $$
 
 $$
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/99146a1e-7b0c-476b-9313-e2b0c5e3220b/Untitled.png)
+![](../pics/Chapter7-09.png)
 
 ### #. 추정 방법
 
@@ -210,7 +206,7 @@ $$
 연속성 처치의 경우 처치의 그리드 정의(해당 예제에서는 0~40% 이므로 10단위로 범주 주여)
 - $μ_s$ 를 사용하여 확장된 데이터에서 반사실적 결과 예측
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/40a78546-83ed-4b07-a295-44b20b0aac65/Untitled.png)
+![](../pics/Chapter7-10.png)
 
 해당 그래프에서 2018-12-25에 추정된 반응 함수가 2018-06-18일보다 더 가파른 모습을 보여줌
 
@@ -235,7 +231,7 @@ $$
 
 한계점
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/25453f3e-a97f-499b-b152-990e573353df/Untitled.png)
+![](../pics/Chapter7-11.png)
 
 - 누적 이득 곡선에서 보면 S러너는 간단하지만 괜찮은 성능을 보여주는 것처럼 보임
 - S 러너는 랜덤화된 데이터가 많고 상대적으로 쉬운 데이터셋에 특화된 성능
@@ -315,15 +311,15 @@ $$
     $$
     
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/9c043318-a066-469e-94e2-f205b2571d2a/Untitled.png)
+![](../pics/Chapter7-12.png)
 
 - 시각화
     
-    ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/1fea1481-cb36-47b9-b252-2b4e1fb4b0e8/Untitled.png)
+![](../pics/Chapter7-13.png)
     
-    ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/4e5244e5-e13e-448f-a5ec-886fe045c908/Untitled.png)
+![](../pics/Chapter7-14.png)
     
-    ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/082f7e37-6766-4909-b567-10fa9cdae8b5/Untitled.png)
+![](../pics/Chapter7-15.png)
     
 
 # 요약

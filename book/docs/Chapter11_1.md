@@ -25,7 +25,7 @@
 
 # 불응 DAG
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/be280180-b960-4871-af7e-b0e443791f79/Untitled.png)
+![](../pics/Chapter11_1-01.png)
 
 - Z : 도구변수
     - 1) 교란 없이 처치에 영향을 주고
@@ -56,7 +56,7 @@
 
 </aside>
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/daeda477-a96d-4370-926d-319b1e6b332d/Untitled.png)
+![](../pics/Chapter11_1-02.png)
 
 - Z : 프라임 신용카드 이용 가능 여부(무작위배정)
 - T : 프라임 카드 보유 여부
@@ -100,11 +100,11 @@ $$
 
 # 도구변수 식별 가정
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/c48d6341-3fac-4b54-b5a9-7ca6cc50304f/Untitled.png)
+![](../pics/Chapter11_1-03.png)
 
 **ITTE 에서 출발**
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/4ecd99f5-4c17-4962-b675-516ceedd6f49/Untitled.png)
+![](../pics/Chapter11_1-04.png)
 
 ## 1. 연관성
 
@@ -116,22 +116,22 @@ $$
 - 도구변수가 처치를 통해서만 결과에 영향을 미침
 - $Y_z,_t = Y_t$
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/e5cfcc0c-9a5b-4c78-917c-daa7fc1a064a/Untitled.png)
+![](../pics/Chapter11_1-05.png)
 
 ## 3. 독립성
 
 - Z와 T 그리고 Z와 Y 사이에 측정되지않은 교란요인이 없다고 가정
 - 도구변수가 무작위로 배정된것처럼 작용
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/ef5467b0-16ce-4e18-b5e8-cd05752358fb/Untitled.png)
+![](../pics/Chapter11_1-06.png)
 
 ## 4. 단조성
 
 - 도구변수가 처치변수를 한 방향으로만 영향을 주는 것을 의미
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/dd5eaa00-bc4e-4513-9443-5320c9f34cd8/Untitled.png)
+![](../pics/Chapter11_1-07.png)
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/31b9363a-b59a-48f7-9038-8ccf134a3cd0/Untitled.png)
+![](../pics/Chapter11_1-08.png)
 
 - 참고
     

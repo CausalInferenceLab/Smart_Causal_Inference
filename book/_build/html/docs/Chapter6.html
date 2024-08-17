@@ -67,7 +67,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'docs/Chapter6';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Chapter 7. 메타러너" href="Chapter7.html" />
+    <link rel="next" title="들어가며" href="Chapter7.html" />
     <link rel="prev" title="Chapter 5. 성향점수" href="Chapter5.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -184,8 +184,7 @@ const thebe_selector_output = ".output, .cell_output"
 
 
 
-<li class="toctree-l1"><a class="reference internal" href="Chapter7.html">Chapter 7. 메타러너</a></li>
-
+<li class="toctree-l1"><a class="reference internal" href="Chapter7.html">들어가며</a></li>
 
 
 
@@ -200,12 +199,7 @@ const thebe_selector_output = ".output, .cell_output"
 
 
 
-<li class="toctree-l1"><a class="reference internal" href="Chapter11_2.html">Chapter 11.1-11.6 불응과 도구변수</a></li>
-
-
-
-
-
+<li class="toctree-l1"><a class="reference internal" href="Chapter11_2.html">Chapter 11.7 ~ 11장 끝 도구변수</a></li>
 </ul>
 
     </div>
@@ -393,7 +387,7 @@ document.write(`
   <section class="tex2jax_ignore mathjax_ignore" id="chapter-6">
 <h1>Chapter 6. 이질적 처치효과<a class="headerlink" href="#chapter-6" title="Permalink to this heading">#</a></h1>
 <p>작성자 : 하소희</p>
-<p><img alt="ITE_need.webp" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/9887de0d-9796-47e3-9313-0f85a8fb2207/ITE_need.webp" /></p>
+<p><img alt="" src="../_images/Chapter6-01.webp" /></p>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="overview">
 <h1>Overview<a class="headerlink" href="#overview" title="Permalink to this heading">#</a></h1>
@@ -461,8 +455,8 @@ document.write(`
 </ul>
 </li>
 </ul>
-<p><img alt="Untitled" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/7fca1d82-5632-4364-9832-b817eb2a127d/Untitled.png" /></p>
-<p><img alt="Untitled" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/51220ac7-0d38-440f-baf0-085094158cda/Untitled.png" /></p>
+<p><img alt="" src="../_images/Chapter6-02.png" /></p>
+<p><img alt="" src="../_images/Chapter6-03.png" /></p>
 <section id="id1">
 <h2>ATE<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
@@ -492,7 +486,7 @@ document.write(`
 <li><p>추정에는 train dataset 사용, 예측 test dataset 사용</p></li>
 <li><p>책에서는 회귀모델, 예측 모델, 난수모델을 비교</p></li>
 </ul>
-<p><img alt="ml_pred: 예측 머신러닝 모델 예측값, cate_pred: 회귀모델 예측값, rand_m_pred: 난수 모델 예측값" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/85ef4707-e9cb-40fc-9ddc-705794cbd702/Untitled.png" /></p>
+<p><img alt="" src="../_images/Chapter6-04.png" /></p>
 <p>ml_pred: 예측 머신러닝 모델 예측값, cate_pred: 회귀모델 예측값, rand_m_pred: 난수 모델 예측값</p>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="cate-evaluation">
@@ -513,37 +507,39 @@ document.write(`
 <li><p>분위수별 중앙값을 구함</p></li>
 <li><p>중앙값별 예측값의 효과크기를 계산</p></li>
 </ol>
-<p><img alt="Untitled" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/a4f04401-a999-40e6-87dc-bb437db1b7fb/Untitled.png" /></p>
-<p><img alt="Untitled" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/a01aecc4-e45b-4988-90db-2d9d5de411a7/Untitled.png" /></p>
+<p><img alt="" src="../_images/Chapter6-05.png" /></p>
+<p><img alt="" src="../_images/Chapter6-06.png" /></p>
 <ul class="simple">
 <li><p>cate_pred 예측이 실제로 효과 순서를 매긴다는 것을 확인</p></li>
 </ul>
 </section>
 <section id="id4">
 <h2>누적 효과 곡선<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h2>
-<ul>
+<ul class="simple">
 <li><p>모델 성능을 하나의 값으로 요약하기 위한 방법</p></li>
 <li><p>그룹별로 효과를 추정하지 않고 한 그룹을 다른 그룹 위에 누적하는 형태</p></li>
 <li><p>How?</p>
-<ul class="simple">
+<ul>
 <li><p>점수를 내림차순으로 정렬한뒤 n개의 구간으로 잘라 누적해서 효과크기를 계산</p></li>
 </ul>
-<p><img alt="Untitled" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/4f9ca4e9-512e-442f-a87e-7a44f103b204/Untitled.png" /></p>
-<p><img alt="Untitled" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/85d1bfd8-496c-4e7a-adfe-bce1a0f10c77/Untitled.png" /></p>
 </li>
-<li><p>장점</p>
+</ul>
+<p><img alt="" src="../_images/Chapter6-07.png" /></p>
+<p><img alt="" src="../_images/Chapter6-08.png" /></p>
 <ul class="simple">
+<li><p>장점</p>
+<ul>
 <li><p>분위수별 효과곡선 보다 좋은 점은 단일 숫자로 모델 평가를 할 수 있다는 점</p></li>
 <li><p>곡선과 ATE 사이의 면적을 계산해서 모델별로 비교 가능하며 면적이 클수록 더 좋은 모델</p></li>
 </ul>
 </li>
 <li><p>단점</p>
-<ul class="simple">
+<ul>
 <li><p>곡선의 시작 부분이 가장 큰 면적을 차지하는데, 이 부분에서 표본 크기가 상대적으로 작기 때문에 불확실성이 가장 큼(<em>불확실성: 표본의 수가 작기 때문에 추정의 변동이 큼을 의미</em>)</p></li>
 </ul>
 </li>
 <li><p>참고) 효과 크기</p>
-<ul class="simple">
+<ul>
 <li><p><span class="math notranslate nohighlight">\(\hat \beta_1 = \frac {\Sigma(t_i-\bar t)y_i}{\Sigma(t_i-\bar t)^2}\)</span></p></li>
 </ul>
 </li>
@@ -555,7 +551,7 @@ document.write(`
 <li><p>누적 효과 곡선과 같은 논리 + 각 데이터 포인트에 누적 표본 <span class="math notranslate nohighlight">\(N_{cum}/N\)</span> 을 곱해줌</p></li>
 <li><p>ATE로 정규화 할 수 있도록 효과계산마다 정규화 인수를 빼는 과정 추가</p></li>
 </ul>
-<p><img alt="Untitled" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/413d9f71-3b1b-4b05-842e-6267a960eae7/Untitled.png" /></p>
+<p><img alt="" src="../_images/Chapter6-09.png" /></p>
 <ul class="simple">
 <li><p>누적 효과 곡선과 마찬가지로 곡선과 ATE를 나타내는 점선 사이의 면적이 가장 큰 모델이 나은 모델(AUC)</p></li>
 <li><p>주의</p>
@@ -585,7 +581,7 @@ Y^\ast_i = \frac {(Y_i-\hat\mu_y(X_i))(T_i-\hat\mu_t(X_i))}{(T_i-\hat\mu(X_i))^2
 </ul>
 </li>
 </ul>
-<p><img alt="Untitled" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/59c2bce1-262a-43a9-9dc4-5015a5ae5b04/Untitled.png" /></p>
+<p><img alt="" src="../_images/Chapter6-10.png" /></p>
 </section>
 <section id="id7">
 <h2>예측 모델과 효과 정렬<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h2>
@@ -601,10 +597,10 @@ Y^\ast_i = \frac {(Y_i-\hat\mu_y(X_i))(T_i-\hat\mu_t(X_i))}{(T_i-\hat\mu(X_i))^2
 </ul>
 </li>
 </ul>
-<p><img alt="Untitled" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/a87f60e3-e5cc-4d50-8eb9-c3681d412b68/Untitled.png" /></p>
-<p><img alt="Untitled" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/c4139070-8ca3-40dc-a07b-47c22b1945fe/Untitled.png" /></p>
-<p><img alt="Untitled" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/f4ed108d-0fa4-4a50-8c48-e60acd4c0c6d/Untitled.png" /></p>
-<ul>
+<p><img alt="" src="../_images/Chapter6-11.png" /></p>
+<p><img alt="" src="../_images/Chapter6-12.png" /></p>
+<p><img alt="" src="../_images/Chapter6-13.png" /></p>
+<ul class="simple">
 <li><p>예측 모델이 효과 정렬에 좋을 때도 있음</p>
 <ul>
 <li><p><strong>CASE 1</strong></p>
@@ -612,27 +608,23 @@ Y^\ast_i = \frac {(Y_i-\hat\mu_y(X_i))(T_i-\hat\mu_t(X_i))}{(T_i-\hat\mu(X_i))^2
 <li><p>Y 를 예측하는 것은 효과가 결과와 상관관계가 있을 때나 효과 크기에 대한 정확한 예측값이 필요할 때(결과가 점진적으로 감소하는 형태일때)</p></li>
 <li><p>예를 들어, 매출이 높은 날에, 높을 수록 할인에 더 민감하게 반응한다하면(상관관계가 분명함) T가 Y에 미치는 효과 순서도 잘 예측할 것</p></li>
 <li><p>현실에서는 처치 반응 함수에 <strong>포화점이 존재</strong></p>
-<ul class="simple">
+<ul>
 <li><p>생산량의 제한, 마케팅 비용의 제한 등의 이유로 인해 점진적으로 감소하는 형태</p></li>
 </ul>
-<p><img alt="Untitled" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/87a76aee-4554-40ec-9c46-11de3523ece6/Untitled.png" /></p>
-<ul class="simple">
-<li><p>결과가 높을수록 효과가 낮은 그래프 → 예측값의 역순으로 정렬시 CATE 정렬 가능</p></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p><strong>CASE 2</strong></p>
-<ul>
-<li><p>Y가 이진값일 때</p></li>
-<li><p>이진 결과 변수의 경우 클래스 간의 분리가 상대적으로 쉬움</p>
-<p><img alt="Untitled" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/8405f147-bf26-4b56-b2ae-a1051a9c8038/Untitled.png" /></p>
 </li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
+<p><img alt="" src="../_images/Chapter6-14.png" /></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>        - 결과가 높을수록 효과가 낮은 그래프 → 예측값의 역순으로 정렬시 CATE 정렬 가능
+- **CASE 2**
+    - Y가 이진값일 때
+    - 이진 결과 변수의 경우 클래스 간의 분리가 상대적으로 쉬움
+</pre></div>
+</div>
+<p><img alt="" src="../_images/Chapter6-15.png" /></p>
 </section>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="cate-for-decision-making">
@@ -715,7 +707,7 @@ Y^\ast_i = \frac {(Y_i-\hat\mu_y(X_i))(T_i-\hat\mu_t(X_i))}{(T_i-\hat\mu(X_i))^2
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Chapter 7. 메타러너</p>
+        <p class="prev-next-title">들어가며</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

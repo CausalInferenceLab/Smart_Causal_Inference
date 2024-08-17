@@ -14,7 +14,7 @@
 
 ### 인과 그래프 예시
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/8d7f6034-cfbe-4fcf-8ba9-cb7f6ed2e2b8/Untitled.png)
+![](../pics/Chapter3-01.png)
 
 인과 그래프는 DAG(directed acyclic graph)이라고도 불리며, 방향이 있있고, 순환되는 부분이 없는 유향 비순환 그래프이다.
 
@@ -27,13 +27,13 @@
 
 ### 인과 그래프에서의 변수 관계 유형
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/4ba7dbea-e0f9-4219-85ce-0e68ed92684d/Untitled.png)
+![](../pics/Chapter3-02.png)
 
 인과 그래프에서는 대표적으로 3가지 구조가 있다.
 
 ### 1) 사슬 구조 (Chain)
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/1afb5035-4ef9-4071-915f-2d8f1578552c/Untitled.png)
+![](../pics/Chapter3-03.png)
 
 T는 M의 원인, M은 Y의 원인. 중간 노드 M은 매개자 (Mediator)라고 불림
 
@@ -46,7 +46,7 @@ T는 M의 원인, M은 Y의 원인. 중간 노드 M은 매개자 (Mediator)라�
 
 **사슬 구조 예시**
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/31e429fe-8f1f-4185-8ba4-19db93b7dc4f/Untitled.png)
+![](../pics/Chapter3-04.png)
 
 - 인과관계
     - 인과추론을 알게되면 문제해결력이 향상
@@ -65,7 +65,7 @@ T는 M의 원인, M은 Y의 원인. 중간 노드 M은 매개자 (Mediator)라�
 - 변수를 고정하는 것이라고도 함
 - 해당 변수의 영향을 통제하는 것
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/2c7cc423-3e3e-4574-9877-9432c5bd0082/Untitled.png)
+![](../pics/Chapter3-05.png)
 
 - 문제 해결력이 동일한 사람들을 살펴보면, 인과추론 지식만 가지고 승진 가능성에 대한 정보를 알 수 없음
 
@@ -73,7 +73,7 @@ T는 M의 원인, M은 Y의 원인. 중간 노드 M은 매개자 (Mediator)라�
 
 ### 2) 분기 구조 (Fork)
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/5448b94a-0156-470a-85da-0b78f5264c7e/Untitled.png)
+![](../pics/Chapter3-06.png)
 
 T의 원인은 X, Y의 원인도 X.
 
@@ -88,7 +88,7 @@ X를 공통 원인 (commmon cause)라 부르며, 교란 요인(confounder)라고
 
 **분기 구조 예시**
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/973bf760-dd29-4a81-bf53-6880ccc6e61e/Untitled.png)
+![](../pics/Chapter3-07.png)
 
 - 인과관계
     - 통계학 덕분에 인과추론과 머신러닝을 더 많이 알게 됨
@@ -98,7 +98,7 @@ X를 공통 원인 (commmon cause)라 부르며, 교란 요인(confounder)라고
 
 **분기 구조 예시 2)**
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/18e01040-7014-4464-b446-09c44a81aee6/Untitled.png)
+![](../pics/Chapter3-08.png)
 
 - 인과관계
     - 훌륭한 프로그래머가 좋은 성과를 냄 (좋은 프로그래머 → 좋은 직원)
@@ -108,7 +108,7 @@ X를 공통 원인 (commmon cause)라 부르며, 교란 요인(confounder)라고
 
 **조건부일 경우?**
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/6fbc35da-6a70-4fe2-817b-965379511350/Untitled.png)
+![](../pics/Chapter3-09.png)
 
 - 지원자가 좋은 프로그래머임을 이미 아는 경우,
     - 문제 해결력이 좋다고 좋은 직원이 될 것인지에 대한 정보를 알 수 없음
@@ -118,7 +118,7 @@ X를 공통 원인 (commmon cause)라 부르며, 교란 요인(confounder)라고
 
 ### 3) 충돌부 구조 (Collider)
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/7f3685ec-4dc9-4daa-b439-f745db637b74/Untitled.png)
+![](../pics/Chapter3-10.png)
 
 X의 원인은 T, Y 모두
 
@@ -135,7 +135,7 @@ X를 collision node 혹은 `common effect`라고 부르며, 충돌부 구조를 
 
 **충돌부 구조 예시 1)**
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/215ff9ad-7f70-4dc6-b8e8-8edc37481e7b/Untitled.png)
+![](../pics/Chapter3-11.png)
 
 - 인과관계
     - 통계를 잘 알거나, 아부를 잘하는 사람이 승진할 수 있음
@@ -144,7 +144,7 @@ X를 collision node 혹은 `common effect`라고 부르며, 충돌부 구조를 
 
 **조건부일 경우?**
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/d0a42f63-b786-4ba2-baf7-fccf7c747178/Untitled.png)
+![](../pics/Chapter3-12.png)
 
 - 승진을 했다면, 통계 수준으로 아부 수준을 알 수 있음
     - 통계를 잘 알지 못하지만 승진을 했다면, 상사에게 아부를 잘 할 가능성이 높음
@@ -156,24 +156,24 @@ X를 collision node 혹은 `common effect`라고 부르며, 충돌부 구조를 
 
 **충돌부 구조 예시 2)**
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/19d2fe33-ae0a-4cc5-8318-f7e2244d2d22/Untitled.png)
+![](../pics/Chapter3-13.png)
 
 - 승진(collision 노드)을 조건으로 두지않고, 해당 충돌부의 `결과`를 조건부로 두어도 충돌부의 원인들은 종속이 됨
     - 승진 정보를 몰라도 거액의 연봉 정보를 안다면, 통계 지식과 아부는 종속적인 관계가 됨
 
 ### 연관성 흐름 치트 시트
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/5a13f24a-21f4-4ff2-ba02-e61c6a889613/Untitled.png)
+![](../pics/Chapter3-14.png)
 
 - 위의 세 가지(Chain, Fork, Collider) 구조를 알면 독립성과 연관성에 대한 흐름의 일반적인 규칙을 정리
 
 ### 퀴즈)
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/59e88915-b527-4b40-88c8-16f81ba78cf6/Untitled.png)
+![](../pics/Chapter3-15.png)
 
 - 정답
     
-    ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/2597f129-4885-4316-87d1-04237c607ff3/Untitled.png)
+![](../pics/Chapter3-16.png)
     
 
 ## 식별 재해석
@@ -186,13 +186,13 @@ X를 collision node 혹은 `common effect`라고 부르며, 충돌부 구조를 
 
 이를 인과그래프로 나타내면,
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/17254899-fcb9-4f7b-990d-91adc565b61f/Untitled.png)
+![](../pics/Chapter3-17.png)
 
 - 컨설팅과 6개월 이후 수익에는 두가지 흐름이 연관됨
     - 직접적인 인과 경로
     - 공통원인 때문에 교란받는 비인과 경로 (뒷문 경로, Backdoor path라고도 함)
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/823a3297-7a0e-42b2-a57c-d49ff77d4750/Untitled.png)
+![](../pics/Chapter3-18.png)
 
 - 컨설팅과 6개월 이후 인과관계를 식별하려면, 인과 경로를 하나만 남겨야함
     - 공통 원인인 이전 6개월 수익을 조건부로 설정하면 해당 경로가 닫힌다
@@ -210,7 +210,7 @@ X를 collision node 혹은 `common effect`라고 부르며, 충돌부 구조를 
 - X의 모든 그룹에 실험군과 대조군의 실험대상이 반드시 존재해야함
     - 없다면, 그룹 간의 차이를 정의할 수 없음
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/35144ca7-b48d-4e3c-8353-0ebadfa2b33e/Untitled.png)
+![](../pics/Chapter3-19.png)
 
 **실험군 (컨설턴트를 고용한 회사) vs 대조군(고용하지 않은 회사) 비교하면?**
 
@@ -251,7 +251,7 @@ X를 collision node 혹은 `common effect`라고 부르며, 충돌부 구조를 
     - 새로운 교육 프로그램이 관리자의 참여도를 높이는지 알고 싶음
     - 잘하고 있는 관리자만 교육에 참석하는 경향
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/ad711262-3d57-4015-bec7-28cb7bc5c765/Untitled.png)
+![](../pics/Chapter3-20.png)
 
 **→ 처치와 결과의 공통원인을 보정해야함**
 
@@ -262,13 +262,13 @@ X를 collision node 혹은 `common effect`라고 부르며, 충돌부 구조를 
 
 **대리 교란 요인을 통제하자**
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/a286941e-5e58-42f3-ab43-c21c9fbf69de/Untitled.png)
+![](../pics/Chapter3-21.png)
 
 - 관리자 자질에 대한 대리변수로 사용할 수 있는 측정된 변수들을 통제하면 편향을 줄이는데 도움됨
 
 **처치를 무작위로 하면, 교란 요인을 파악하기 쉬워진다 (랜덤화 재해석)**
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/c78b7795-ad77-4fa6-8e7b-a7cb28131d55/Untitled.png)
+![](../pics/Chapter3-22.png)
 
 - 많은 연구에서는 교란 요인이 중요한 문제임
     - 모든 교란요인을 통제했는지 확신하기 어렵기 때문
@@ -292,7 +292,7 @@ X를 collision node 혹은 `common effect`라고 부르며, 충돌부 구조를 
 
 → No. 설문에 응답한 사람들에게서만 NPS를 측정했기 때문 (선택 편향)
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/46bb87ae-4205-4cf9-9170-981674b87b3a/Untitled.png)
+![](../pics/Chapter3-23.png)
 
 - 공통 효과 (설문 응답)을 조건부로 두면 선택 편향이 생김
     - 신규 기능과 고객만족도에 연관성이 생기기 때문 - 비인과 경로로 발생하는 편향
@@ -303,7 +303,7 @@ X를 collision node 혹은 `common effect`라고 부르며, 충돌부 구조를 
     - nps_0 = 대조군의 nps결과
     - nps_1 = 실험군의 nps결과
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/cc17e3d9-0875-419c-b8e2-4b80e40aa552/Untitled.png)
+![](../pics/Chapter3-24.png)
 
  → 실험군, 대조군 모두 0.4 만큼 차이남 → 신규 기능이 NPS를 0.4 만큼 높이는 것이라고 볼 수 있음
 
@@ -311,11 +311,11 @@ X를 collision node 혹은 `common effect`라고 부르며, 충돌부 구조를 
     - nps_0, nps_1 열을 볼 수 없다.
     - 설문에 응답하지 않은 사람들의 응답을 볼 수 없다.
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/4b09fdf6-f4a9-4ed1-94bb-605faba82de1/Untitled.png)
+![](../pics/Chapter3-25.png)
 
 → 실험군 - 대조군 차이가 0.22 (0.4의 절반 수준) 에 불과함
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/8b169784-a27b-4f80-ac64-047b17a29371/Untitled.png)
+![](../pics/Chapter3-26.png)
 
 → 값이 채워져있다면 (가정) 위와 같은 값일 것임.
 
@@ -326,21 +326,21 @@ X를 collision node 혹은 `common effect`라고 부르며, 충돌부 구조를 
 
 - 다른 관측가능한 변수를 활용하자!
     
-    ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/38fc24af-ceb6-49b9-9e9d-c5e50e212315/Untitled.png)
+![](../pics/Chapter3-27.png)
     
     - 설문에 응답하는 요인에 영향을 주는 것
         - 예시) 앱 사용 시간, 신규 기능
     - 앱 사용 시간이 비슷한 유저들끼리 비교하자!
         - 앱 사용 시간이 많은 유저를 1, 사용 시간이 적은 유저들을 0으로 두고 비교하면 편향을 줄일 수 있음
         
-        ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/d0b3c3a8-d2cc-4c7a-9bed-b599d67bbca3/Untitled.png)
+![](../pics/Chapter3-28.png)
         
 
 **매개자 (Mediator)를 조건부 설정할 때 발생할 수 있는 편향**
 
 - 인사팀에서 일하면서, 성차별이 있는지, 동일한 자격을 갖춘 남성과 여성이 다르게 임금을 받는지 알고 싶다고 가정
     
-    ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/85ce6236-0291-41b6-9e2e-29e49d09b487/Untitled.png)
+![](../pics/Chapter3-29.png)
     
     - 이 분석을 수행할 때 직급(Seniority Level)의 통제를 고려할 수 있음
     - 그러나 woman → salary 간의 관계는 2가지 경로가 있음
@@ -355,7 +355,7 @@ X를 collision node 혹은 `common effect`라고 부르며, 충돌부 구조를 
     - 사슬 구조 (Chain), 분기 구조 (Fork), 충돌부 구조 (Collider)
     - 치트 시트
         
-        ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/5a13f24a-21f4-4ff2-ba02-e61c6a889613/Untitled.png)
+![](../pics/Chapter3-30.png)
         
 - 교란 편향과 선택 편향의 사례와 그에 따른 보정 방법
     - 교란 편향 : 처치와 결과가 공통 원인을 공유하는 경우

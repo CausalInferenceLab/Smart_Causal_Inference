@@ -2,7 +2,7 @@
 
 작성자 : 하소희
 
-![ITE_need.webp](https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/9887de0d-9796-47e3-9313-0f85a8fb2207/ITE_need.webp)
+![](../pics/Chapter6-01.webp)
 
 # Overview
 
@@ -50,9 +50,9 @@ $$
     - 처치반응 함수의 기울기
     - $\frac {\Delta Y} {\Delta T}$
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/7fca1d82-5632-4364-9832-b817eb2a127d/Untitled.png)
+![](../pics/Chapter6-02.png)
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/51220ac7-0d38-440f-baf0-085094158cda/Untitled.png)
+![](../pics/Chapter6-03.png)
 
 ### ATE
 
@@ -74,7 +74,7 @@ $$
 - 추정에는 train dataset 사용, 예측 test dataset 사용
 - 책에서는 회귀모델, 예측 모델, 난수모델을 비교
 
-![ml_pred: 예측 머신러닝 모델 예측값, cate_pred: 회귀모델 예측값, rand_m_pred: 난수 모델 예측값](https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/85ef4707-e9cb-40fc-9ddc-705794cbd702/Untitled.png)
+![](../pics/Chapter6-04.png)
 
 ml_pred: 예측 머신러닝 모델 예측값, cate_pred: 회귀모델 예측값, rand_m_pred: 난수 모델 예측값
 
@@ -91,9 +91,9 @@ ml_pred: 예측 머신러닝 모델 예측값, cate_pred: 회귀모델 예측값
 2. 분위수별 중앙값을 구함
 3. 중앙값별 예측값의 효과크기를 계산
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/a4f04401-a999-40e6-87dc-bb437db1b7fb/Untitled.png)
+![](../pics/Chapter6-05.png)
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/a01aecc4-e45b-4988-90db-2d9d5de411a7/Untitled.png)
+![](../pics/Chapter6-06.png)
 
 - cate_pred 예측이 실제로 효과 순서를 매긴다는 것을 확인
 
@@ -104,9 +104,9 @@ ml_pred: 예측 머신러닝 모델 예측값, cate_pred: 회귀모델 예측값
 - How?
     - 점수를 내림차순으로 정렬한뒤 n개의 구간으로 잘라 누적해서 효과크기를 계산
     
-    ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/4f9ca4e9-512e-442f-a87e-7a44f103b204/Untitled.png)
+![](../pics/Chapter6-07.png)
     
-    ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/85d1bfd8-496c-4e7a-adfe-bce1a0f10c77/Untitled.png)
+![](../pics/Chapter6-08.png)
     
 - 장점
     - 분위수별 효과곡선 보다 좋은 점은 단일 숫자로 모델 평가를 할 수 있다는 점
@@ -121,7 +121,7 @@ ml_pred: 예측 머신러닝 모델 예측값, cate_pred: 회귀모델 예측값
 - 누적 효과 곡선과 같은 논리 + 각 데이터 포인트에 누적 표본 $N_{cum}/N$ 을 곱해줌
 - ATE로 정규화 할 수 있도록 효과계산마다 정규화 인수를 빼는 과정 추가
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/413d9f71-3b1b-4b05-842e-6267a960eae7/Untitled.png)
+![](../pics/Chapter6-09.png)
 
 - 누적 효과 곡선과 마찬가지로 곡선과 ATE를 나타내는 점선 사이의 면적이 가장 큰 모델이 나은 모델(AUC)
 
@@ -143,7 +143,7 @@ $$
 - 목표가 처치의 평균값에 가까워지면 분모가 0에 가까워져 잡음이 매우 커짐
     - $T_i-\hat\mu_t(X_i)$ 가 작은 지점에 낮은 중요도를 부요하는 가중치를 적용함으로써 해결
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/59c2bce1-262a-43a9-9dc4-5015a5ae5b04/Untitled.png)
+![](../pics/Chapter6-10.png)
 
 ### 예측 모델과 효과 정렬
 
@@ -152,11 +152,11 @@ $$
         - $\frac {\Delta Y} {\Delta T}$
     - 우리가 찾아야하는 건 이 기울기에 따른 세그멘테이션인데 머신러닝을 돌리게 되면 머신러닝은 y값에 대한 결과 예측 성능을 올리는데 초점을 맞추므로 세그먼트가 y값을 기준으로 될 것이다.
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/a87f60e3-e5cc-4d50-8eb9-c3681d412b68/Untitled.png)
+![](../pics/Chapter6-11.png)
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/c4139070-8ca3-40dc-a07b-47c22b1945fe/Untitled.png)
+![](../pics/Chapter6-12.png)
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/f4ed108d-0fa4-4a50-8c48-e60acd4c0c6d/Untitled.png)
+![](../pics/Chapter6-13.png)
 
 - 예측 모델이 효과 정렬에 좋을 때도 있음
     - **CASE 1**
@@ -165,14 +165,14 @@ $$
         - 현실에서는 처치 반응 함수에 **포화점이 존재**
             - 생산량의 제한, 마케팅 비용의 제한 등의 이유로 인해 점진적으로 감소하는 형태
             
-            ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/87a76aee-4554-40ec-9c46-11de3523ece6/Untitled.png)
+![](../pics/Chapter6-14.png)
             
             - 결과가 높을수록 효과가 낮은 그래프 → 예측값의 역순으로 정렬시 CATE 정렬 가능
     - **CASE 2**
         - Y가 이진값일 때
         - 이진 결과 변수의 경우 클래스 간의 분리가 상대적으로 쉬움
             
-            ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/8405f147-bf26-4b56-b2ae-a1051a9c8038/Untitled.png)
+![](../pics/Chapter6-15.png)
             
 
 # CATE for Decision Making
