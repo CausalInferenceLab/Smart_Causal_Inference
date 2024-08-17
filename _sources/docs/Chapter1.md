@@ -4,7 +4,7 @@
 
 1인당 초콜릿 소비량과 노벨상 수상자 수의 관계
 
-![스크린샷 2024-03-27 오후 5.49.50.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/8f3909bd-9799-4def-92e8-e3e58236b6cf/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2024-03-27_%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE_5.49.50.png)
+![](../pics/Chapter1-01.png)
 
 Messerli, F. H. (2012). Chocolate consumption, cognitive function, and Nobel laureates. *N Engl J Med*, *367*(16), 1562-1564.
 
@@ -60,7 +60,7 @@ $CATE =E[AmountSold_{1i}-AmountSold_{0i}|weeksToXmas=0]$
 
 우리가 이론적으로 다음과 같은 potential outcome을 알 수 있다고 하자. 다음 표에서 $i$는 실험 대상, $y$는 관측한 결과, $y_0$과 $y_1$은 각각 실험군 및 대조군에 따른 잠재적 결과, $t$는 처치 여부, $x$는 크리스마스까지의 시간을 표시하는 공변량이다.
 
-![스크린샷 2024-03-28 오전 8.13.24.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/0dda1a97-1598-4fc9-a5f7-f0d18d7678db/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2024-03-28_%E1%84%8B%E1%85%A9%E1%84%8C%E1%85%A5%E1%86%AB_8.13.24.png)
+![](../pics/Chapter1-02.png)
 
 여기서 위에서 구한 $ATE, ATT, CATE$를 추정해보자.
 
@@ -76,7 +76,7 @@ $CATE(x=1) = (100+200)/2=150$
 
 하지만, 실제 관측된 값과는 차이가 존재한다. 
 
-![스크린샷 2024-03-28 오전 8.22.08.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/67706fdb-7dac-41ef-aacc-dc05b53b28eb/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2024-03-28_%E1%84%8B%E1%85%A9%E1%84%8C%E1%85%A5%E1%86%AB_8.22.08.png)
+![](../pics/Chapter1-03.png)
 
 위의 표에서 관측된 값을 기반으로 계산해보자.
 
@@ -116,13 +116,13 @@ $(Y_0,Y_1)\perp T$
 
 잠재적 결과가 처치와 독립적인 상황을 만들기 위해서 randomization을 사용한다. 실험 대상에 처치를 무작위로 지정하게 되면, 실험 대상은 잠재적 결과는 물론이고 어떤 변수와도 독립적으로 된다. 무작위 대조 연구에서도 randomization이 중요한 요소인 이유이다.
 
-![스크린샷 2024-03-28 오전 9.09.57.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/fe0c79a3-9fc1-4cd5-a4bc-c0d0f556596c/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2024-03-28_%E1%84%8B%E1%85%A9%E1%84%8C%E1%85%A5%E1%86%AB_9.09.57.png)
+![](../pics/Chapter1-04.png)
 
-![스크린샷 2024-03-28 오전 9.10.23.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/fe95da26-d8be-4b6e-9c09-befbaf18e416/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2024-03-28_%E1%84%8B%E1%85%A9%E1%84%8C%E1%85%A5%E1%86%AB_9.10.23.png)
+![](../pics/Chapter1-05.png)
 
 만약, $Y_0$만 관측할 수 있다면 다음과 같이 된다.
 
-![스크린샷 2024-03-28 오전 9.11.04.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/6c0c8ecd-b665-479c-9aba-eef177e0552e/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2024-03-28_%E1%84%8B%E1%85%A9%E1%84%8C%E1%85%A5%E1%86%AB_9.11.04.png)
+![](../pics/Chapter1-06.png)
 
 ### 용어 설명
 
