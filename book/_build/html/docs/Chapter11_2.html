@@ -1,0 +1,752 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Chapter 11.1-11.6 불응과 도구변수 &#8212; Smart Causal Inference [SCI]</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/Chapter11_2';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Chapter 11.1-11.6 불응과 도구변수" href="Chapter11_1.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/qe-logo-large.png" class="logo__image only-light" alt="Smart Causal Inference [SCI] - Home"/>
+    <script>document.write(`<img src="../_static/qe-logo-large.png" class="logo__image only-dark" alt="Smart Causal Inference [SCI] - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Chapter1.html">Chapter 1. 인과추론 소개</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chapter2.html">Chapter 2. 무작위 실험 및 기초 통계 리뷰</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chapter3.html">Chapter 3. 그래프 인과모델</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chapter4.html">Chapter 4. 유용한 선형회귀</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Chapter5.html">Chapter 5. 성향점수</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chapter6.html">Chapter 6. 이질적 처치효과</a></li>
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Chapter7.html">Chapter 7. 메타러너</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Chapter8_1.html">Chapter 8. 이중차분법 (8.1~8.3)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chapter8_2.html">Chapter 8.4 ~ 8.8</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chapter9.html">Chapter 9. 통제집단합성법</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chapter10.html">Chapter 10. 지역 실험과 스위치백 실험</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chapter11_1.html">Chapter 11.1-11.6 불응과 도구변수</a></li>
+
+
+
+
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Chapter 11.1-11.6 불응과 도구변수</a></li>
+
+
+
+
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/docs/Chapter11_2.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Chapter 11.1-11.6 불응과 도구변수</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Chapter 11.1-11.6 불응과 도구변수</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">개념</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">불응</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">도구변수</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">처치 배정과 처치 적용에 따른 4가지 그룹</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#dag">불응 DAG</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">불응 예시</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#itte-ate">ITTE ↔ ATE 비교</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#itte">처치 의도 효과(ITTE)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">ITTE ↔ ATE 차이</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ate">처치 선택에 따른 ATE 식별 불가</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">도구변수 식별 가정</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">1. 연관성</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">2. 배제 제약</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">3. 독립성</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">4. 단조성</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">결과</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">도구변수 실습</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id14">1단계</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id15">2단계</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id16">2단계 최소제곱법</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="chapter-11-1-11-6">
+<h1>Chapter 11.1-11.6 불응과 도구변수<a class="headerlink" href="#chapter-11-1-11-6" title="Permalink to this heading">#</a></h1>
+<p>작성자 : 하소희</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1>개념<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
+<section id="id2">
+<h2>불응<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>요구나 요청에 응하지 않음</p></li>
+<li><p>처치를 배정 받은 모든 사람이 처치 받지 않음을 의미</p>
+<ul>
+<li><p>즉, 처치가 배정되었다고 처치가 반드시 적용되지 않을 수 있음을 의미</p></li>
+</ul>
+</li>
+<li><p>처치 여부를 무작위로 결정하더라도 고객이 이를 선택할 수 있는 상황에서 발생</p></li>
+</ul>
+</section>
+<section id="id3">
+<h2>도구변수<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>불응과 같은 문제에서 처치가 결과에 미치는 인과 효과를 정확히 추정하기 위한 방법</p></li>
+<li><p>도구변수는 처치와 관련이 있고 결과 변수와 직접적인 관련이 없어야 함</p></li>
+</ul>
+</section>
+<section id="id4">
+<h2>처치 배정과 처치 적용에 따른 4가지 그룹<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>순응자: 자신에게 배정된 처치 받는 사람</p></li>
+<li><p>항시 참여자: 배정과 관계 없이 항상 처치 받는 사람</p></li>
+<li><p>항시 불참자: 배정과 관계없이 처치를 한 번도 받지 않은 사람</p></li>
+<li><p>반항자: 배정된 처치와 반대되는 처치 받는 사람</p></li>
+</ul>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="dag">
+<h1>불응 DAG<a class="headerlink" href="#dag" title="Permalink to this heading">#</a></h1>
+<p><img alt="Untitled" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/be280180-b960-4871-af7e-b0e443791f79/Untitled.png" /></p>
+<ul class="simple">
+<li><p>Z : 도구변수</p>
+<ul>
+<li><ol class="arabic simple">
+<li><p>교란 없이 처치에 영향을 주고</p></li>
+</ol>
+</li>
+<li><ol class="arabic simple" start="2">
+<li><p>처치를 거치지 않으면 결과에 영향을 미치지 않는 변수</p></li>
+</ol>
+</li>
+</ul>
+</li>
+<li><p>T : 처치</p></li>
+<li><p>Y : 결과</p></li>
+<li><p>U : 교란요인</p></li>
+</ul>
+<hr class="docutils" />
+<p><strong>불응에서 처치에 따른 효과를 정확히 판단할 수 없음</strong></p>
+<p>: U를 통과하는 <strong>열린 뒷문 경로</strong> 때문에 처치가 Y에 미치는 영향을 제대로 식별할 수 없기 때문</p>
+<ul class="simple">
+<li><p>열린 뒷문 경로 → 처치와 결과가 공통 원인을 공유하는 상황(U)</p></li>
+</ul>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="id5">
+<h1>불응 예시<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h1>
+<aside>
+💡 예시
+1️⃣고객을 대상으로 프라임 신용카드 이용 가능 여부를 무작위로 배정
+<p>2️⃣고객의 절반은 실험군, 나머지 절반은 대조군</p>
+<p>3️⃣카드 이용 선택은 고객 몫 → 불응 존재</p>
+<p>알고 싶은 것 → 프라임 카드 사용이 고객의 구매금액을 얼마나 늘리는가?</p>
+</aside>
+<p><img alt="Untitled" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/daeda477-a96d-4370-926d-319b1e6b332d/Untitled.png" /></p>
+<ul class="simple">
+<li><p>Z : 프라임 신용카드 이용 가능 여부(무작위배정)</p></li>
+<li><p>T : 프라임 카드 보유 여부</p></li>
+<li><p>Y : 구매금액</p></li>
+<li><p>U : 교란요인</p></li>
+</ul>
+<section id="itte-ate">
+<h2>ITTE ↔ ATE 비교<a class="headerlink" href="#itte-ate" title="Permalink to this heading">#</a></h2>
+<section id="itte">
+<h3>처치 의도 효과(ITTE)<a class="headerlink" href="#itte" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Z는 무작위로 배정되기 때문에(예시에서) 단순 선형회귀로 추정가능</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+ITTE = E[Y|Z =1]-E[Y|Z = 0] = E[Y_1,_t - Y_0,_t]
+\]</div>
+<p>✅그러나 ITTE가 처치효과와 같다고 말할 수 없음</p>
+<p>✅실제 처치를 받지 않은 대상자가 포함되기 때문에, 처치의 실제 효과를 과소평가할 수 있음</p>
+<p>✅중요한 건 카드 선택(처치 받은 대상자)에 따른 처치효과를 파악하는 것</p>
+</section>
+<section id="id6">
+<h3>ITTE ↔ ATE 차이<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>ITTE</strong>: 모든 배정된 대상을 포함하므로 실제 효과를 과소평가할 수 있음</p></li>
+<li><p><strong>ATE</strong>: 실제로 처치를 받은 대상자만 포함하여 더 정확한 처치 효과를 반영</p></li>
+</ul>
+<p>✅ 따라서, 불응이 발생하면(무작위 처치 배정과 상관없이) 처치를 받은 사람과 받지 않은 사람이 혼재되어 있기 때문에 <strong>ITTE</strong> 추정값이 처치의 실제 효과를 과소평가하게 됨</p>
+<p>✅ ITTE 추정값은 ATE 추정값보다 0에 가깝게 편향됨(처치의 효과가 0에 가까워짐을 의미)</p>
+</section>
+<section id="ate">
+<h3>처치 선택에 따른 ATE 식별 불가<a class="headerlink" href="#ate" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>불응 상태에서는 처치 선택이 무작위가 아니므로, 처치 받은 경우와 받지 않은 경우를 비교해도  ATE를 제대로 식별할 수 없음</p></li>
+</ul>
+<p>✅ ITTE의 값은 대리 변수로 사용할 수 있지만, 처치의 실제 효과를 과소평가 하게 됨</p>
+<p>✅ 처치 선택이 무작위가 아니기에 ATE를 제대로 식별할 수 없음</p>
+<p>→ 추가적인 가정 필요</p>
+</section>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="id7">
+<h1>도구변수 식별 가정<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h1>
+<p><img alt="Untitled" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/c48d6341-3fac-4b54-b5a9-7ca6cc50304f/Untitled.png" /></p>
+<p><strong>ITTE 에서 출발</strong></p>
+<p><img alt="Untitled" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/4ecd99f5-4c17-4962-b675-516ceedd6f49/Untitled.png" /></p>
+<section id="id8">
+<h2>1. 연관성<a class="headerlink" href="#id8" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>도구변수가 처치변수에 영향을 미쳐야 함</p></li>
+</ul>
+</section>
+<section id="id9">
+<h2>2. 배제 제약<a class="headerlink" href="#id9" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>처치 T를 통하지 않고는 Z에서 Y로 가는 경로가 없다는 가정</p></li>
+<li><p>도구변수가 처치를 통해서만 결과에 영향을 미침</p></li>
+<li><p><span class="math notranslate nohighlight">\(Y_z,_t = Y_t\)</span></p></li>
+</ul>
+<p><img alt="Untitled" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/e5cfcc0c-9a5b-4c78-917c-daa7fc1a064a/Untitled.png" /></p>
+</section>
+<section id="id10">
+<h2>3. 독립성<a class="headerlink" href="#id10" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Z와 T 그리고 Z와 Y 사이에 측정되지않은 교란요인이 없다고 가정</p></li>
+<li><p>도구변수가 무작위로 배정된것처럼 작용</p></li>
+</ul>
+<p><img alt="Untitled" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/ef5467b0-16ce-4e18-b5e8-cd05752358fb/Untitled.png" /></p>
+</section>
+<section id="id11">
+<h2>4. 단조성<a class="headerlink" href="#id11" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>도구변수가 처치변수를 한 방향으로만 영향을 주는 것을 의미</p></li>
+</ul>
+<p><img alt="Untitled" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/dd5eaa00-bc4e-4513-9443-5320c9f34cd8/Untitled.png" /></p>
+<p><img alt="Untitled" src="https://prod-files-secure.s3.us-west-2.amazonaws.com/333f96cf-396d-45ff-8331-232d41bd4d55/31b9363a-b59a-48f7-9038-8ccf134a3cd0/Untitled.png" /></p>
+<ul>
+<li><p>참고</p>
+<p><span class="math notranslate nohighlight">\(T_1&gt;T_0\)</span>인 값을 갖는 그룹은 순응자 밖에 없음</p>
+<ul class="simple">
+<li><p>순응자(Complier) : 배정된 처치를 받는 사람들(T1=1, T0 = 0)</p></li>
+<li><p>항시 참여자 (Always-taker): 도구변수와 상관없이 항상 처치를 받는 사람들 (T1=1, T0=1).</p></li>
+<li><p>항시 불참자자 (Never-taker): 도구변수와 상관없이 처치를 받지 않는 사람들 (T1=0, T0=0).</p></li>
+<li><p>반항자 (Defier): 도구변수의 할당과 반대로 행동하는 사람들 (T1=0, T0=1).</p></li>
+</ul>
+</li>
+</ul>
+<section id="id12">
+<h3>결과<a class="headerlink" href="#id12" title="Permalink to this heading">#</a></h3>
+<aside>
+💡 도구 변수가 결과에 미치는 영향을,
+도구 변수가 처치에 미치는 영향인 순응률로 조정함으로써,
+순응자들에 대한 평균 처치효과를 식별할 수 있음(**국지적 평균 처치 효과 LATE**)
+</aside>
+<div class="math notranslate nohighlight">
+\[
+E[Y_1-Y_0|T_1&gt;T_0] = \frac{E[Y|Z=1]-E[Y|Z=0]}{E[T|Z=1]-E[T|Z=0]}
+\]</div>
+</section>
+</section>
+<section id="id13">
+<h2>도구변수 실습<a class="headerlink" href="#id13" title="Permalink to this heading">#</a></h2>
+<section id="id14">
+<h3>1단계<a class="headerlink" href="#id14" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>1단계 - 회귀: 처치 변수를 도구변수에 대해 회귀하는 단계 → 연관성 가정 확인 가능</p></li>
+<li><p>도구변수와 관련된 매개변수 추정값이 크고 통계적으로 유의 → 해당 가정이 유효</p></li>
+<li><p>Z → T 추정</p></li>
+</ul>
+</section>
+<section id="id15">
+<h3>2단계<a class="headerlink" href="#id15" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>2단계 - 축약형 : 결과를 도구변수에 회귀하여 처치 의도 효과를 추정</p></li>
+<li><p>Z → Y 추정</p></li>
+</ul>
+<p>LATE = 2단계 추정값 / 1단계 추정값</p>
+</section>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="id16">
+<h1>2단계 최소제곱법<a class="headerlink" href="#id16" title="Permalink to this heading">#</a></h1>
+<ul class="simple">
+<li><p>개념</p>
+<ul>
+<li><p>2단계에서 결과(Y)를  1단계에서 구한 T의 예측값(<span class="math notranslate nohighlight">\(\hat{T}\)</span>)에 회귀하는 방법</p></li>
+</ul>
+</li>
+<li><p>장점</p>
+<ul>
+<li><p>표준오차를 적절하게 계산할 수 있음</p></li>
+<li><p>더 많은 도구변수와 공변량을 추가할 수 있음</p></li>
+</ul>
+</li>
+</ul>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./docs"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Chapter11_1.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Chapter 11.1-11.6 불응과 도구변수</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Chapter 11.1-11.6 불응과 도구변수</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">개념</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">불응</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">도구변수</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">처치 배정과 처치 적용에 따른 4가지 그룹</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#dag">불응 DAG</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">불응 예시</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#itte-ate">ITTE ↔ ATE 비교</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#itte">처치 의도 효과(ITTE)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">ITTE ↔ ATE 차이</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ate">처치 선택에 따른 ATE 식별 불가</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">도구변수 식별 가정</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">1. 연관성</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">2. 배제 제약</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">3. 독립성</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">4. 단조성</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">결과</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">도구변수 실습</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id14">1단계</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id15">2단계</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id16">2단계 최소제곱법</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Smart Causal Inference Team
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
