@@ -1,4 +1,4 @@
-# Chapter 5. 성향점수
+# Chapter 5.1 - 5.3 성향점수
 ![](../pics/Chapter5-01.jpg)
 ![](../pics/Chapter5-02.jpg)
 ![](../pics/Chapter5-03.jpg)
