@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Chapter 8.4 ~ 8.8 이중차분법 &#8212; Smart Causal Inference [SCI]</title>
+    <title>Chapter 5.1 - 5.3 성향점수 &#8212; Smart Causal Inference [SCI]</title>
   
   
   
@@ -62,13 +62,9 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/Chapter8_2';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/Chapter5_1';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Chapter 10. 지역 실험과 스위치백 실험" href="Chapter10.html" />
-    <link rel="prev" title="Chapter 8. 이중차분법 (8.1~8.3)" href="Chapter8_1.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -162,7 +158,7 @@ const thebe_selector_output = ".output, .cell_output"
 </a></div>
         <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
-        <ul class="current nav bd-sidenav">
+        <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="Chapter1.html">Chapter 1. 인과추론 소개</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Chapter2.html">Chapter 2. 무작위 실험 및 기초 통계 리뷰</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Chapter3.html">Chapter 3. 그래프 인과모델</a></li>
@@ -190,7 +186,7 @@ const thebe_selector_output = ".output, .cell_output"
 
 
 <li class="toctree-l1"><a class="reference internal" href="Chapter8_1.html">Chapter 8. 이중차분법 (8.1~8.3)</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Chapter 8.4 ~ 8.8 이중차분법</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chapter8_2.html">Chapter 8.4 ~ 8.8 이중차분법</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Chapter10.html">Chapter 10. 지역 실험과 스위치백 실험</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Chapter11_1.html">Chapter 11.1-11.6 불응과 도구변수</a></li>
 
@@ -253,7 +249,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="../_sources/docs/Chapter8_2.md" target="_blank"
+      <li><a href="../_sources/docs/Chapter5_1.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -324,9 +320,7 @@ document.write(`
   </button>
 `);
 </script>
-<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="fa-solid fa-list"></span>
-</label>
+
 </div></div>
       
     </div>
@@ -337,28 +331,11 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Chapter 8.4 ~ 8.8 이중차분법</h1>
+    <h1>Chapter 5.1 - 5.3 성향점수</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
-            <div>
-                <h2> Contents </h2>
-            </div>
-            <nav aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">8.4 시간에 따른 효과 변동</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">8.5 이중차분법과 공변량</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">8.6 이중 강건 이중차분법</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">8.6.1 성향점수 모델</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">8.6.2 델타 결과 모델</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">8.7 처치의 시차 도입</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">8.7.1 시간에 따른 이질적 효과</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">8.7.2 공변량</a></li>
-</ul>
-</li>
-</ul>
-            </nav>
         </div>
     </div>
 </div>
@@ -368,82 +345,24 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="chapter-8-4-8-8">
-<h1>Chapter 8.4 ~ 8.8 이중차분법<a class="headerlink" href="#chapter-8-4-8-8" title="Permalink to this heading">#</a></h1>
-<p>작성자 : 박상호</p>
-<p>패널데이터에서는 특정 시점에서 처치가 이루어지기 전과 후를 비교하여 처치의 효과를 알고자 한다.</p>
-<section id="id1">
-<h2>8.4 시간에 따른 효과 변동<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
-<p>처치효과가 즉각적이지 않은 경우가 있다. 이 경우에는 시간에 따른 ATT를 추정한다.</p>
-<p>mkt_data 셋</p>
-<p><img alt="" src="../_images/Chapter8_01-01.png" /></p>
-<p>파이썬 함수</p>
-<p><img alt="" src="../_images/Chapter8_01-02.png" /></p>
-<p><img alt="" src="../_images/Chapter8_01-03.png" /></p>
-<p><img alt="" src="../_images/Chapter8_01-04.png" /></p>
-<p><img alt="" src="../_images/Chapter8_01-05.png" /></p>
-<p>처치는 15일에 이루어졌으나 효과가 바로 나타나지는 않음.</p>
-</section>
-<section id="id2">
-<h2>8.5 이중차분법과 공변량<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
-<p>모델에 처치 전의 공변량을 포함했을 때 데이터가 평행 추세 가정을 만족하는 경우에 유용하게 사용할 수 있다.</p>
-<p><img alt="" src="../_images/Chapter8_01-06.png" /></p>
-<p>편향 문제를 해결하기 위해 각 지역별 서로 다른 추세를 반드시 고려해야 한다. 해결 방법 중에 각 지역별 별도의 DID 회귀 모델을 적용하는 것이다. 전체 이중차분법 모델을 지역 더미변수와 상호작용한다. 이로써 true ATE 1.72와 거의 비슷한 값을 얻게 된다.</p>
-<p><img alt="" src="../_images/Chapter8_01-07.png" /></p>
-<p>하지만 공변량이 많거나 연속형일 경우에 실용적이지 않다. 지역변수를 처치 여부 및 처치 후 더미변수 모두와 상호작용하는 대신, 처치 후 더미변수와 상호작용하면 된다. 이 모델은 각 지역 실험군의 추세(처치 전후 결과 수준)를 별도로 추정하지만, 실험군과 처치 후 기간에 대해서는 단일 절편 이동을 적합시킨다.</p>
-<p><img alt="" src="../_images/Chapter8_01-08.png" /></p>
-<p>post::treated의 coef가 ATT이다. 이 값은 이전에 추정한 ATT와 꽤 비슷하다. 차이가 약간 나타나는 이유는 회귀분석에서 표본 크기가 아닌 분산에 따라 평균을 구하기 때문이다. 이 모형은 실행속도가 빠르지만, 상호작용하는 부분에서 신중해야 한다.</p>
-</section>
-<section id="id3">
-<h2>8.6 이중 강건 이중차분법<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
-<p>이중 강건 이중차분법은 이중 강건 추정량의 아이디어를 활용한다. 이중차분법은 결과 변화량인 <span class="math notranslate nohighlight">\(\Delta y\)</span>와 관련이 있으므로 시간에 따른 델타 결과 모델이 필요하다. 그리고 ATT에만 관심이 있으므로 대조군을 바탕으로 실험군을 재구성해야 한다.</p>
-<section id="id4">
-<h3>8.6.1 성향점수 모델<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h3>
-<p>처치 전 공변량을 활용하여 실험 대상이 실험군에 속할 확률을 추정하는 성향점수 모델 <span class="math notranslate nohighlight">\(\hat{e}(x)\)</span>이다. 이 모델을 시간 차원을 고려하지 않으므로 한 시점의 데이터만 있으면 된다.</p>
-<p><img alt="" src="../_images/Chapter8_01-09.png" /></p>
-</section>
-<section id="id5">
-<h3>8.6.2 델타 결과 모델<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h3>
-<p>처치 전후 기간의 평균 결과 차이를 계산한다.</p>
-<p><img alt="" src="../_images/Chapter8_01-10.png" /></p>
-<p>평균 결과 차이와 실험 대상에 대해 회귀한다.</p>
-<p><img alt="" src="../_images/Chapter8_01-11.png" /></p>
-<p>우리가 구하고자 하는 ATT는 다음과 같다.</p>
-<p><span class="math notranslate nohighlight">\(\hat{\tau}_{DRDID}=\widehat{\Delta y_1}^{DR}-\widehat{\Delta y_0}^{DR}\)</span></p>
-<p><span class="math notranslate nohighlight">\(\widehat{\Delta y_1}^{DR} = 1/N_{tr} \Sigma_{i \in tr}(\Delta y - \hat{m}(x))\)</span></p>
-<p>대조군 하에서의 전체 모집단에서는 <span class="math notranslate nohighlight">\(1/(1-\hat{e}(x))\)</span> 가중치를 사용한다.</p>
-<p><span class="math notranslate nohighlight">\(w_{co} = \hat{e}(X) \frac{1}{1-\hat{e}(X)}\)</span></p>
-<p>가중치를 정의했으면 이를 사용하여</p>
-<p><span class="math notranslate nohighlight">\(\widehat{\Delta y_0}^{DR}=\Sigma_{i \in tr}w_{co}(\Delta y - \hat{m}(x))/\Sigma w_{co}\)</span></p>
-<p><img alt="" src="../_images/Chapter8_01-12.png" /></p>
-<p>이 추정값은 실제 ATT 및 이전에 이중차분법에 공변량을 추가했을 때 얻은 ATT와 매우 비슷하다. 이중 강건 이중차분법은 성향점수 모델이나 결과 모델 중 하나만 정확해도 잘 작동한다.</p>
-</section>
-<section id="id6">
-<h3>8.7 처치의 시차 도입<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h3>
-<p>만약 실험 대상이 서로 다른 시점에 처치 받는다면 다른 방법론을 고려해야 한다. 처치에 대한 시차 도입 설계는 여러 실험 그룹(<span class="math notranslate nohighlight">\(G\)</span>로 표기)이 있고 각 그룹이 다른 시점에 처치를 받거나 전혀 받지 않는 구조이다. 이때 처치 받는 시점이 그룹을 구분하는 기준이므로, 이들을 코호트라고 부른다. 즉, <span class="math notranslate nohighlight">\(t\)</span> 시점에 처치 받는 그룹 <span class="math notranslate nohighlight">\(G\)</span>를 코호트 <span class="math notranslate nohighlight">\(G_t\)</span>라고 한다.</p>
-<p><img alt="" src="../_images/Chapter8_01-13.png" /></p>
-<p><img alt="" src="../_images/Chapter8_01-14.png" /></p>
-<p><img alt="" src="../_images/Chapter8_01-15.png" /></p>
-<p>평행 추세 가정을 잘 만족하지만, ATT를 이중차분법으로 찾기는 어렵다.</p>
-<p><img alt="" src="../_images/Chapter8_01-16.png" /></p>
-<p>이중차분법 가정에 더해 시차 도입에서는 시간에 걸쳐 효과가 동일하다는 가정이 있어야 한다. 그러나 여기서는 효과가 나타나기까지는 일정 시간이 걸린다. 그리고 미리 처치를 받은 코호트를 대조군으로 하여 늦은 처치를 받은 코호트의 효과를 추정할 때 문제가 생긴다.</p>
-<p><img alt="" src="../_images/Chapter8_01-17.png" /></p>
-</section>
-<section id="id7">
-<h3>8.7.1 시간에 따른 이질적 효과<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h3>
-<p>코호트별로 효과를 변하도록 하여 구한다.</p>
-<p><img alt="" src="../_images/Chapter8_01-18.png" /></p>
-<p><img alt="" src="../_images/Chapter8_01-19.png" /></p>
-<p>여러 개의 2*2 이중차분법으로 나누고 각각을 개별적으로 계산한 후 결과를 합치는 방법도 있다.</p>
-<p><img alt="" src="../_images/Chapter8_01-20.png" /></p>
-<p>코호트의 표본크기를 이용하여 가중평균을 구한다. 혹은 처치를 전혀 받지 않은 대상을 대조군으로 사용하는 대신에 아직 처치 받지 않은 대상을 사용함으로써 대조군의 표본 크기를 늘릴 수 있다.</p>
-</section>
-<section id="id8">
-<h3>8.7.2 공변량<a class="headerlink" href="#id8" title="Permalink to this heading">#</a></h3>
-<p>DID 모델에 공변량을 추가하기 위해, 공변량과 처치 후 더미변수를 상호작용시킨다. 시간의 경과를 표시하는 날짜열은 처치 후 더미변수와 유사하다고 볼 수 있으므로 공변량을 해당 날짜 열과 상호작용시킨다.</p>
-<p><img alt="" src="../_images/Chapter8_01-21.png" /></p>
-</section>
-</section>
+  <section class="tex2jax_ignore mathjax_ignore" id="chapter-5-1-5-3">
+<h1>Chapter 5.1 - 5.3 성향점수<a class="headerlink" href="#chapter-5-1-5-3" title="Permalink to this heading">#</a></h1>
+<p><img alt="" src="../_images/Chapter5-01.jpg" />
+<img alt="" src="../_images/Chapter5-02.jpg" />
+<img alt="" src="../_images/Chapter5-03.jpg" />
+<img alt="" src="../_images/Chapter5-04.jpg" />
+<img alt="" src="../_images/Chapter5-05.jpg" />
+<img alt="" src="../_images/Chapter5-06.jpg" />
+<img alt="" src="../_images/Chapter5-07.jpg" />
+<img alt="" src="../_images/Chapter5-08.jpg" />
+<img alt="" src="../_images/Chapter5-09.jpg" />
+<img alt="" src="../_images/Chapter5-10.jpg" />
+<img alt="" src="../_images/Chapter5-11.jpg" />
+<img alt="" src="../_images/Chapter5-12.jpg" />
+<img alt="" src="../_images/Chapter5-13.jpg" />
+<img alt="" src="../_images/Chapter5-14.jpg" />
+<img alt="" src="../_images/Chapter5-15.jpg" />
+<img alt="" src="../_images/Chapter5-16.jpg" /></p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -476,53 +395,12 @@ document.write(`
                 <footer class="prev-next-footer">
                   
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="Chapter8_1.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Chapter 8. 이중차분법 (8.1~8.3)</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="Chapter10.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Chapter 10. 지역 실험과 스위치백 실험</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
 </div>
                 </footer>
               
             </div>
             
             
-              
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-  <div class="sidebar-secondary-item">
-  <div class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> Contents
-  </div>
-  <nav class="bd-toc-nav page-toc">
-    <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">8.4 시간에 따른 효과 변동</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">8.5 이중차분법과 공변량</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">8.6 이중 강건 이중차분법</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">8.6.1 성향점수 모델</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">8.6.2 델타 결과 모델</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">8.7 처치의 시차 도입</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">8.7.1 시간에 따른 이질적 효과</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">8.7.2 공변량</a></li>
-</ul>
-</li>
-</ul>
-  </nav></div>
-
-</div></div>
               
             
           </div>
