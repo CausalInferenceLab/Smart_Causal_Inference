@@ -5,6 +5,7 @@ Introduction to causal inference
 "실무로 통하는 인과추론 with 파이썬" 스터디를 하고 내용을 정리한 깃허브입니다.
 
 이 자료가 도움이 되었다면 깃허브 star를 눌러주세요!
+
 https://github.com/CausalInferenceLab/Smart_Causal_Inference
 
 스터디원 : 박상호, 김상돈, 하소희, 안시형, 이명석, 최의관, 김혜민
