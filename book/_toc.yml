@@ -5,12 +5,14 @@ sections:
 - file: docs/Chapter2
 - file: docs/Chapter3
 - file: docs/Chapter4
-- file: docs/Chapter5
+- file: docs/Chapter5_1
+- file: docs/Chapter5_2
 - file: docs/Chapter6
 - file: docs/Chapter7
 - file: docs/Chapter8_1
 - file: docs/Chapter8_2
-- file: docs/Chapter9
+- file: docs/Chapter9_1
+- file: docs/Chapter9_2
 - file: docs/Chapter10
 - file: docs/Chapter11_1
 - file: docs/Chapter11_2
